@@ -1,8 +1,9 @@
-const { i18n } = require('./next-i18next.config');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n,
+  // Configuration pour App Router (pas d'i18n legacy)
+  experimental: {
+    // Optimisations pour le développement
+  },
   // ...autres options Next.js
 };
 

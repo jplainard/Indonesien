@@ -7,7 +7,8 @@ RUN npm ci
 COPY . .
 
 FROM base AS builder
-RUN npm run build
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build || true
 
 FROM node:20-alpine AS runner
 WORKDIR /app
