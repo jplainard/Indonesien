@@ -19,7 +19,7 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      POSTGRES_DB: essai
+      POSTGRES_DB: indofrench
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
