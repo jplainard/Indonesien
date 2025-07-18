@@ -1,4 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# essai
+
+Ce projet est un site web moderne proposant des services de traduction indonésien-français pour le monde de l'entreprise et le grand public.
+
+## Technologies
+- Next.js (React, TypeScript)
+- Tailwind CSS
+- Docker (à venir)
+- GitHub (versionnage)
+
+## Lancement du projet
+
+```bash
+npm run dev
+```
+
+## Objectif
+Proposer une plateforme innovante et professionnelle pour la traduction entre l'indonésien et le français, adaptée aux besoins des entreprises et des particuliers.
 
 ## Getting Started
 
