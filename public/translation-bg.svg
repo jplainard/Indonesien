@@ -1,0 +1,68 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond avec formes abstraites -->
+  <circle cx="80" cy="80" r="60" fill="url(#bg1)" />
+  <circle cx="320" cy="220" r="70" fill="url(#bg2)" />
+  <ellipse cx="200" cy="150" rx="100" ry="50" fill="url(#bg1)" opacity="0.3" />
+  
+  <!-- Documents flottants -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="40" height="50" rx="2" fill="#3B82F6" opacity="0.2" />
+    <rect x="5" y="8" width="30" height="2" fill="#3B82F6" opacity="0.4" />
+    <rect x="5" y="14" width="25" height="2" fill="#3B82F6" opacity="0.4" />
+    <rect x="5" y="20" width="28" height="2" fill="#3B82F6" opacity="0.4" />
+  </g>
+  
+  <!-- Flèche de traduction -->
+  <g transform="translate(120, 75)">
+    <path d="M0 0 L30 0 L25 -5 M30 0 L25 5" stroke="#8B5CF6" stroke-width="2" fill="none" opacity="0.6" />
+    <circle cx="15" cy="0" r="8" fill="#8B5CF6" opacity="0.1" />
+  </g>
+  
+  <!-- Document traduit -->
+  <g transform="translate(180, 50)">
+    <rect x="0" y="0" width="40" height="50" rx="2" fill="#10B981" opacity="0.2" />
+    <rect x="5" y="8" width="30" height="2" fill="#10B981" opacity="0.4" />
+    <rect x="5" y="14" width="25" height="2" fill="#10B981" opacity="0.4" />
+    <rect x="5" y="20" width="28" height="2" fill="#10B981" opacity="0.4" />
+  </g>
+  
+  <!-- Globes représentant les langues -->
+  <g transform="translate(100, 180)">
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.3" />
+    <path d="M-20 0 Q0 -15 20 0 Q0 15 -20 0" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.3" />
+    <path d="M0 -20 Q-10 0 0 20 Q10 0 0 -20" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.3" />
+    <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="10" fill="#3B82F6" opacity="0.6">ID</text>
+  </g>
+  
+  <g transform="translate(250, 180)">
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#10B981" stroke-width="1" opacity="0.3" />
+    <path d="M-20 0 Q0 -15 20 0 Q0 15 -20 0" fill="none" stroke="#10B981" stroke-width="1" opacity="0.3" />
+    <path d="M0 -20 Q-10 0 0 20 Q10 0 0 -20" fill="none" stroke="#10B981" stroke-width="1" opacity="0.3" />
+    <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="10" fill="#10B981" opacity="0.6">FR</text>
+  </g>
+  
+  <!-- Flèche de connexion -->
+  <g transform="translate(175, 200)">
+    <path d="M-50 0 L50 0" stroke="url(#bg1)" stroke-width="2" opacity="0.4" stroke-dasharray="5,5">
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        values="175,200; 185,200; 175,200"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+    </path>
+  </g>
+</svg>

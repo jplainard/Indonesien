@@ -2,10 +2,13 @@
 
 echo "🚀 Démarrage de l'environnement de développement..."
 
-# Arrêter les containers existants
-docker compose -f docker-compose.dev.yml down
+# Désactiver BuildKit pour contourner les problèmes potentiels de WSL
+export DOCKER_BUILDKIT=0
 
-# Reconstruire et démarrer les containers
+# Arrêter les conteneurs existants pour éviter les conflits
+docker compose -f docker-compose.dev.yml down --remove-orphans
+
+# Démarrer les services en reconstruisant l'image
 docker compose -f docker-compose.dev.yml up --build
 
 # Pour arrêter, utilisez Ctrl+C
