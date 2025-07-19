@@ -27,6 +27,48 @@ import {
 } from "lucide-react";
 import UserManagementSection from "../components/UserManagementSection";
 
+// Composant pour les particules flottantes (évite le problème d'hydration)
+function FloatingParticles() {
+  const [particles, setParticles] = useState<{ left: number; top: number; x: number; delay: number; duration: number }[]>([]);
+
+  useEffect(() => {
+    // Génère les positions aléatoires côté client uniquement
+    setParticles(
+      Array.from({ length: 12 }, () => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        x: Math.random() * 20 - 10,
+        delay: Math.random() * 4,
+        duration: 4 + Math.random() * 4,
+      }))
+    );
+  }, []);
+
+  return (
+    <div className="absolute inset-0">
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
+          style={{ left: `${p.left}%`, top: `${p.top}%` }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, p.x, 0],
+            opacity: [0.2, 0.8, 0.2],
+            scale: [1, 1.5, 1]
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: p.delay
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -304,30 +346,7 @@ export default function Home() {
         />
 
         {/* Particules flottantes */}
-        <div className="absolute inset-0">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                x: [0, Math.random() * 20 - 10, 0],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1]
-              }}
-              transition={{
-                duration: 4 + Math.random() * 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: Math.random() * 4
-              }}
-            />
-          ))}
-        </div>
+        <FloatingParticles />
 
         {/* Effet laser de scan */}
         <motion.div
