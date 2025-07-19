@@ -108,3 +108,23 @@ coverage/
 # Storybook build outputs
 .out
 .storybook-out
+
+# Dossiers temporaires et de débogage
+debug-login.js
+init-roles.js
+*.log
+
+# Fichiers de cache et build corrompus
+.next/cache/
+.next/server/
+.next/static/
+.next/trace
+.next/server-cache/
+
+# VSCode et IDE
+.vscode/settings.json
+.idea/
+
+# Fichiers système
+Thumbs.db
+.DS_Store

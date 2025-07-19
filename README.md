@@ -1,122 +1,350 @@
-# Indonesien
-
-Ce projet est un site web moderne proposant des services de traduction indonésien-français pour le monde de l'entreprise et le grand public.
-
-## Technologies
-- Next.js (React, TypeScript)
-- Tailwind CSS
-- Docker
-- PostgreSQL
-- GitHub (versionnage)
-
-## Installation
-
-1. Clonez le repository
-```bash
-git clone https://github.com/jplainard/Indonesien.git
-cd Indonesien
-```
-
-2. Installez les dépendances
-```bash
-npm install
-```
-
-## Lancement du projet
-
-### Avec Docker
-
-#### Mode Développement
-```bash
-./dev.sh
-```
-L'application sera accessible sur http://localhost:3000
-
-#### Mode Production
-```bash
-./prod.sh
-```
-
-### Sans Docker
-```bash
-npm run dev
-```
-
-## Objectif
-Proposer une plateforme innovante et professionnelle pour la traduction entre l'indonésien et le français, adaptée aux besoins des entreprises et des particuliers.
-
 # 🇮🇩↔️🇫🇷 IndoFrench - Traduction Professionnelle
 
 **IndoFrench** est une plateforme moderne de traduction professionnelle entre l'indonésien et le français, développée avec Next.js 15, React 19, et les dernières technologies web.
 
-## ✨ Fonctionnalités
-
-- **🌐 Traduction Professionnelle** : Services IA avancés (OpenAI, Google Cloud)
-- **🔐 Authentification Sécurisée** : NextAuth v5 avec Prisma
-- **💳 Paiements Intégrés** : Stripe et PayPal
-- **📄 Génération PDF** : Documents automatisés
-- **🎨 Interface Moderne** : Tailwind CSS 4, Framer Motion, Radix UI
-- **📊 Analytique** : Google Analytics intégré
-- **🌍 Multilingue** : Support FR/ID/EN complet
-- **🐳 Docker Ready** : Conteneurisation complète
-
 ## 🚀 Démarrage Rapide
 
-### Prérequis
-- Node.js 18.19.1+ 
-- Docker & Docker Compose
-- PostgreSQL 16
-
-### Installation
-
-1. **Cloner le projet**
+### Option 1 : Démarrage Automatique (Recommandé)
 ```bash
-git clone https://github.com/jplainard/IndoFrench.git
-cd IndoFrench
+# Démarrage avec vérifications automatiques
+./quick-start.sh --dev-local
+
+# Ou pour Docker
+./quick-start.sh --dev
+
+# Production
+./quick-start.sh --prod
 ```
 
-2. **Installer les dépendances**
+### Option 2 : Démarrage Manuel
 ```bash
-npm install --legacy-peer-deps
-```
+# 1. Cloner le repository
+git clone https://github.com/jplainard/Indonesien.git
+cd Indonesien
 
-3. **Configuration environnement**
-```bash
-cp .env.example .env.local
-# Éditer .env.local avec vos clés API
-```
+# 2. Installer les dépendances
+npm install
 
-4. **Démarrer l'environnement de développement**
-```bash
-./dev.sh
-# ou
+# 3. Démarrer la base de données
+docker-compose -f docker-compose.dev.yml up -d db
+
+# 4. Configurer la base de données
+npx prisma db push
+node init-roles.js
+
+# 5. Démarrer le serveur
 npm run dev
 ```
 
-5. **Accéder à l'application**
-- Site web : [http://localhost:3000](http://localhost:3000)
-- Base de données : [http://localhost:5432](http://localhost:5432)
+## 🛠️ Scripts de Maintenance
 
-## 📋 Scripts Disponibles
+### Scripts Principaux
+- **`./quick-start.sh`** - Démarrage intelligent avec vérifications
+- **`./scripts/dev-clean.sh`** - Nettoyage de l'environnement de développement
+- **`./scripts/fix-common-issues.sh`** - Diagnostic et réparation automatique
 
+### En cas de problème
+```bash
+# Réparation automatique complète
+./scripts/fix-common-issues.sh --auto-repair
+
+# Nettoyage complet
+./scripts/dev-clean.sh --full
+
+# Redémarrage propre
+./quick-start.sh --clean
+```
+
+## 📋 Architecture et Technologies
+
+### Stack Technique
+- **Frontend** : Next.js 15, React 19, TypeScript
+- **Styling** : Tailwind CSS, Framer Motion
+- **Backend** : Next.js API Routes
+- **Base de données** : PostgreSQL + Prisma ORM
+- **Authentification** : JWT + HttpOnly Cookies
+- **Containerisation** : Docker + Docker Compose
+- **Déploiement** : Scripts automatisés
+
+### Structure du Projet
+```
+Indonesien/
+├── 📁 src/
+│   ├── 📁 app/                 # App Router Next.js
+│   │   ├── 📁 api/            # API Routes
+│   │   │   ├── 📁 auth/       # Authentification
+│   │   │   ├── 📁 translate/  # Services de traduction
+│   │   │   └── 📁 users/      # Gestion utilisateurs
+│   │   ├── 📁 admin/          # Interface admin
+│   │   ├── 📁 auth/           # Pages d'authentification
+│   │   └── 📁 dashboard/      # Tableau de bord
+│   ├── 📁 components/         # Composants React
+│   ├── 📁 lib/               # Utilities et configuration
+│   └── 📁 config/            # Configuration app
+├── 📁 scripts/               # Scripts de maintenance
+│   ├── 🔧 dev-clean.sh       # Nettoyage développement
+│   ├── 🔧 fix-common-issues.sh # Réparation automatique
+│   ├── 🔧 init-roles.ts      # Initialisation des rôles
+│   └── 🔧 create-test-users.ts # Utilisateurs de test
+├── 📁 prisma/               # Schéma base de données
+├── 📁 public/               # Assets statiques
+├── 🐳 docker-compose.dev.yml # Configuration Docker dev
+├── 🐳 docker-compose.prod.yml # Configuration Docker prod
+├── 🚀 quick-start.sh        # Script de démarrage intelligent
+├── 🛠️ dev.sh               # Script développement Docker
+├── 🏭 prod.sh              # Script production
+└── 📚 TROUBLESHOOTING.md   # Guide de résolution
+```
+
+## ✨ Fonctionnalités Principales
+
+### 🌐 Services de Traduction
+- **Traduction IA Avancée** : Intégration OpenAI et Google Cloud
+- **Traduction Humaine** : Réseau de traducteurs professionnels
+- **Support Multi-formats** : Documents, images, audio, vidéo
+- **Qualité Garantie** : Système de notation et révision
+
+### 🔐 Système d'Authentification
+- **JWT Sécurisé** : Tokens avec HttpOnly cookies
+- **Gestion des Rôles** : Utilisateur, Premium, Traducteur, Modérateur, Admin
+- **Session Management** : Gestion avancée des sessions
+- **Sécurité Renforcée** : Protection CSRF, rate limiting
+
+### � Interface Professionnelle
+- **Dashboard Intuitif** : Gestion complète des projets
+- **Interface Admin** : Outils de modération et analytics
+- **Responsive Design** : Optimisé mobile et desktop
+- **UX/UI Moderne** : Tailwind CSS 4, Framer Motion
+
+### 🛠️ Outils de Développement
+
+#### Scripts de Maintenance Automatisés
+- **`quick-start.sh`** - Démarrage intelligent avec vérifications
+- **`scripts/dev-clean.sh`** - Nettoyage environnement développement
+- **`scripts/fix-common-issues.sh`** - Diagnostic et réparation automatique
+
+#### Fonctionnalités de Stabilité
+- **Auto-repair** : Détection et correction automatique des erreurs
+- **Permission Management** : Gestion automatique des permissions fichiers
+- **Process Monitoring** : Surveillance des processus Node.js
+- **Database Health Checks** : Vérification état PostgreSQL
+
+## 🚀 Guide de Démarrage
+
+### Option 1 : Démarrage Automatique (Recommandé)
+```bash
+# Clone et setup automatique
+git clone https://github.com/jplainard/Indonesien.git
+cd Indonesien
+
+# Démarrage intelligent avec toutes les vérifications
+./quick-start.sh --dev-local
+```
+
+### Option 2 : Démarrage Docker
+```bash
+# Avec Docker Compose
+./quick-start.sh --dev
+
+# Ou directement
+./dev.sh
+```
+
+### Option 3 : Démarrage Manuel
+```bash
+# 1. Installation des dépendances
+npm install
+
+# 2. Configuration environnement
+cp .env.example .env.local
+# Éditer .env.local avec vos paramètres
+
+# 3. Base de données
+docker-compose -f docker-compose.dev.yml up -d db
+npx prisma db push
+node init-roles.js
+
+# 4. Démarrage serveur
+npm run dev
+```
+
+## 📋 Scripts et Commandes
+
+### Scripts de Démarrage
+```bash
+./quick-start.sh --dev-local   # Mode développement local (recommandé)
+./quick-start.sh --dev         # Mode développement Docker
+./quick-start.sh --prod        # Mode production
+./quick-start.sh --clean       # Nettoyage complet
+```
+
+### Scripts de Maintenance
+```bash
+# Diagnostic et réparation automatique
+./scripts/fix-common-issues.sh --auto-repair
+
+# Nettoyage développement
+./scripts/dev-clean.sh           # Nettoyage standard
+./scripts/dev-clean.sh --full    # Nettoyage complet avec node_modules
+
+# Vérifications spécifiques
+./scripts/fix-common-issues.sh --check-permissions
+./scripts/fix-common-issues.sh --check-database
+./scripts/fix-common-issues.sh --check-processes
+```
+
+### Scripts NPM
 ```bash
 # Développement
-npm run dev          # Démarrage avec Turbopack
-./dev.sh            # Démarrage Docker complet
-
-# Production
-npm run build       # Construction optimisée
-npm run start       # Serveur production
-
-# Qualité
-npm run lint        # Linting ESLint
-npm test           # Tests Jest
+npm run dev              # Serveur de développement Next.js
+npm run build           # Build de production
+npm run start           # Serveur de production
+npm run lint            # Vérification ESLint
+npm run type-check      # Vérification TypeScript
 
 # Base de données
-npx prisma generate  # Génération client
-npx prisma studio   # Interface admin
-npx prisma db push  # Migration
+npx prisma db push      # Synchroniser le schéma
+npx prisma studio       # Interface graphique DB
+npx prisma generate     # Générer le client Prisma
+
+# Utilitaires
+node init-roles.js      # Initialiser les rôles
+node debug-login.js     # Debug authentification
 ```
+
+## 🔧 Résolution de Problèmes
+
+### Problèmes Courants
+
+#### 1. Erreurs de Permissions (EACCES)
+```bash
+# Solution automatique
+./scripts/fix-common-issues.sh --auto-repair
+
+# Solution manuelle
+sudo chown -R $USER:$USER .
+chmod -R 755 .
+```
+
+#### 2. Build Corrompu (.next)
+```bash
+# Nettoyage rapide
+./scripts/dev-clean.sh
+
+# Nettoyage complet
+./scripts/dev-clean.sh --full
+```
+
+#### 3. Processus Bloqués
+```bash
+# Vérification et nettoyage automatique
+./scripts/fix-common-issues.sh --check-processes
+
+# Manuel
+pkill -f "next"
+lsof -ti:3000 | xargs kill -9
+```
+
+#### 4. Base de Données Inaccessible
+```bash
+# Vérification automatique
+./scripts/fix-common-issues.sh --check-database
+
+# Redémarrage manuel
+docker-compose -f docker-compose.dev.yml restart db
+```
+
+### Workflow de Débogage Recommandé
+
+1. **Premier niveau** : `./scripts/fix-common-issues.sh --auto-repair`
+2. **Deuxième niveau** : `./scripts/dev-clean.sh && ./quick-start.sh --dev-local`
+3. **Reset complet** : `./scripts/dev-clean.sh --full && ./quick-start.sh --dev-local`
+
+Pour plus de détails, consultez [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+
+## 🏗️ Architecture Technique
+
+### Stack Technologique
+- **Frontend** : Next.js 15, React 19, TypeScript 5
+- **Styling** : Tailwind CSS 4, Framer Motion, Lucide Icons
+- **Backend** : Next.js API Routes, Prisma ORM
+- **Base de données** : PostgreSQL 16
+- **Authentification** : JWT + HttpOnly Cookies
+- **Containerisation** : Docker + Docker Compose
+- **CI/CD** : GitHub Actions
+
+### Configuration Docker Optimisée
+- **Multi-stage builds** : Optimisation des images
+- **Non-root user** : Sécurité renforcée (nextjs:1001)
+- **Volume management** : Cache persistant pour node_modules
+- **Health checks** : Surveillance PostgreSQL
+- **Permission handling** : Gestion automatique des permissions
+
+### Améliorations de Stabilité
+- **Auto-recovery** : Détection et correction d'erreurs
+- **Permission management** : Correction automatique
+- **Process monitoring** : Surveillance des processus
+- **Cache optimization** : Gestion intelligente du cache Next.js
+
+## 🚀 APIs et Endpoints
+
+### Authentification
+- `POST /api/auth/register` - Inscription utilisateur
+- `POST /api/auth/login` - Connexion
+- `POST /api/auth/logout` - Déconnexion
+- `GET /api/auth/me` - Informations utilisateur actuel
+
+### Gestion Utilisateurs
+- `GET /api/users` - Liste des utilisateurs (admin)
+- `GET /api/users/[id]` - Détails utilisateur
+- `PUT /api/users/[id]` - Modification utilisateur
+- `DELETE /api/users/[id]` - Suppression utilisateur
+
+### Services
+- `GET /api/health` - État du système
+- `GET /api/stats` - Statistiques plateforme
+- `GET /api/roles` - Liste des rôles
+- `POST /api/upload` - Upload de fichiers
+
+## 🌐 Accès à l'Application
+
+Une fois démarrée, l'application est accessible via :
+
+- **Site principal** : http://localhost:3000
+- **API Health Check** : http://localhost:3000/api/health
+- **Admin Panel** : http://localhost:3000/admin
+- **Dashboard** : http://localhost:3000/dashboard
+- **Authentification** : http://localhost:3000/auth
+
+## 📚 Documentation Complète
+
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Guide de résolution des problèmes
+- **[DEMARRAGE-RAPIDE.md](./DEMARRAGE-RAPIDE.md)** - Guide de démarrage rapide
+- **[INSTALLATION-OUTILS.md](./INSTALLATION-OUTILS.md)** - Installation des outils de développement
+- **[BRAND-GUIDE.md](./BRAND-GUIDE.md)** - Guide de la marque
+- **[DEPLOY.md](./DEPLOY.md)** - Guide de déploiement
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 📞 Support
+
+- **Email** : support@indofrench.com
+- **Documentation** : [docs.indofrench.com](https://docs.indofrench.com)
+- **Issues GitHub** : [github.com/jplainard/Indonesien/issues](https://github.com/jplainard/Indonesien/issues)
+
+---
+
+**Développé avec ❤️ pour la communauté franco-indonésienne**
 
 ## 🛠️ Stack Technique
 

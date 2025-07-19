@@ -2,7 +2,30 @@
 
 Ce guide vous permet de démarrer rapidement avec **IndoFrench**, la plateforme de traduction indonésien-français.
 
-## 📋 Checklist de Configuration
+## 🎯 Démarrage Ultra-Rapide (Recommandé)
+
+### Option 1 : Script Automatique
+```bash
+# 1. Cloner et accéder au projet
+git clone https://github.com/jplainard/Indonesien.git
+cd Indonesien
+
+# 2. Démarrage automatique avec vérifications
+./quick-start.sh --dev-local
+```
+
+**C'est tout !** 🎉 Votre application sera accessible sur http://localhost:3000
+
+### Option 2 : Si vous avez des problèmes
+```bash
+# Diagnostic et réparation automatique
+./scripts/fix-common-issues.sh --auto-repair
+
+# Puis redémarrage
+./quick-start.sh --dev-local
+```
+
+## 📋 Checklist de Configuration Détaillée
 
 ### ✅ Étape 1 : Prérequis Système
 - [ ] Node.js 18.19.1+ installé
@@ -10,14 +33,14 @@ Ce guide vous permet de démarrer rapidement avec **IndoFrench**, la plateforme 
 - [ ] Git configuré
 - [ ] WSL activé (Windows uniquement)
 
-### ✅ Étape 2 : Installation du Projet
+### ✅ Étape 2 : Installation Manuelle (si nécessaire)
 ```bash
 # 1. Cloner le repository
-git clone https://github.com/jplainard/IndoFrench.git
-cd IndoFrench
+git clone https://github.com/jplainard/Indonesien.git
+cd Indonesien
 
 # 2. Installer les dépendances
-npm install --legacy-peer-deps
+npm install
 
 # 3. Copier la configuration
 cp .env.example .env.local
@@ -29,13 +52,13 @@ cp .env.example .env.local
 
 #### 🔐 Authentification (Obligatoire)
 ```bash
-NEXTAUTH_SECRET="votre-secret-super-long-et-aleatoire"
+JWT_SECRET="votre-secret-super-long-et-aleatoire"
 NEXTAUTH_URL="http://localhost:3000"
 ```
 
 #### 🗄️ Base de Données (Obligatoire)
 ```bash
-DATABASE_URL="postgresql://user:password@localhost:5432/indonesien_db"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/indofrench"
 ```
 
 #### 🤖 APIs de Traduction (Obligatoire pour traduction)
@@ -51,37 +74,234 @@ STRIPE_SECRET_KEY="sk_test_votre-cle-stripe"
 STRIPE_PUBLISHABLE_KEY="pk_test_votre-cle-publique"
 ```
 
-### ✅ Étape 4 : Démarrage
-```bash
-# Méthode 1 : Docker complet (Recommandé)
-./dev.sh
+## 🛠️ Scripts de Démarrage Disponibles
 
-# Méthode 2 : Node.js local
-npm run dev
+### Scripts Principaux
+```bash
+# Démarrage automatique (RECOMMANDÉ)
+./quick-start.sh --dev-local    # Mode développement local
+./quick-start.sh --dev          # Mode développement Docker
+./quick-start.sh --prod         # Mode production
+./quick-start.sh --clean        # Nettoyage complet
+
+# Scripts de maintenance
+./scripts/dev-clean.sh          # Nettoyage développement
+./scripts/dev-clean.sh --full   # Nettoyage complet avec node_modules
+./scripts/fix-common-issues.sh  # Diagnostic et réparation
 ```
 
-### ✅ Étape 5 : Base de Données
+### Scripts Classiques
 ```bash
-# Initialiser Prisma
-npx prisma generate
-npx prisma db push
+# Docker complet
+./dev.sh                        # Développement avec Docker
+./prod.sh                       # Production avec Docker
 
-# (Optionnel) Interface admin
-npx prisma studio
+# Node.js local
+npm run dev                     # Serveur de développement
+npm run build                   # Build de production
+npm run start                   # Serveur de production
+```
+
+### ✅ Étape 4 : Démarrage (Méthodes)
+
+#### Option A : Démarrage Automatique (Recommandé)
+```bash
+./quick-start.sh --dev-local
+```
+✅ **Avantages** : Vérifications automatiques, stable, réparation d'erreurs
+
+#### Option B : Docker Complet
+```bash
+./dev.sh
+```
+✅ **Avantages** : Environnement isolé, production-like
+
+#### Option C : Node.js Local
+```bash
+# 1. Démarrer seulement la DB
+docker-compose -f docker-compose.dev.yml up -d db
+
+# 2. Configurer la DB
+npx prisma db push
+node init-roles.js
+
+# 3. Démarrer Next.js
+npm run dev
+```
+✅ **Avantages** : Plus rapide, debugging facile
+
+### ✅ Étape 5 : Vérification du Fonctionnement
+
+#### Tests Automatiques
+```bash
+# Vérification de l'état du système
+curl http://localhost:3000/api/health
+
+# Test de l'authentification
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"testpassword","name":"Test User"}'
+```
+
+#### Interface Web
+Vérifiez que ces pages se chargent :
+- [ ] http://localhost:3000 (Page d'accueil)
+- [ ] http://localhost:3000/auth (Authentification)
+- [ ] http://localhost:3000/dashboard (Tableau de bord)
+
+## 🚨 En Cas de Problème
+
+### Réparation Automatique
+```bash
+# Solution universelle
+./scripts/fix-common-issues.sh --auto-repair
+```
+
+### Problèmes Courants
+
+#### 1. Port déjà utilisé
+```bash
+# Trouver et tuer le processus
+lsof -ti:3000 | xargs kill -9
+# Ou utiliser le script
+./scripts/fix-common-issues.sh --check-processes
+```
+
+#### 2. Erreurs de permissions
+```bash
+# Correction automatique
+./scripts/fix-common-issues.sh --check-permissions
+```
+
+#### 3. Build corrompu
+```bash
+# Nettoyage complet
+./scripts/dev-clean.sh --full
+./quick-start.sh --dev-local
+```
+
+#### 4. Base de données inaccessible
+```bash
+# Vérification et redémarrage
+./scripts/fix-common-issues.sh --check-database
 ```
 
 ## 🌐 Accès aux Services
 
 Une fois démarré, vous aurez accès à :
 
-- **Site Web** : http://localhost:3000
-- **Base de Données** : localhost:5432
-- **Prisma Studio** : http://localhost:5555 (si lancé)
+### URLs Principales
+- **🏠 Site Web** : http://localhost:3000
+- **🔑 Authentification** : http://localhost:3000/auth
+- **📊 Dashboard** : http://localhost:3000/dashboard
+- **👤 Admin** : http://localhost:3000/admin
+- **📤 Upload** : http://localhost:3000/upload
+
+### APIs Disponibles
+- **🏥 Health Check** : http://localhost:3000/api/health
+- **🔐 Auth API** : http://localhost:3000/api/auth/*
+- **👥 Users API** : http://localhost:3000/api/users
+- **📈 Stats API** : http://localhost:3000/api/stats
+
+### Services de Base
+- **🗄️ PostgreSQL** : localhost:5432
+- **🔍 Prisma Studio** : http://localhost:5555 (si lancé avec `npx prisma studio`)
 
 ## 🛠️ Commandes Essentielles
 
+### Maintenance Quotidienne
+```bash
+# Démarrage journalier
+./quick-start.sh --dev-local
+
+# En cas de problème
+./scripts/fix-common-issues.sh --auto-repair
+
+# Nettoyage hebdomadaire
+./scripts/dev-clean.sh --full
+```
+
 ### Développement
 ```bash
+# Logs en temps réel
+docker-compose -f docker-compose.dev.yml logs -f
+
+# Redémarrage services
+docker-compose -f docker-compose.dev.yml restart
+
+# Base de données
+npx prisma studio              # Interface graphique
+npx prisma db push            # Appliquer le schéma
+node init-roles.js            # Initialiser les rôles
+```
+
+### Debugging
+```bash
+# Vérifier les processus
+ps aux | grep next
+
+# Vérifier les ports
+lsof -i :3000
+lsof -i :5432
+
+# Logs Docker
+docker-compose logs db
+docker-compose logs web
+```
+
+## 📚 Ressources Utiles
+
+### Documentation
+- **[README.md](./README.md)** - Documentation complète
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Guide de résolution de problèmes
+- **[INSTALLATION-OUTILS.md](./INSTALLATION-OUTILS.md)** - Installation des outils
+
+### Comptes de Test
+Une fois l'application démarrée, vous pouvez créer des comptes via :
+- Interface web : http://localhost:3000/auth
+- API directe : `POST /api/auth/register`
+
+### Scripts Utiles
+```bash
+# Créer des utilisateurs de test
+node scripts/create-test-users.ts
+
+# Debug d'authentification
+node debug-login.js
+
+# Test de la base de données
+node test-db.mjs
+```
+
+## ✅ Checklist de Validation
+
+Avant de commencer le développement, vérifiez :
+
+- [ ] ✅ Le site se charge sur http://localhost:3000
+- [ ] ✅ L'API health répond : http://localhost:3000/api/health
+- [ ] ✅ Vous pouvez créer un compte sur /auth
+- [ ] ✅ PostgreSQL est accessible
+- [ ] ✅ Aucune erreur dans les logs
+
+## 🎯 Prochaines Étapes
+
+1. **Explorez l'interface** : Naviguez sur le site
+2. **Créez un compte** : Testez l'authentification
+3. **Consultez le code** : Familiarisez-vous avec la structure
+4. **Lisez la doc** : Parcourez [README.md](./README.md) pour plus de détails
+
+## 💡 Conseils de Productivité
+
+- **Utilisez toujours** `./quick-start.sh --dev-local` pour démarrer
+- **Nettoyez régulièrement** avec `./scripts/dev-clean.sh`
+- **En cas de doute**, lancez `./scripts/fix-common-issues.sh --auto-repair`
+- **Consultez** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) pour les problèmes courants
+
+---
+
+🎉 **Félicitations !** Votre environnement IndoFrench est maintenant opérationnel !
+
+Pour toute question, consultez la documentation ou créez une issue sur GitHub.
 npm run dev          # Démarrage développement
 npm run build        # Construction production
 npm run start        # Serveur production
