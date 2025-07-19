@@ -18,6 +18,8 @@ model User {
   name         String?
   avatar       String?
   emailVerified DateTime?
+  status       String   @default("active") // active, inactive, suspended
+  lastLoginAt  DateTime?
   role         Role     @relation(fields: [roleId], references: [id])
   roleId       Int
   createdAt    DateTime @default(now())
