@@ -4,6 +4,8 @@ const nextConfig = {
   experimental: {
     // Optimisations pour le développement
   },
+  // Configuration pour Docker et production
+  output: 'standalone',
   // ...autres options Next.js
 };
 

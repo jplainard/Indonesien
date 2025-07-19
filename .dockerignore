@@ -1,27 +1,69 @@
-# Ignorer les dépendances Node, elles seront installées dans le conteneur
-node_modules
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+.yarn/
 
-# Ignorer le cache de Next.js
-.next
+# Next.js
+.next/
+out/
 
-# Ignorer le dossier Docker (s'il existe)
-.docker
+# Environment files
+.env*
+!.env.production.example
 
-# Ignorer les logs
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-
-# Ignorer le dossier Git
-.git
-.gitignore
-
-# Ignorer les fichiers de configuration de l'éditeur
-.vscode
-.idea
+# IDE et éditeurs
+.vscode/
+.idea/
 *.sublime-project
 *.sublime-workspace
 
-# Fichiers système
+# OS
 .DS_Store
 Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+
+# Build et distribution
+build/
+dist/
+
+# Fichiers temporaires
+.tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+# Documentation
+*.md
+!README.md
+
+# Backups
+backups/
+
+# SSL certificates
+ssl/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Testing
+.nyc_output/
+coverage.lcov

@@ -52,16 +52,16 @@ export async function POST(request: NextRequest) {
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Obtenir le rôle par défaut (utilisateur)
+    // Obtenir le rôle par défaut (user)
     let defaultRole = await prisma.role.findFirst({
-      where: { name: 'utilisateur' }
+      where: { name: 'user' }
     });
 
     if (!defaultRole) {
       // Créer le rôle utilisateur s'il n'existe pas
       defaultRole = await prisma.role.create({
         data: {
-          name: 'utilisateur',
+          name: 'user',
           description: 'Utilisateur standard'
         }
       });
