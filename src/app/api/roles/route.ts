@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     return NextResponse.json(role, { status: 201 });
   } catch (error) {
     console.error('Erreur lors de la création du rôle:', error);
-    if ((error as any).code === 'P2002') {
+    if ((error as { code?: string }).code === 'P2002') {
       return NextResponse.json(
         { error: 'Un rôle avec ce nom existe déjà' },
         { status: 409 }

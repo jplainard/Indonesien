@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { 
   FileText, 
@@ -16,7 +17,6 @@ import {
   Clock,
   Shield,
   Award,
-  FileImage,
   FileSpreadsheet,
   Presentation,
   Image as ImageIcon,
@@ -70,7 +70,22 @@ function FloatingParticles() {
 }
 
 export default function Home() {
-  const [stats, setStats] = useState<any>(null);
+  interface StatsOverview {
+    totalTranslations: number;
+    totalUsers: number;
+    languagePairs: number;
+    todayTranslations: number;
+    averageQuality: number;
+    publicTranslations: number;
+  }
+  interface Stats {
+    overview: StatsOverview;
+    translationTypes?: Array<{ type: string; count: number }>;
+    monthlyData?: Record<string, number>;
+    topLanguages?: Array<{ language: string; count: number }>;
+    growth?: { thisMonth: number; lastMonth: number };
+  }
+  const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -140,9 +155,11 @@ export default function Home() {
               ease: "easeInOut" 
             }}
           >
-            <img 
+            <Image 
               src="/translation-bg.svg" 
               alt="Translation background" 
+              width={384}
+              height={288}
               className="w-96 h-72"
             />
           </motion.div>
@@ -481,7 +498,7 @@ export default function Home() {
               <ul className="space-y-3 text-gray-700">
                 {[
                   { icon: FileText, text: "Contrats commerciaux", desc: "Accords, partenariats, conditions générales" },
-                  { icon: Users, text: "Documentation RH", desc: "Offres d'emploi, règlements intérieurs" },
+                  { icon: Users, text: "Documentation RH", desc: "Offres d&apos;emploi, règlements intérieurs" },
                   { icon: BarChart3, text: "Marketing", desc: "Brochures, sites web, supports commerciaux" },
                   { icon: CheckCircle, text: "Technique", desc: "Manuels, spécifications, notices" },
                   { icon: Shield, text: "Juridique", desc: "Statuts, procédures, correspondances" }
@@ -525,7 +542,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-4">Particuliers</h3>
               <ul className="space-y-3 text-gray-700">
                 {[
-                  { icon: Award, text: "Documents officiels", desc: "Actes d'état civil, passeports" },
+                  { icon: Award, text: "Documents officiels", desc: "Actes d&apos;état civil, passeports" },
                   { icon: GraduationCap, text: "Études", desc: "Diplômes, relevés de notes, lettres de motivation" },
                   { icon: FileText, text: "Immigration", desc: "Dossiers de visa, attestations" },
                   { icon: CheckCircle, text: "Médical", desc: "Ordonnances, comptes-rendus médicaux" },
@@ -733,7 +750,7 @@ export default function Home() {
                 >
                   {stats.overview.todayTranslations}
                 </motion.div>
-                <div className="text-white/80">Aujourd'hui</div>
+                <div className="text-white/80">Aujourd&apos;hui</div>
               </motion.div>
             </div>
           )}

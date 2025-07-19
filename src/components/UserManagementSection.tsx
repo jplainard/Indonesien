@@ -1,5 +1,13 @@
 "use client";
 
+// Type pour les utilisateurs API (hors fonction)
+export type UserApi = {
+  createdAt: string;
+  lastLoginAt: string;
+  role: { name: string };
+  stats: { lastActivity: string };
+};
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { 
@@ -37,17 +45,21 @@ export default function UserManagementSection() {
       // Calculer les statistiques
       const stats: UserStats = {
         totalUsers: users.length,
-        newUsersThisMonth: users.filter((user: any) => {
+
+
+
+
+        newUsersThisMonth: users.filter((user: UserApi) => {
           const userDate = new Date(user.createdAt);
           const now = new Date();
           return userDate.getMonth() === now.getMonth() && 
                  userDate.getFullYear() === now.getFullYear();
         }).length,
-        usersByRole: users.reduce((acc: any, user: any) => {
+        usersByRole: users.reduce((acc: Record<string, number>, user: UserApi) => {
           acc[user.role.name] = (acc[user.role.name] || 0) + 1;
           return acc;
         }, {}),
-        activeUsers: users.filter((user: any) => {
+        activeUsers: users.filter((user: UserApi) => {
           const lastActivity = new Date(user.stats.lastActivity);
           const thirtyDaysAgo = new Date();
           thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);

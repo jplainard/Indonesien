@@ -20,6 +20,19 @@ const eslintConfig = [
       "dist/**/*",
       "build/**/*"
     ]
+  },
+  {
+    rules: {
+      // Autoriser les variables non utilisées qui commencent par _
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ]
+    }
   }
 ];
 

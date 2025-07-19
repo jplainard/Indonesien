@@ -237,7 +237,7 @@ export default function LoginPage() {
             href="/" 
             className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
         </div>
       </motion.div>

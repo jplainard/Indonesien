@@ -29,7 +29,19 @@ export async function GET() {
     });
 
     // Transformer les données pour la sécurité
-    const safeUsers = users.map((user: any) => ({
+    const safeUsers = users.map((user: {
+      id: number;
+      name: string | null;
+      email: string;
+      avatar?: string | null;
+      emailVerified?: Date | null;
+      role: { name: string };
+      createdAt: Date;
+      updatedAt: Date;
+      lastLoginAt?: Date | null;
+      translations: Array<{ id: number; createdAt: Date; quality: number | null }>;
+      _count: { translations: number };
+    }) => ({
       id: user.id,
       email: user.email,
       name: user.name,
@@ -41,7 +53,7 @@ export async function GET() {
       stats: {
         totalTranslations: user._count.translations,
         averageQuality: user.translations.length > 0 
-          ? Math.round(user.translations.reduce((acc: number, t: any) => acc + (t.quality || 0), 0) / user.translations.length)
+          ? Math.round(user.translations.reduce((acc: number, t) => acc + (t.quality || 0), 0) / user.translations.length)
           : 0,
         lastActivity: user.translations.length > 0 
           ? user.translations[0].createdAt 

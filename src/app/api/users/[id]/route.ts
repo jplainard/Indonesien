@@ -7,10 +7,11 @@ const prisma = new PrismaClient();
 // GET - Récupérer un utilisateur spécifique
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await params;
+    const userId = parseInt(id);
     
     if (isNaN(userId)) {
       return NextResponse.json(
@@ -55,7 +56,7 @@ export async function GET(
     }
 
     // Retourner sans le mot de passe
-    const { password, ...safeUser } = user;
+    const { password: _, ...safeUser } = user;
     
     return NextResponse.json(safeUser);
   } catch (error) {
@@ -72,10 +73,11 @@ export async function GET(
 // PUT - Mettre à jour un utilisateur
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await params;
+    const userId = parseInt(id);
     const data = await request.json();
     
     if (isNaN(userId)) {
@@ -85,7 +87,7 @@ export async function PUT(
       );
     }
 
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     
     if (data.name !== undefined) updateData.name = data.name;
     if (data.email !== undefined) updateData.email = data.email;
@@ -106,12 +108,12 @@ export async function PUT(
     });
 
     // Retourner sans le mot de passe
-    const { password, ...safeUser } = user;
+    const { password: __, ...safeUser } = user;
     
     return NextResponse.json(safeUser);
   } catch (error) {
     console.error('Erreur lors de la mise à jour de l\'utilisateur:', error);
-    if ((error as any).code === 'P2002') {
+    if ((error as { code?: string }).code === 'P2002') {
       return NextResponse.json(
         { error: 'Cet email est déjà utilisé' },
         { status: 409 }
@@ -129,10 +131,11 @@ export async function PUT(
 // DELETE - Supprimer un utilisateur
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await params;
+    const userId = parseInt(id);
     
     if (isNaN(userId)) {
       return NextResponse.json(
@@ -148,7 +151,7 @@ export async function DELETE(
     return NextResponse.json({ message: 'Utilisateur supprimé avec succès' });
   } catch (error) {
     console.error('Erreur lors de la suppression de l\'utilisateur:', error);
-    if ((error as any).code === 'P2025') {
+    if ((error as { code?: string }).code === 'P2025') {
       return NextResponse.json(
         { error: 'Utilisateur non trouvé' },
         { status: 404 }

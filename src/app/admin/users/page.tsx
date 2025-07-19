@@ -16,8 +16,7 @@ import {
   Search,
   Filter,
   ChevronDown,
-  Eye,
-  Settings
+  Eye
 } from "lucide-react";
 
 interface Role {
@@ -51,8 +50,6 @@ export default function UsersAdmin() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRole, setSelectedRole] = useState<string>("all");
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetchUsers();
@@ -151,7 +148,6 @@ export default function UsersAdmin() {
               </div>
             </div>
             <motion.button
-              onClick={() => setShowCreateModal(true)}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -299,7 +295,6 @@ export default function UsersAdmin() {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <motion.button
-                          onClick={() => setEditingUser(user)}
                           className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}

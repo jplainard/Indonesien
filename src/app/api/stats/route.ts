@@ -76,7 +76,7 @@ export async function GET() {
     });
 
     // Traiter les données mensuelles
-    const monthlyData = monthlyStats.reduce((acc: Record<string, number>, item: any) => {
+    const monthlyData = monthlyStats.reduce((acc: Record<string, number>, item: { createdAt: Date; _count: number }) => {
       const month = item.createdAt.toISOString().substring(0, 7); // YYYY-MM
       acc[month] = (acc[month] || 0) + item._count;
       return acc;
@@ -103,12 +103,12 @@ export async function GET() {
         averageQuality: Math.round(averageQuality._avg.quality || 0),
         publicTranslations
       },
-      translationTypes: translationTypes.map((t: any) => ({
+      translationTypes: translationTypes.map((t: { translationType: string; _count: number }) => ({
         type: t.translationType,
         count: t._count
       })),
       monthlyData,
-      topLanguages: topLanguages.map((lang: any) => ({
+      topLanguages: topLanguages.map((lang: { sourceLang: string; _count: number }) => ({
         language: lang.sourceLang,
         count: lang._count
       })),

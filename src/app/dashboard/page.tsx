@@ -22,27 +22,26 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        const data = await response.json();
 
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me');
-      const data = await response.json();
-
-      if (response.ok) {
-        setUser(data.user);
-      } else {
-        // Non authentifié, rediriger vers la page de connexion
+        if (response.ok) {
+          setUser(data.user);
+        } else {
+          // Non authentifié, rediriger vers la page de connexion
+          router.push('/auth');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la vérification:', error);
         router.push('/auth');
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Erreur lors de la vérification:', error);
-      router.push('/auth');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+    checkAuth();
+  }, [router]);
 
   const handleLogout = async () => {
     try {
@@ -82,7 +81,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-700">
-                Bonjour, {user.name || user.email}
+                Bonjour, {(user.name || user.email).replace(/'/g, "&apos;")}
               </span>
               <motion.button
                 onClick={handleLogout}
@@ -128,7 +127,7 @@ export default function DashboardPage() {
               <span className="ml-2 font-semibold">
                 {user.lastLoginAt 
                   ? new Date(user.lastLoginAt).toLocaleDateString('fr-FR')
-                  : 'Première connexion'
+                  : 'Premi&egrave;re connexion'
                 }
               </span>
             </div>
@@ -140,7 +139,7 @@ export default function DashboardPage() {
                 className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg"
               >
                 <Award className="w-5 h-5" />
-                Accéder au panneau d'administration
+                Accéder au panneau d&apos;administration
               </Link>
             </div>
           )}

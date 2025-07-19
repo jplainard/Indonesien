@@ -54,7 +54,7 @@ export default function TestAuth() {
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold mb-4">Test d'authentification</h2>
+      <h2 className="text-xl font-bold mb-4">Test d&apos;authentification</h2>
       
       <div className="space-x-4 mb-4">
         <button

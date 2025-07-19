@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Vérifier et décoder le token
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number; email: string; exp: number };
 
     // Récupérer l'utilisateur depuis la base de données
     const user = await prisma.user.findUnique({
