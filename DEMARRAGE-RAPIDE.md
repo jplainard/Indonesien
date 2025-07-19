@@ -174,3 +174,38 @@ Si vous rencontrez des problèmes :
 ---
 
 **⚡ En 5 minutes, vous devriez avoir un environnement fonctionnel !**
+
+# Lancer le projet en développement
+
+Pour démarrer l'environnement de développement avec Docker :
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+Cela démarre :
+- Le serveur Next.js en mode développement (hot reload)
+- La base de données PostgreSQL
+
+# Lancer le projet en production
+
+Pour la production, utilisez :
+
+```bash
+docker compose -f docker-compose.prod.yml up --build
+```
+
+# Nettoyage
+
+- Le fichier `docker-compose.simple.yml` a été supprimé car il faisait doublon avec la prod.
+- Utilisez uniquement :
+  - `docker-compose.dev.yml` pour le développement
+  - `docker-compose.prod.yml` pour la production
+
+# Astuce
+
+Pour arrêter les conteneurs :
+
+```bash
+docker compose -f docker-compose.dev.yml down
+```

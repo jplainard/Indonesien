@@ -19,6 +19,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!sourceLang || !targetLang) {
+      return NextResponse.json(
+        { error: 'Les langues source et cible sont requises' },
+        { status: 400 }
+      );
+    }
+
     // Validation de la taille (max 10MB)
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {

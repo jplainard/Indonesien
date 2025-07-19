@@ -127,7 +127,7 @@ export default function DashboardPage() {
               <span className="ml-2 font-semibold">
                 {user.lastLoginAt 
                   ? new Date(user.lastLoginAt).toLocaleDateString('fr-FR')
-                  : 'Premi&egrave;re connexion'
+                  : 'Première connexion'
                 }
               </span>
             </div>

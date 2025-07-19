@@ -161,6 +161,7 @@ export default function Home() {
               width={384}
               height={288}
               className="w-96 h-72"
+              priority
             />
           </motion.div>
 

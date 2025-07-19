@@ -64,10 +64,34 @@ export default function UploadPage() {
       f.id === uploadFile.id ? { ...f, status: 'uploading', progress: 0 } : f
     ));
 
+    // Validation côté client
+    if (!uploadFile.file) {
+      console.error('No file provided');
+      setFiles(prev => prev.map(f => 
+        f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
+      ));
+      return;
+    }
+
+    if (!sourceLang || !targetLang) {
+      console.error('Source or target language missing:', { sourceLang, targetLang });
+      setFiles(prev => prev.map(f => 
+        f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
+      ));
+      return;
+    }
+
     const formData = new FormData();
     formData.append('file', uploadFile.file);
-    formData.append('sourceLang', sourceLang);
-    formData.append('targetLang', targetLang);
+    formData.append('sourceLanguage', sourceLang);
+    formData.append('targetLanguage', targetLang);
+
+    console.log('Uploading file:', {
+      fileName: uploadFile.file.name,
+      fileSize: uploadFile.file.size,
+      sourceLanguage: sourceLang,
+      targetLanguage: targetLang
+    });
 
     try {
       const response = await fetch('/api/upload', {
@@ -80,9 +104,12 @@ export default function UploadPage() {
           f.id === uploadFile.id ? { ...f, status: 'success', progress: 100 } : f
         ));
       } else {
-        throw new Error('Upload failed');
+        const errorData = await response.json();
+        console.error('Upload error:', errorData);
+        throw new Error(`Upload failed: ${errorData.error || 'Unknown error'}`);
       }
-    } catch (_error) {
+    } catch (error) {
+      console.error('Upload exception:', error);
       setFiles(prev => prev.map(f => 
         f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
       ));
