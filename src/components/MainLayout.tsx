@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from './Navigation';
+import Footer from './Footer';
 
 // Particules identiques à la page d'accueil
 function FloatingParticles() {
@@ -219,6 +220,9 @@ export default function MainLayout({
           {children}
         </div>
       </main>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

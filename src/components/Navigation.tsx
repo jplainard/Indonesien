@@ -61,9 +61,17 @@ export default function Navigation() {
     { href: '/dashboard', label: 'Dashboard', icon: BarChart3 },
   ];
 
-  // Ajouter la gestion des utilisateurs pour les admins
+  // Ajouter les pages supplémentaires pour tous les utilisateurs
+  navigationItems.push(
+    { href: '/about', label: 'À propos', icon: Home },
+    { href: '/pricing', label: 'Tarifs', icon: BarChart3 },
+    { href: '/contact', label: 'Contact', icon: Users },
+    { href: '/help', label: 'Aide', icon: Home }
+  );
+
+  // Ajouter la gestion admin pour les admins
   if (user?.role === 'admin') {
-    navigationItems.push({ href: '/admin/users', label: 'Utilisateurs', icon: Users });
+    navigationItems.push({ href: '/admin', label: 'Admin', icon: Users });
   }
 
   return (

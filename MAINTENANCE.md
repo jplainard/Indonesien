@@ -18,6 +18,35 @@ Ce guide documente tous les scripts et outils de maintenance pour garantir le bo
 | `scripts/fix-common-issues.sh` | Diagnostic et réparation | Automatique ou à la demande |
 | `init-roles.js` | Initialisation des rôles DB | Une fois ou après reset DB |
 
+## 🔄 Tâches de Maintenance Régulières
+
+### Quotidiennes ⏰
+- [ ] Vérification des logs d'erreur dans `/var/log/` et Docker
+- [ ] Monitoring des performances via le dashboard admin
+- [ ] Backup automatique de la base de données
+- [ ] Vérification de l'espace disque disponible
+- [ ] Contrôle des nouvelles pages (404, erreurs)
+- [ ] Test rapide des formulaires de contact
+- [ ] Monitoring du dashboard admin accessible
+
+### Hebdomadaires 📅
+- [ ] Mise à jour des dépendances non-critiques avec `npm update`
+- [ ] Nettoyage des fichiers temporaires et uploads anciens
+- [ ] Vérification des certificats SSL et HTTPS
+- [ ] Test des sauvegardes avec restauration partielle
+- [ ] Test des nouveaux composants (Footer, Navigation enrichie)
+- [ ] Vérification des animations Framer Motion sur toutes les pages
+- [ ] Contrôle responsive design et compatibilité mobile
+
+### Mensuelles 🗓️
+- [ ] Audit de sécurité complet et mise à jour des packages
+- [ ] Optimisation et analyse des performances de la base de données
+- [ ] Audit de performance avec Lighthouse et GTmetrix
+- [ ] Vérification approfondie des logs de sécurité
+- [ ] Test complet des pages nouvellement créées (about, contact, pricing, etc.)
+- [ ] Optimisation des images et assets statiques
+- [ ] Audit UX/UI des nouvelles fonctionnalités avec tests utilisateurs
+
 ## 🚀 Scripts de Démarrage Détaillés
 
 ### 1. quick-start.sh - Script Principal

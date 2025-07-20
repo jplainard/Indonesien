@@ -89,28 +89,60 @@ Indonesien/
 │   │   ├── 📄 layout.tsx            # Layout racine
 │   │   ├── 📄 page.tsx              # Page d'accueil
 │   │   ├── 📄 globals.css           # Styles globaux
-│   │   ├── 📁 api/                  # API Routes
+│   │   ├── � not-found.tsx         # Page 404
+│   │   ├── 📄 error.tsx             # Page d'erreur 500
+│   │   ├── �📁 api/                  # API Routes
 │   │   │   ├── 📁 auth/             # Authentification
 │   │   │   │   ├── 📄 login/route.ts
 │   │   │   │   ├── 📄 register/route.ts
 │   │   │   │   ├── 📄 logout/route.ts
 │   │   │   │   └── 📄 me/route.ts
 │   │   │   ├── 📁 users/            # Gestion utilisateurs
-│   │   │   ├── 📁 translate/        # Services de traduction
+│   │   │   │   ├── � route.ts      # CRUD utilisateurs
+│   │   │   │   └── 📄 [id]/route.ts # Utilisateur spécifique
+│   │   │   ├── �📁 translate/        # Services de traduction
 │   │   │   ├── 📁 upload/           # Upload de fichiers
-│   │   │   ├── 📄 health/route.ts   # Health check
-│   │   │   └── 📄 stats/route.ts    # Statistiques
+│   │   │   ├── 📁 stats/            # Statistiques
+│   │   │   ├── 📁 roles/            # Gestion des rôles
+│   │   │   └── 📁 health/           # Health check
 │   │   ├── 📁 auth/                 # Pages d'authentification
+│   │   │   └── 📄 page.tsx          # Connexion/Inscription
 │   │   ├── 📁 dashboard/            # Tableau de bord utilisateur
-│   │   ├── 📁 admin/                # Interface d'administration
-│   │   └── 📁 upload/               # Interface d'upload
-│   ├── 📁 components/               # Composants React
+│   │   │   └── 📄 page.tsx          # Dashboard principal
+│   │   ├── 📁 translate/            # Interface de traduction
+│   │   │   └── 📄 page.tsx          # Service de traduction
+│   │   ├── 📁 upload/               # Interface d'upload
+│   │   │   └── 📄 page.tsx          # Upload de fichiers
+│   │   ├── 📁 mes-traductions/      # Historique traductions
+│   │   │   └── 📄 page.tsx          # Liste des traductions
+│   │   ├── 📁 profile/              # Profil utilisateur
+│   │   │   └── 📄 page.tsx          # Gestion du profil
+│   │   ├── 📁 settings/             # Paramètres utilisateur
+│   │   │   └── 📄 page.tsx          # Configuration personnelle
+│   │   ├── 📁 about/                # Page à propos
+│   │   │   └── 📄 page.tsx          # Présentation entreprise
+│   │   ├── 📁 contact/              # Page contact
+│   │   │   └── 📄 page.tsx          # Formulaire de contact
+│   │   ├── 📁 pricing/              # Page tarifs
+│   │   │   └── 📄 page.tsx          # Plans et tarification
+│   │   ├── 📁 help/                 # Centre d'aide
+│   │   │   └── 📄 page.tsx          # FAQ et support
+│   │   └── 📁 admin/                # Interface d'administration
+│   │       ├── 📄 page.tsx          # Dashboard admin principal
+│   │       └── 📁 users/            # Gestion utilisateurs admin
+│   │           └── 📄 page.tsx      # Administration des comptes
+│   ├── � components/               # Composants React réutilisables
+│   │   ├── � Navigation.tsx        # Navigation principale avec menu adaptatif
+│   │   ├── � Footer.tsx            # Pied de page complet avec liens
+│   │   ├── � MainLayout.tsx        # Layout principal avec particules
 │   │   ├── 📄 TestAuth.tsx          # Test d'authentification
 │   │   └── 📄 UserManagementSection.tsx # Gestion utilisateurs
 │   ├── 📁 lib/                      # Utilitaires et configuration
-│   │   └── 📄 prisma.ts             # Configuration Prisma
-│   └── 📁 config/                   # Configuration application
-│       └── 📄 index.ts              # Config centralisée
+│   │   ├── 📄 prisma.ts             # Configuration Prisma
+│   │   └── 📄 fileTranslation.ts    # Utilitaires de traduction
+│   ├── 📁 config/                   # Configuration application
+│   │   └── 📄 index.ts              # Config centralisée
+│   └── 📁 generated/                # Code généré automatiquement
 ├── 📁 scripts/                      # Scripts de maintenance
 │   ├── 🔧 dev-clean.sh              # Nettoyage développement
 │   ├── 🔧 fix-common-issues.sh      # Diagnostic et réparation
