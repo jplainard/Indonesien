@@ -26,6 +26,7 @@ import {
   Zap
 } from "lucide-react";
 import UserManagementSection from "../components/UserManagementSection";
+import MainLayout from "../components/MainLayout";
 
 // Composant pour les particules flottantes (évite le problème d'hydration)
 function FloatingParticles() {
@@ -130,34 +131,35 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* HEADER */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-blue-600">IndoFrench</h1>
-              <span className="ml-3 text-sm text-gray-500">Traduction de documents</span>
+    <MainLayout>
+      <div className="bg-white min-h-screen">
+        {/* HEADER */}
+        <header className="bg-white shadow-sm border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-6">
+              <div className="flex items-center">
+                <h1 className="text-2xl font-bold text-blue-600">IndoFrench</h1>
+                <span className="ml-3 text-sm text-gray-500">Traduction de documents</span>
+              </div>
+              <nav className="hidden md:flex space-x-8">
+                <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
+                <a href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</a>
+                <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+                {isAuthenticated ? (
+                  <a href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-1">
+                    <UserCheck className="w-4 h-4" />
+                    Mon dashboard
+                  </a>
+                ) : (
+                  <a href="/auth" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
+                    <Users className="w-4 h-4" />
+                    Connexion
+                  </a>
+                )}
+              </nav>
             </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</a>
-              <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-              {isAuthenticated ? (
-                <a href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-1">
-                  <UserCheck className="w-4 h-4" />
-                  Mon dashboard
-                </a>
-              ) : (
-                <a href="/auth" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
-                  <Users className="w-4 h-4" />
-                  Connexion
-                </a>
-              )}
-            </nav>
           </div>
-        </div>
-      </header>
+        </header>
 
       {/* HERO - TRADUCTION DE DOCUMENTS */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 overflow-hidden">
@@ -973,45 +975,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-white font-bold text-lg mb-4">IndoFrench</h3>
-              <p className="text-sm">Traduction professionnelle de documents indonésien-français pour entreprises et particuliers.</p>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/entreprises" className="hover:text-white">Entreprises</a></li>
-                <li><a href="/particuliers" className="hover:text-white">Particuliers</a></li>
-                <li><a href="/tarifs" className="hover:text-white">Tarifs</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/contact" className="hover:text-white">Contact</a></li>
-                <li><a href="/faq" className="hover:text-white">FAQ</a></li>
-                <li><a href="/aide" className="hover:text-white">Aide</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Légal</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/mentions-legales" className="hover:text-white">Mentions légales</a></li>
-                <li><a href="/confidentialite" className="hover:text-white">Confidentialité</a></li>
-                <li><a href="/cgv" className="hover:text-white">CGV</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
-            <p>© 2024 IndoFrench. Tous droits réservés.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </MainLayout>
   );
 }

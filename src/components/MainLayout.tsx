@@ -62,12 +62,15 @@ export default function MainLayout({
   className = ""
 }: MainLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Arrière-plan animé avec gradient transparent pour laisser passer les particules */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white/70 to-purple-50/80 z-0" />
+      
       {/* Arrière-plan animé similaire à la page d'accueil */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {/* Cercles dégradés flottants */}
         <motion.div
-          className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-r from-blue-300/20 to-purple-300/20 rounded-full blur-3xl"
+          className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-r from-blue-300/30 to-purple-300/30 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360]
@@ -79,7 +82,7 @@ export default function MainLayout({
           }}
         />
         <motion.div
-          className="absolute -bottom-32 -left-32 w-80 h-80 bg-gradient-to-r from-purple-300/20 to-pink-300/20 rounded-full blur-3xl"
+          className="absolute -bottom-32 -left-32 w-80 h-80 bg-gradient-to-r from-purple-300/30 to-pink-300/30 rounded-full blur-3xl"
           animate={{ 
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0]
@@ -93,10 +96,10 @@ export default function MainLayout({
 
         {/* Éléments géométriques flottants */}
         <motion.div
-          className="absolute top-20 right-20 w-4 h-4 bg-blue-500/30 rounded-full"
+          className="absolute top-20 right-20 w-4 h-4 bg-blue-500/40 rounded-full"
           animate={{ 
             y: [0, -20, 0],
-            opacity: [0.3, 0.8, 0.3]
+            opacity: [0.4, 0.8, 0.4]
           }}
           transition={{ 
             duration: 3, 
@@ -105,7 +108,7 @@ export default function MainLayout({
           }}
         />
         <motion.div
-          className="absolute top-40 left-20 w-6 h-6 bg-purple-500/30 rotate-45"
+          className="absolute top-40 left-20 w-6 h-6 bg-purple-500/40 rotate-45"
           animate={{ 
             rotate: [45, 225, 45],
             scale: [1, 1.2, 1]
@@ -117,7 +120,7 @@ export default function MainLayout({
           }}
         />
         <motion.div
-          className="absolute bottom-32 right-32 w-8 h-1 bg-blue-400/40 rounded-full"
+          className="absolute bottom-32 right-32 w-8 h-1 bg-blue-400/50 rounded-full"
           animate={{ 
             scaleX: [1, 2, 1],
             opacity: [0.4, 0.8, 0.4]
@@ -195,8 +198,8 @@ export default function MainLayout({
       {/* Navigation */}
       <Navigation />
 
-      {/* Contenu principal */}
-      <main className={`relative z-10 ${className}`}>
+      {/* Contenu principal avec z-index pour être au-dessus des particules */}
+      <main className={`relative z-20 ${className}`}>
         {/* En-tête de page optionnel */}
         {(title || description) && (
           <div className="bg-white/10 backdrop-blur-sm border-b border-white/20">
@@ -216,9 +219,7 @@ export default function MainLayout({
         )}
 
         {/* Contenu de la page */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {children}
-        </div>
+        {children}
       </main>
       
       {/* Footer */}
