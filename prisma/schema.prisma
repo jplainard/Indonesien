@@ -36,17 +36,23 @@ model Role {
 }
 
 model Translation {
-  id            Int      @id @default(autoincrement())
-  sourceText    String   @db.Text
-  sourceLang    String
-  targetText    String   @db.Text
-  targetLang    String
-  quality       Int?     @default(0) // Score de qualité 0-100
-  isPublic      Boolean  @default(false)
-  translationType String @default("auto") // auto, human, ai
-  createdAt     DateTime @default(now())
-  user          User?    @relation(fields: [userId], references: [id])
-  userId        Int?
+  id               Int      @id @default(autoincrement())
+  sourceText       String   @db.Text
+  sourceLang       String
+  targetText       String   @db.Text
+  targetLang       String
+  quality          Int?     @default(0) // Score de qualité 0-100
+  isPublic         Boolean  @default(false)
+  translationType  String   @default("auto") // auto, human, ai
+  fileName         String?  // Nom du fichier source
+  fileSize         Int?     // Taille du fichier en bytes
+  translatedFile   String?  // Chemin vers le fichier traduit
+  processingTime   Float?   // Temps de traitement en secondes
+  segmentsCount    Int?     // Nombre de segments traduits
+  method           String?  // Méthode de traduction utilisée
+  createdAt        DateTime @default(now())
+  user             User?    @relation(fields: [userId], references: [id])
+  userId           Int?
   
   @@index([sourceLang, targetLang])
   @@index([userId])

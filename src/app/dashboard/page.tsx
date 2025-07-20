@@ -150,24 +150,24 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {([
             {
-              title: 'Nouvelle traduction',
-              description: 'Traduire un document',
+              title: 'Traduire du texte',
+              description: 'Traduction instantanée',
+              icon: FileText,
+              href: '/translate',
+              color: 'bg-blue-500'
+            },
+            {
+              title: 'Traduire un fichier',
+              description: 'Upload de documents',
               icon: FileText,
               href: '/upload',
-              color: 'bg-blue-500'
+              color: 'bg-green-500'
             },
             {
               title: 'Mes traductions',
               description: 'Historique et suivi',
               icon: Clock,
               href: '/mes-traductions',
-              color: 'bg-green-500'
-            },
-            {
-              title: 'Profil',
-              description: 'Gérer mon compte',
-              icon: User,
-              href: '/profil',
               color: 'bg-purple-500'
             },
             {

@@ -450,6 +450,15 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <motion.a
+                href="/translate"
+                className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FileText className="w-5 h-5" />
+                Traduire du texte
+              </motion.a>
+              <motion.a
                 href="/upload"
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
@@ -914,13 +923,22 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <motion.a
+              href="/translate"
+              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FileText className="w-5 h-5" />
+              Traduire du texte
+            </motion.a>
+            <motion.a
               href="/upload"
               className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Upload className="w-5 h-5" />
-              Commencer maintenant
+              Traduire un document
             </motion.a>
             <motion.a
               href="/contact"

@@ -8,6 +8,13 @@ interface UploadFile {
   id: string;
   status: 'pending' | 'uploading' | 'success' | 'error';
   progress: number;
+  result?: {
+    translatedFile?: string;
+    downloadUrl?: string;
+    summary?: any;
+    metadata?: any;
+    error?: string;
+  };
 }
 
 export default function UploadPage() {
@@ -99,19 +106,30 @@ export default function UploadPage() {
         body: formData,
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setFiles(prev => prev.map(f => 
-          f.id === uploadFile.id ? { ...f, status: 'success', progress: 100 } : f
+          f.id === uploadFile.id ? { 
+            ...f, 
+            status: 'success', 
+            progress: 100,
+            result: data.translation
+          } : f
         ));
+        console.log('✅ Upload réussi:', data);
       } else {
-        const errorData = await response.json();
-        console.error('Upload error:', errorData);
-        throw new Error(`Upload failed: ${errorData.error || 'Unknown error'}`);
+        throw new Error(data.error || 'Upload failed');
       }
     } catch (error) {
       console.error('Upload exception:', error);
       setFiles(prev => prev.map(f => 
-        f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
+        f.id === uploadFile.id ? { 
+          ...f, 
+          status: 'error', 
+          progress: 0,
+          result: { error: error instanceof Error ? error.message : 'Erreur inconnue' }
+        } : f
       ));
     }
   };
@@ -262,6 +280,47 @@ export default function UploadPage() {
                             style={{ width: `${uploadFile.progress}%` }}
                           />
                         </div>
+                      </div>
+                    )}
+
+                    {uploadFile.status === 'success' && (
+                      <div className="mt-2 p-3 bg-green-50 rounded-md">
+                        <div className="flex items-center justify-between mb-2">
+                          <CheckCircle className="h-5 w-5 text-green-500" />
+                          <span className="text-sm font-medium text-green-800">
+                            Traduction terminée !
+                          </span>
+                        </div>
+                        {uploadFile.result && (
+                          <div className="space-y-2">
+                            {uploadFile.result.summary && (
+                              <div className="text-xs text-gray-600">
+                                <div>📄 {uploadFile.result.summary.statistics.originalLength} → {uploadFile.result.summary.statistics.translatedLength} caractères</div>
+                                <div>🎯 Qualité: {uploadFile.result.metadata?.quality}</div>
+                                <div>⏱️ Traité en: {uploadFile.result.metadata?.processingTime}</div>
+                              </div>
+                            )}
+                            {uploadFile.result.downloadUrl && (
+                              <a
+                                href={uploadFile.result.downloadUrl}
+                                download
+                                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                              >
+                                📁 Télécharger le document traduit
+                              </a>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {uploadFile.status === 'error' && uploadFile.result?.error && (
+                      <div className="mt-2 p-3 bg-red-50 rounded-md">
+                        <div className="flex items-center gap-2 mb-1">
+                          <AlertCircle className="h-4 w-4 text-red-500" />
+                          <span className="text-sm font-medium text-red-800">Erreur</span>
+                        </div>
+                        <p className="text-xs text-red-600">{uploadFile.result.error}</p>
                       </div>
                     )}
                   </div>
