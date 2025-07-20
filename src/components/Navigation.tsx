@@ -54,24 +54,36 @@ export default function Navigation() {
     }
   };
 
-  const navigationItems = [
+  // Navigation publique (visible pour tous)
+  const publicNavigationItems = [
     { href: '/', label: 'Accueil', icon: Home },
-    { href: '/translate', label: 'Traduire', icon: Languages },
-    { href: '/upload', label: 'Upload', icon: Upload },
-    { href: '/dashboard', label: 'Dashboard', icon: BarChart3 },
-  ];
-
-  // Ajouter les pages supplémentaires pour tous les utilisateurs
-  navigationItems.push(
     { href: '/about', label: 'À propos', icon: Home },
     { href: '/pricing', label: 'Tarifs', icon: BarChart3 },
     { href: '/contact', label: 'Contact', icon: Users },
     { href: '/help', label: 'Aide', icon: Home }
-  );
+  ];
 
-  // Ajouter la gestion admin pour les admins
-  if (user?.role === 'admin') {
-    navigationItems.push({ href: '/admin', label: 'Admin', icon: Users });
+  // Navigation privée (visible seulement si connecté)
+  const privateNavigationItems = [
+    { href: '/translate', label: 'Traduire', icon: Languages },
+    { href: '/upload', label: 'Upload', icon: Upload },
+    { href: '/dashboard', label: 'Dashboard', icon: BarChart3 }
+  ];
+
+  // Navigation admin (visible seulement pour les admins)
+  const adminNavigationItems = [
+    { href: '/admin', label: 'Admin', icon: Users }
+  ];
+
+  // Construire la liste des items de navigation selon l'état utilisateur
+  let navigationItems = [...publicNavigationItems];
+  
+  if (user) {
+    navigationItems = [...navigationItems, ...privateNavigationItems];
+    
+    if (user.role === 'admin') {
+      navigationItems = [...navigationItems, ...adminNavigationItems];
+    }
   }
 
   return (

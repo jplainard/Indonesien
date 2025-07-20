@@ -159,12 +159,12 @@ export default function Error500Page() {
             Nous nous excusons pour la gêne occasionnée.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a 
+            <Link 
               href="/status" 
               className="text-red-600 hover:text-red-700 font-medium text-sm transition-colors"
             >
               Voir le statut du système →
-            </a>
+            </Link>
             <a 
               href="mailto:support@indofrench.com" 
               className="text-red-600 hover:text-red-700 font-medium text-sm transition-colors"

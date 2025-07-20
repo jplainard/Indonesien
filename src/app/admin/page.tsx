@@ -17,6 +17,7 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import MainLayout from '../../components/MainLayout';
 
 interface AdminStats {
@@ -435,12 +436,12 @@ export default function AdminPage() {
             </div>
 
             <div className="mt-6 text-center">
-              <a 
+              <Link 
                 href="/admin/logs" 
                 className="text-blue-600 hover:text-blue-700 text-sm font-medium"
               >
                 Voir tous les logs →
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

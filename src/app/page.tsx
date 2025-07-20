@@ -9,7 +9,6 @@ import {
   BarChart3, 
   GraduationCap,
   Users,
-  UserCheck,
   Upload,
   Calculator,
   ArrowRight,
@@ -88,7 +87,6 @@ export default function Home() {
   }
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -113,53 +111,12 @@ export default function Home() {
         setLoading(false);
       }
     };
-    const checkAuth = async () => {
-      try {
-        const res = await fetch('/api/auth/me');
-        if (res.ok) {
-          const data = await res.json();
-          setIsAuthenticated(!!data?.user);
-        } else {
-          setIsAuthenticated(false);
-        }
-      } catch {
-        setIsAuthenticated(false);
-      }
-    };
     fetchStats();
-    checkAuth();
   }, []);
 
   return (
     <MainLayout>
       <div className="bg-white min-h-screen">
-        {/* HEADER */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-6">
-              <div className="flex items-center">
-                <h1 className="text-2xl font-bold text-blue-600">IndoFrench</h1>
-                <span className="ml-3 text-sm text-gray-500">Traduction de documents</span>
-              </div>
-              <nav className="hidden md:flex space-x-8">
-                <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-                <a href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</a>
-                <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-                {isAuthenticated ? (
-                  <a href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-1">
-                    <UserCheck className="w-4 h-4" />
-                    Mon dashboard
-                  </a>
-                ) : (
-                  <a href="/auth" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
-                    <Users className="w-4 h-4" />
-                    Connexion
-                  </a>
-                )}
-              </nav>
-            </div>
-          </div>
-        </header>
 
       {/* HERO - TRADUCTION DE DOCUMENTS */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 overflow-hidden">
@@ -571,7 +528,7 @@ export default function Home() {
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
             >
-              <UserCheck className="w-12 h-12 text-green-600 mb-4" />
+              <Users className="w-12 h-12 text-green-600 mb-4" />
               <h3 className="text-2xl font-bold mb-4">Particuliers</h3>
               <ul className="space-y-3 text-gray-700">
                 {[

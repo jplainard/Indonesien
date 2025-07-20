@@ -209,7 +209,7 @@ print(result["translated_text"])`
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.a
-                  href="#getting-started"
+                  href="/docs/api#getting-started"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -217,7 +217,7 @@ print(result["translated_text"])`
                   Commencer maintenant
                 </motion.a>
                 <motion.a
-                  href="#endpoints"
+                  href="/docs/api#endpoints"
                   className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
