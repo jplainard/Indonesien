@@ -178,7 +178,7 @@ export default function GDPRPage() {
                   <div className="flex items-start space-x-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-blue-900 mb-2">Notre DPO (Délégué à la Protection des Données)</h4>
+                      <h4 className="font-semibold text-blue-900 mb-2">Notre DPO (délégué à la protection des données)</h4>
                       <p className="text-blue-800 text-sm">
                         Marie Dubois - DPO certifiée CNIL<br />
                         Email : dpo@indofrench.com<br />
@@ -203,7 +203,7 @@ export default function GDPRPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Vos Droits selon le RGPD
+                Vos droits selon le RGPD
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Le RGPD vous accorde plusieurs droits fondamentaux concernant vos données personnelles. 
@@ -252,7 +252,7 @@ export default function GDPRPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Finalités de Traitement des Données
+                Finalités de traitement des données
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Découvrez pourquoi et comment nous traitons vos données personnelles, 
@@ -360,7 +360,7 @@ export default function GDPRPage() {
               viewport={{ once: true }}
             >
               <div className="text-center">
-                <h2 className="text-2xl font-bold mb-6">Exercer vos Droits RGPD</h2>
+                <h2 className="text-2xl font-bold mb-6">Exercer vos droits RGPD</h2>
                 <p className="text-blue-100 mb-8">
                   Pour exercer vos droits ou pour toute question concernant le traitement 
                   de vos données personnelles, contactez notre DPO.
@@ -371,7 +371,7 @@ export default function GDPRPage() {
                     <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
                       <UserCheck className="w-6 h-6" />
                     </div>
-                    <h4 className="font-semibold mb-2">Par Email</h4>
+                    <h4 className="font-semibold mb-2">Par email</h4>
                     <a href="mailto:dpo@indofrench.com" className="text-blue-200 hover:text-white">
                       dpo@indofrench.com
                     </a>
@@ -380,7 +380,7 @@ export default function GDPRPage() {
                     <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
                       <Settings className="w-6 h-6" />
                     </div>
-                    <h4 className="font-semibold mb-2">Espace Client</h4>
+                    <h4 className="font-semibold mb-2">Espace client</h4>
                     <p className="text-blue-200">Gérez vos préférences</p>
                   </div>
                   <div className="text-center">

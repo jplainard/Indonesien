@@ -155,7 +155,7 @@ export default function DashboardPage() {
               title: 'Paramètres',
               description: 'Préférences',
               icon: Settings,
-              href: '/parametres',
+              href: '/settings',
               color: 'bg-orange-500'
             }
           ] as const).map((action, index) => (

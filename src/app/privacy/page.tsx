@@ -197,7 +197,7 @@ export default function PrivacyPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl font-bold mb-6">Nous Contacter</h2>
+              <h2 className="text-2xl font-bold mb-6">Nous contacter</h2>
               <p className="text-blue-100 mb-8">
                 Pour toute question concernant cette politique de confidentialité ou 
                 l'exercice de vos droits, contactez-nous :
@@ -220,7 +220,7 @@ export default function PrivacyPage() {
               
               <div className="mt-8 pt-8 border-t border-blue-400">
                 <p className="text-blue-100 text-sm">
-                  <strong>Adresse postale :</strong> IndoFrench SAS, 123 Rue de la Traduction, 75001 Paris, France
+                  <strong>Adresse postale :</strong> IndoFrench SAS, 123 rue de la Traduction, 75001 Paris, France
                 </p>
               </div>
             </motion.div>

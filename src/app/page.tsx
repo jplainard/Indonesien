@@ -9,7 +9,6 @@ import {
   BarChart3, 
   GraduationCap,
   Users,
-  Upload,
   Calculator,
   ArrowRight,
   CheckCircle,
@@ -45,7 +44,7 @@ function FloatingParticles() {
   }, []);
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 pointer-events-none">
       {particles.map((p, i) => (
         <motion.div
           key={i}
@@ -121,7 +120,7 @@ export default function Home() {
       {/* HERO - TRADUCTION DE DOCUMENTS */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 overflow-hidden">
         {/* Fond décoratif avec formes géométriques */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Image SVG de fond */}
           <motion.div
             className="absolute top-10 right-10 opacity-20"
@@ -430,26 +429,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <motion.a
-                href="/translate"
-                className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FileText className="w-5 h-5" />
-                Traduire du texte
-              </motion.a>
-              <motion.a
-                href="/upload"
+                href="/contact"
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Upload className="w-5 h-5" />
-                Traduire un document
-              </motion.a>
-              <motion.a
-                href="/devis"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold border border-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -510,7 +491,7 @@ export default function Home() {
               </ul>
               <div className="mt-6">
                 <motion.a 
-                  href="/entreprises" 
+                  href="/contact?type=entreprise" 
                   className="text-blue-600 font-semibold hover:underline flex items-center gap-2"
                   whileHover={{ x: 5 }}
                 >
@@ -555,7 +536,7 @@ export default function Home() {
               </ul>
               <div className="mt-6">
                 <motion.a 
-                  href="/particuliers" 
+                  href="/contact?type=particulier" 
                   className="text-green-600 font-semibold hover:underline flex items-center gap-2"
                   whileHover={{ x: 5 }}
                 >
@@ -821,9 +802,9 @@ export default function Home() {
             {[
               { 
                 step: 1, 
-                icon: Upload, 
-                title: "Envoyez votre document", 
-                desc: "Uploadez votre fichier ou collez votre texte",
+                icon: FileText, 
+                title: "Contactez-nous", 
+                desc: "Demandez un devis pour votre projet",
                 color: "bg-blue-100 text-blue-600"
               },
               { 
@@ -875,7 +856,7 @@ export default function Home() {
       </section>
 
       {/* CTA FINAL */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.h2 
             className="text-3xl font-bold mb-4"
@@ -903,26 +884,8 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <motion.a
-              href="/translate"
-              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FileText className="w-5 h-5" />
-              Traduire du texte
-            </motion.a>
-            <motion.a
-              href="/upload"
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Upload className="w-5 h-5" />
-              Traduire un document
-            </motion.a>
-            <motion.a
               href="/contact"
-              className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

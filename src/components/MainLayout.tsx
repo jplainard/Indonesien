@@ -135,7 +135,7 @@ export default function MainLayout({
 
         {/* Pattern de points subtil */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -148,21 +148,21 @@ export default function MainLayout({
 
       {/* Quelques icônes flottantes supplémentaires pour renforcer l'effet "traduction" */}
       <motion.div
-        className="absolute top-32 left-10 text-blue-400/40"
+        className="absolute top-32 left-10 text-blue-400/40 pointer-events-none"
         animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" x2="22" y1="12" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" /></svg>
       </motion.div>
       <motion.div
-        className="absolute top-16 right-32 text-purple-400/40"
+        className="absolute top-16 right-32 text-purple-400/40 pointer-events-none"
         animate={{ y: [0, 12, 0], rotate: [0, -8, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
       </motion.div>
       <motion.div
-        className="absolute bottom-32 left-32 text-green-400/40"
+        className="absolute bottom-32 left-32 text-green-400/40 pointer-events-none"
         animate={{ scale: [1, 1.1, 1], rotate: [0, 10, 0] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       >
@@ -219,11 +219,15 @@ export default function MainLayout({
         )}
 
         {/* Contenu de la page */}
-        {children}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {children}
+        </div>
       </main>
       
       {/* Footer */}
-      <Footer />
+      <div className="relative z-20">
+        <Footer />
+      </div>
     </div>
   );
 }

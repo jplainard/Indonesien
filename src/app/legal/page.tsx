@@ -324,10 +324,10 @@ export default function LegalPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl font-bold mb-6 text-center">Assurance Professionnelle</h2>
+              <h2 className="text-2xl font-bold mb-6 text-center">Assurance professionnelle</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h4 className="font-semibold mb-3">Responsabilité Civile Professionnelle</h4>
+                  <h4 className="font-semibold mb-3">Responsabilité civile professionnelle</h4>
                   <div className="text-blue-100 space-y-2 text-sm">
                     <p><strong>Assureur :</strong> AXA France</p>
                     <p><strong>Police :</strong> RCP-2024-789456123</p>
@@ -336,7 +336,7 @@ export default function LegalPage() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-3">Protection Juridique</h4>
+                  <h4 className="font-semibold mb-3">Protection juridique</h4>
                   <div className="text-blue-100 space-y-2 text-sm">
                     <p><strong>Assureur :</strong> Allianz Protection Juridique</p>
                     <p><strong>Police :</strong> PJ-2024-456789</p>
@@ -364,11 +364,11 @@ export default function LegalPage() {
               </h3>
               <div className="text-gray-600 space-y-4 text-sm">
                 <p>
-                  <strong>Droit applicable :</strong> Toutes les relations entre IndoFrench et ses clients 
+                  <strong>Droit applicable :</strong> toutes les relations entre IndoFrench et ses clients 
                   sont soumises au droit français.
                 </p>
                 <p>
-                  <strong>Juridiction compétente :</strong> En cas de litige, les tribunaux de Paris 
+                  <strong>Juridiction compétente :</strong> en cas de litige, les tribunaux de Paris 
                   seront seuls compétents.
                 </p>
                 <p>

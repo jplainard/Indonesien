@@ -533,7 +533,7 @@ export default function EnterprisePage() {
                   <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Calendar className="w-6 h-6" />
                   </div>
-                  <h4 className="font-semibold mb-2">Planifiez un RDV</h4>
+                  <h4 className="font-semibold mb-2">Planifiez un rendez-vous</h4>
                   <p className="text-blue-200">Consultation gratuite</p>
                 </div>
               </div>

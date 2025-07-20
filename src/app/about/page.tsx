@@ -59,7 +59,7 @@ export default function AboutPage() {
     },
     {
       year: "2020",
-      title: "Premiers Grands Comptes",
+      title: "Premiers grands comptes",
       description: "Signature des premiers contrats avec des multinationales françaises s'implantant en Indonésie : Total Énergies, Danone, et Crédit Agricole."
     },
     {
@@ -89,14 +89,14 @@ export default function AboutPage() {
       name: "Marie Dubois",
       role: "Co-Fondatrice & Directrice Générale",
       bio: "Master en Traduction de l'ESIT Paris, 15 ans d'expérience en cabinet d'avocats international. Spécialisée en droit des affaires et fusions-acquisitions. Auteure de deux guides sur la traduction juridique.",
-      expertise: ["Droit des Affaires", "M&A", "Compliance"],
+      expertise: ["Droit des affaires", "M&A", "Compliance"],
       languages: ["Français (natif)", "Indonésien (C2)", "Anglais (C1)"]
     },
     {
       name: "Andi Pratama",
       role: "Co-Fondateur & Directeur Technique",
       bio: "Ingénieur linguiste, ancien directeur de traduction chez Telkom Indonesia. Expert en localisation logicielle et traduction technique. Certifié Project Management Professional (PMP).",
-      expertise: ["Traduction Technique", "Localisation", "Gestion de Projet"],
+      expertise: ["Traduction technique", "Localisation", "Gestion de projet"],
       languages: ["Indonésien (natif)", "Français (C2)", "Anglais (C1)"]
     },
     {
@@ -108,7 +108,7 @@ export default function AboutPage() {
     },
     {
       name: "Budi Santoso",
-      role: "Directeur Commercial Asie",
+      role: "Directeur commercial Asie",
       bio: "MBA INSEAD, 10 ans dans le développement commercial en Asie du Sud-Est. Ancien directeur régional chez BNP Paribas Jakarta. Expertise en services financiers et énergétiques.",
       expertise: ["Développement Commercial", "Finance", "Énergie"],
       languages: ["Indonésien (natif)", "Français (C1)", "Anglais (C2)"]
@@ -146,7 +146,7 @@ export default function AboutPage() {
       description: "Standard international pour les services de traduction"
     },
     {
-      title: "Label French Tech",
+      title: "Label French tech",
       organization: "Bpifrance",
       description: "Reconnaissance de notre excellence technologique"
     }
@@ -232,7 +232,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre Parcours</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre parcours</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 De startup prometteuse à leader du marché franco-indonésien, 
                 découvrez les étapes clés de notre développement.
@@ -278,7 +278,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Nos Valeurs</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Nos valeurs</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Les principes fondamentaux qui guident notre action quotidienne 
                 et garantissent l'excellence de nos services.
@@ -322,7 +322,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre Équipe Dirigeante</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre équipe dirigeante</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Des experts passionnés avec une vision commune : révolutionner 
                 la traduction franco-indonésienne grâce à l'innovation et l'excellence.
@@ -415,7 +415,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Nos Partenaires</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">Nos partenaires</h2>
                 <div className="space-y-4">
                   {partnerships.map((partner, index) => (
                     <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg">
@@ -433,7 +433,7 @@ export default function AboutPage() {
                 </div>
 
                 <div className="mt-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white">
-                  <h3 className="font-bold text-lg mb-3">Rejoignez Notre Réseau</h3>
+                  <h3 className="font-bold text-lg mb-3">Rejoignez notre réseau</h3>
                   <p className="mb-4">
                     Vous êtes une institution, une école de traduction ou une entreprise ? 
                     Explorons ensemble les opportunités de collaboration.

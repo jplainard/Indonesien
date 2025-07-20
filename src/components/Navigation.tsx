@@ -56,14 +56,12 @@ export default function Navigation() {
 
   // Navigation publique (visible pour tous)
   const publicNavigationItems = [
-    { href: '/', label: 'Accueil', icon: Home },
     { href: '/about', label: 'À propos', icon: Home },
     { href: '/pricing', label: 'Tarifs', icon: BarChart3 },
-    { href: '/contact', label: 'Contact', icon: Users },
-    { href: '/help', label: 'Aide', icon: Home }
+    { href: '/contact', label: 'Contact', icon: Users }
   ];
 
-  // Navigation privée (visible seulement si connecté)
+  // Navigation privée (visible seulement si connecté et pas sur la page d'accueil)
   const privateNavigationItems = [
     { href: '/translate', label: 'Traduire', icon: Languages },
     { href: '/upload', label: 'Upload', icon: Upload },
@@ -78,12 +76,16 @@ export default function Navigation() {
   // Construire la liste des items de navigation selon l'état utilisateur
   let navigationItems = [...publicNavigationItems];
   
-  if (user) {
+  // Ne pas afficher les liens privés sur la page d'accueil
+  if (user && pathname !== '/') {
     navigationItems = [...navigationItems, ...privateNavigationItems];
     
     if (user.role === 'admin') {
       navigationItems = [...navigationItems, ...adminNavigationItems];
     }
+  } else if (user && user.role === 'admin' && pathname !== '/') {
+    // Pour les admins, toujours afficher le lien admin (sauf sur accueil)
+    navigationItems = [...navigationItems, ...adminNavigationItems];
   }
 
   return (
@@ -129,6 +131,16 @@ export default function Navigation() {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
+                {/* Bouton Dashboard spécial pour la page d'accueil */}
+                {pathname === '/' && (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    <BarChart3 className="w-4 h-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                )}
                 <div className="hidden md:flex items-center space-x-2 text-sm text-gray-600">
                   <User className="w-4 h-4" />
                   <span>{user.email}</span>
@@ -193,6 +205,18 @@ export default function Navigation() {
                   </Link>
                 );
               })}
+              
+              {/* Bouton Dashboard spécial pour mobile sur la page d'accueil */}
+              {user && pathname === '/' && (
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                >
+                  <BarChart3 className="w-5 h-5" />
+                  <span>Dashboard</span>
+                </Link>
+              )}
               
               {user && (
                 <div className="pt-2 border-t border-gray-200">

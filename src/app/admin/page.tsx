@@ -437,10 +437,10 @@ export default function AdminPage() {
 
             <div className="mt-6 text-center">
               <Link 
-                href="/admin/logs" 
+                href="/admin" 
                 className="text-blue-600 hover:text-blue-700 text-sm font-medium"
               >
-                Voir tous les logs →
+                Actualiser les données →
               </Link>
             </div>
           </motion.div>

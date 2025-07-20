@@ -56,9 +56,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white relative z-10">
       {/* Newsletter Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 py-12">
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 py-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center"
