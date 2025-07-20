@@ -201,6 +201,30 @@ export default function UploadPage() {
           </div>
         </div>
 
+        {/* Information sur les formats de fichiers */}
+        <div className="bg-blue-50 rounded-lg p-6 mb-6 border border-blue-200">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-blue-800 mb-2">Important à savoir sur les formats de fichiers</h3>
+              <ul className="text-sm text-blue-700 space-y-1">
+                <li>• <strong>PDF avec texte</strong> : Fonctionne parfaitement pour les PDF créés numériquement</li>
+                <li>• <strong>PDF scannés</strong> : Les documents scannés (images) ne peuvent pas être traduits directement</li>
+                <li>• <strong>Word (.doc, .docx)</strong> : Format recommandé pour une extraction optimale</li>
+                <li>• <strong>Texte (.txt)</strong> : Format le plus simple et le plus fiable</li>
+                <li>• <strong>RTF</strong> : Texte enrichi supporté</li>
+              </ul>
+              <p className="text-sm text-blue-600 mt-2">
+                <strong>Astuce :</strong> Si votre PDF est un document scanné, utilisez d'abord un outil de reconnaissance de caractères (OCR) ou copiez-collez le texte manuellement dans l'outil de traduction de texte.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Upload Area */}
         <div className="bg-white rounded-lg shadow-sm border mb-6">
           <div

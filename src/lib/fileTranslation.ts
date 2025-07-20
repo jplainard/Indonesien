@@ -29,6 +29,18 @@ export class FileTextExtractor {
       }
     } catch (error) {
       console.error(`❌ Erreur lors de l'extraction de ${fileName}:`, error);
+      
+      // Préserver les messages d'erreur spécifiques et informatifs
+      if (error instanceof Error && (
+        error.message.includes('PDF semble être composé uniquement d\'images scannées') ||
+        error.message.includes('protégé par mot de passe') ||
+        error.message.includes('composé uniquement d\'images scannées') ||
+        error.message.includes('reconnaissance optique de caractères')
+      )) {
+        throw error; // Propager le message spécifique
+      }
+      
+      // Message générique pour autres erreurs
       throw new Error(`Impossible d'extraire le texte du fichier ${fileName}`);
     }
   }
@@ -42,6 +54,13 @@ export class FileTextExtractor {
       const pdfParse = require('pdf-parse');
       const data = await pdfParse(buffer);
       const text = data.text?.trim() || '';
+      
+      // Vérifier si le PDF contient des pages mais pas de texte (PDF scanné)
+      if (data.numpages > 0 && (!text || text.length < 10)) {
+        console.warn(`⚠️ PDF de ${data.numpages} page(s) mais aucun texte extractible détecté`);
+        throw new Error('PDF_IMAGE_ONLY');
+      }
+      
       if (!text) {
         console.warn('⚠️ Aucun texte extrait du PDF');
         throw new Error('Aucun texte trouvé dans le PDF');
@@ -50,7 +69,12 @@ export class FileTextExtractor {
       return this.cleanExtractedText(text);
     } catch (error) {
       console.error('❌ Erreur extraction PDF:', error);
-      throw new Error('Erreur lors de l\'extraction du PDF. Le fichier pourrait être corrompu, protégé, ou composé uniquement d\'images.');
+      
+      if (error instanceof Error && error.message === 'PDF_IMAGE_ONLY') {
+        throw new Error('Ce PDF semble être composé uniquement d\'images scannées. Pour traduire ce type de document, veuillez utiliser un outil de reconnaissance optique de caractères (OCR) pour le convertir en texte, ou utilisez la fonction de traduction de texte directement.');
+      }
+      
+      throw new Error('Erreur lors de l\'extraction du PDF. Le fichier pourrait être corrompu, protégé par mot de passe, ou composé uniquement d\'images scannées.');
     }
   }
 
