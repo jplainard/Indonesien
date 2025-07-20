@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
   Send,
   MessageCircle,
-  Globe,
-  Users,
-  Building
+  Globe
 } from 'lucide-react';
 import MainLayout from '../../components/MainLayout';
 
@@ -336,7 +334,7 @@ export default function ContactPage() {
                   <div className="flex items-center mb-6">
                     <Clock className="w-8 h-8 text-blue-600 mr-3" />
                     <h3 className="text-2xl font-bold text-gray-800">
-                      Horaires d'ouverture
+                      Horaires d&apos;ouverture
                     </h3>
                   </div>
                   <div className="space-y-3">
@@ -354,7 +352,7 @@ export default function ContactPage() {
                     </div>
                     <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                       <p className="text-sm text-blue-700">
-                        <strong>Service d'urgence :</strong> Disponible 24h/7j pour les demandes urgentes
+                        <strong>Service d&apos;urgence :</strong> Disponible 24h/7j pour les demandes urgentes
                       </p>
                     </div>
                   </div>
@@ -399,7 +397,7 @@ export default function ContactPage() {
                     Besoin urgent ?
                   </h3>
                   <p className="mb-6">
-                    Pour les traductions urgentes, contactez notre service d'urgence 24h/7j.
+                    Pour les traductions urgentes, contactez notre service d&apos;urgence 24h/7j.
                   </p>
                   <div className="flex items-center">
                     <Phone className="w-6 h-6 mr-3" />

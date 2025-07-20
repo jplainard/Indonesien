@@ -12,16 +12,10 @@ import {
   Download,
   Star,
   ArrowRight,
-  Bookmark,
   Clock,
   User,
   Lightbulb,
-  Zap,
-  Shield,
-  Globe,
-  Users,
-  MessageCircle,
-  CheckCircle
+  MessageCircle
 } from 'lucide-react';
 import MainLayout from '@/components/MainLayout';
 import { useState } from 'react';
@@ -93,7 +87,7 @@ export default function DocsPage() {
         },
         {
           title: "Obtenir vos clés API",
-          description: "Générez et gérez vos clés d'authentification",
+          description: "Générez et gérez vos clés d&apos;authentification",
           time: "3 min"
         },
         {
@@ -116,7 +110,7 @@ export default function DocsPage() {
         },
         {
           title: "Authentification et sécurité",
-          description: "Méthodes d'auth et bonnes pratiques",
+          description: "Méthodes d&apos;auth et bonnes pratiques",
           time: "8 min"
         },
         {
@@ -590,7 +584,7 @@ for original, translated in zip(texts, translations):
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold mb-4">
-                Besoin d'Aide Supplémentaire ?
+                Besoin d&apos;Aide Supplémentaire ?
               </h2>
               <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
                 Notre équipe de développeurs est là pour vous aider. 

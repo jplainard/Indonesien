@@ -3,21 +3,15 @@
 import { motion } from 'framer-motion';
 import { 
   Building, 
-  Users, 
   Shield, 
   Zap, 
-  Globe, 
   HeadphonesIcon,
-  Target,
-  TrendingUp,
   CheckCircle,
   Star,
   ArrowRight,
   Phone,
   Mail,
   Calendar,
-  Award,
-  Briefcase,
   Settings
 } from 'lucide-react';
 import MainLayout from '@/components/MainLayout';
@@ -113,7 +107,7 @@ export default function EnterprisePage() {
         turnaround: "24h"
       },
       testimonial: {
-        text: "La précision juridique d'IndoFrench est exceptionnelle. Nos traductions sont systématiquement validées par nos juristes.",
+        text: "La précision juridique d&apos;IndoFrench est exceptionnelle. Nos traductions sont systématiquement validées par nos juristes.",
         author: "Sophie Martin",
         role: "Associée Senior",
         company: "Cabinet Juridique International"
@@ -135,7 +129,7 @@ export default function EnterprisePage() {
         "Intégrations standards",
         "Rapports mensuels"
       ],
-      cta: "Commencer l'essai"
+      cta: "Commencer l&apos;essai"
     },
     {
       name: "Enterprise",
@@ -212,7 +206,7 @@ export default function EnterprisePage() {
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Transformez votre communication internationale avec nos solutions 
-                de traduction d'entreprise. Sécurité, performance et support dédié 
+                de traduction d&apos;entreprise. Sécurité, performance et support dédié 
                 pour vos équipes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -326,7 +320,7 @@ export default function EnterprisePage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Cas d'Usage par Secteur
+                Cas d&apos;Usage par Secteur
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Découvrez comment les entreprises de différents secteurs 
@@ -369,7 +363,7 @@ export default function EnterprisePage() {
                         </div>
                         <div>
                           <blockquote className="text-gray-800 italic mb-4">
-                            "{useCase.testimonial.text}"
+                            &quot;{useCase.testimonial.text}&quot;
                           </blockquote>
                           <div className="text-sm">
                             <div className="font-semibold text-gray-900">{useCase.testimonial.author}</div>

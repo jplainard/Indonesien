@@ -4,16 +4,28 @@ import { useState, useRef } from 'react';
 import { Upload, FileText, X, CheckCircle, AlertCircle } from 'lucide-react';
 import MainLayout from '../../components/MainLayout';
 
+interface UploadSummary {
+  statistics: {
+    originalLength: number;
+    translatedLength: number;
+  };
+}
+
+interface UploadMetadata {
+  quality?: number;
+  processingTime?: string;
+}
+
 interface UploadFile {
-  file: File;
   id: string;
+  file: File;
   status: 'pending' | 'uploading' | 'success' | 'error';
   progress: number;
   result?: {
     translatedFile?: string;
     downloadUrl?: string;
-    summary?: any;
-    metadata?: any;
+    summary?: UploadSummary;
+    metadata?: UploadMetadata;
     error?: string;
   };
 }

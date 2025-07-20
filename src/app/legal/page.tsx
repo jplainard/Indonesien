@@ -20,7 +20,7 @@ export default function LegalPage() {
     {
       name: "Marie Dubois",
       role: "Directrice Générale",
-      qualification: "Master en Traduction, 15 ans d'expérience"
+      qualification: "Master en Traduction, 15 ans d&apos;expérience"
     },
     {
       name: "Ahmad Wijaya", 
@@ -39,19 +39,19 @@ export default function LegalPage() {
       title: "Licence de Traduction Professionnelle",
       authority: "Ministère de la Culture - France",
       number: "LTP-2023-001245",
-      validity: "Valide jusqu'au 31/12/2025"
+      validity: "Valide jusqu&apos;au 31/12/2025"
     },
     {
       title: "Certification ISO 17100",
       authority: "Organisme de certification AFNOR",
       number: "ISO17100-FR-2024-089",
-      validity: "Valide jusqu'au 15/06/2027"
+      validity: "Valide jusqu&apos;au 15/06/2027"
     },
     {
       title: "Agrément Traduction Assermentée",
-      authority: "Cour d'Appel de Paris",
+      authority: "Cour d&apos;Appel de Paris",
       number: "TAP-2024-156",
-      validity: "Valide jusqu'au 01/09/2026"
+      validity: "Valide jusqu&apos;au 01/09/2026"
     }
   ];
 

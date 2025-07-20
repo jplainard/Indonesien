@@ -14,9 +14,9 @@ import Link from 'next/link';
 
 export default function Error500Page() {
   const suggestions = [
-    { href: '/', label: 'Retour à l\'accueil', icon: Home },
+    { href: '/', label: 'Retour à l&apos;accueil', icon: Home },
     { href: '/contact', label: 'Signaler le problème', icon: Mail },
-    { href: '/help', label: 'Centre d\'aide', icon: MessageCircle }
+    { href: '/help', label: 'Centre d&apos;aide', icon: MessageCircle }
   ];
 
   const handleReload = () => {
@@ -76,7 +76,7 @@ export default function Error500Page() {
           </p>
           <p className="text-gray-500">
             Veuillez patienter quelques instants et réessayer. 
-            Si le problème persiste, n'hésitez pas à nous contacter.
+            Si le problème persiste, n&apos;hésitez pas à nous contacter.
           </p>
         </motion.div>
 

@@ -3,10 +3,8 @@
 import { motion } from 'framer-motion';
 import { 
   Briefcase, 
-  Users, 
   MapPin, 
   Clock, 
-  Star, 
   TrendingUp,
   Heart,
   Globe,
@@ -29,8 +27,8 @@ export default function CareersPage() {
       description: "Nous recherchons un traducteur expérimenté pour rejoindre notre équipe de traduction spécialisée.",
       requirements: [
         "Master en traduction ou équivalent",
-        "5+ années d'expérience en traduction professionnelle",
-        "Maîtrise parfaite du français et de l'indonésien",
+        "5+ années d&apos;expérience en traduction professionnelle",
+        "Maîtrise parfaite du français et de l&apos;indonésien",
         "Spécialisation dans les domaines juridique ou technique"
       ],
       benefits: ["Télétravail possible", "Formation continue", "Primes de performance"]
@@ -47,7 +45,7 @@ export default function CareersPage() {
         "Expérience avec React, Node.js, TypeScript",
         "Connaissance des API de traduction (Google, DeepL)",
         "Expérience en IA/ML pour le traitement du langage",
-        "Maîtrise de l'anglais technique"
+        "Maîtrise de l&apos;anglais technique"
       ],
       benefits: ["Remote-friendly", "Stack moderne", "Projets innovants"]
     },
@@ -62,7 +60,7 @@ export default function CareersPage() {
       requirements: [
         "Expérience en gestion de projet (PMP apprécié)",
         "Bilingue français-indonésien obligatoire",
-        "Connaissance de l'industrie de la traduction",
+        "Connaissance de l&apos;industrie de la traduction",
         "Compétences en négociation et relation client"
       ],
       benefits: ["Expatriation", "Package complet", "Évolution rapide"]
@@ -90,12 +88,12 @@ export default function CareersPage() {
       location: "Paris, France",
       type: "CDI",
       level: "Senior",
-      description: "Développez des modèles d'IA avancés pour améliorer la qualité de nos traductions.",
+      description: "Développez des modèles d&apos;IA avancés pour améliorer la qualité de nos traductions.",
       requirements: [
         "PhD en informatique ou linguistique computationnelle",
         "Expérience avec TensorFlow/PyTorch",
         "Publication dans des revues scientifiques",
-        "Passion pour les langues et l'IA"
+        "Passion pour les langues et l&apos;IA"
       ],
       benefits: ["Recherche appliquée", "Conférences internationales", "Impact mondial"]
     },
@@ -110,7 +108,7 @@ export default function CareersPage() {
       requirements: [
         "Expérience en relation client B2B",
         "Excellent sens de la communication",
-        "Maîtrise de l'anglais professionnel",
+        "Maîtrise de l&apos;anglais professionnel",
         "Empathie et orientation solution"
       ],
       benefits: ["Contact client international", "Formation produit", "Évolution interne"]
@@ -153,7 +151,7 @@ export default function CareersPage() {
   const values = [
     {
       title: "Excellence",
-      description: "Nous visons l'excellence dans chaque traduction et chaque interaction",
+      description: "Nous visons l&apos;excellence dans chaque traduction et chaque interaction",
       icon: "🏆"
     },
     {
@@ -197,12 +195,12 @@ export default function CareersPage() {
                 </div>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Rejoignez l'Aventure IndoFrench
+                Rejoignez l&apos;Aventure IndoFrench
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Construisez votre carrière dans une entreprise innovante qui connecte 
                 les cultures à travers la traduction. Découvrez nos opportunités 
-                d'emploi dans un environnement international stimulant.
+                d&apos;emploi dans un environnement international stimulant.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.a
@@ -211,7 +209,7 @@ export default function CareersPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Voir nos offres d'emploi
+                  Voir nos offres d&apos;emploi
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </motion.a>
                 <motion.a
@@ -342,7 +340,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Nos Offres d'Emploi
+                Nos Offres d&apos;Emploi
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Découvrez les postes disponibles et trouvez celui qui correspond 

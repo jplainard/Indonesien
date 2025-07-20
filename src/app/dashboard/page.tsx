@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, LogOut, FileText, Clock, Award, Settings } from 'lucide-react';
+import {
+  FileText,
+  Clock,
+  User,
+  Award,
+  Settings
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import MainLayout from '../../components/MainLayout';
@@ -49,7 +55,7 @@ export default function DashboardPage() {
     checkAuthAndStats();
   }, [router]);
 
-  const handleLogout = async () => {
+  const _handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
       router.push('/');

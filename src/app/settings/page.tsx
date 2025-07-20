@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 import MainLayout from '../../components/MainLayout';
 
 export default function SettingsPage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -64,7 +64,7 @@ export default function SettingsPage() {
         router.push('/auth');
       }
     } catch (error) {
-      console.error('Erreur d\'authentification:', error);
+      console.error('Erreur d&apos;authentification:', error);
       router.push('/auth');
     } finally {
       setLoading(false);
@@ -92,7 +92,7 @@ export default function SettingsPage() {
     }
   };
 
-  const handleSettingChange = (key: string, value: any) => {
+  const handleSettingChange = (key: string, value: unknown) => {
     setSettings(prev => ({
       ...prev,
       [key]: value
@@ -107,7 +107,7 @@ export default function SettingsPage() {
       settings: [
         {
           key: 'language',
-          label: 'Langue de l\'interface',
+          label: 'Langue de l&apos;interface',
           type: 'select',
           options: [
             { value: 'fr', label: 'Français' },
@@ -231,13 +231,13 @@ export default function SettingsPage() {
           key: 'dataSharing',
           label: 'Partage de données',
           type: 'toggle',
-          description: 'Autoriser l\'utilisation anonyme de vos données pour améliorer le service'
+          description: 'Autoriser l&apos;utilisation anonyme de vos données pour améliorer le service'
         },
         {
           key: 'analytics',
           label: 'Analytics',
           type: 'toggle',
-          description: 'Autoriser la collecte de données d\'usage anonymes'
+          description: 'Autoriser la collecte de données d&apos;usage anonymes'
         }
       ]
     }

@@ -2,17 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Users, 
-  FileText, 
-  BarChart3, 
+import {
+  Users,
+  FileText,
+  BarChart3,
   Settings,
   TrendingUp,
-  TrendingDown,
   Activity,
   Globe,
   Clock,
-  Shield,
   AlertCircle,
   CheckCircle
 } from 'lucide-react';
@@ -38,10 +36,9 @@ interface AdminStats {
     uptime: string;
     performance: number;
     storage: number;
-    bandwidth: number;
+  bandwidth: number;
   };
 }
-
 interface RecentActivity {
   id: string;
   type: 'user' | 'translation' | 'system';
@@ -54,7 +51,7 @@ export default function AdminPage() {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<Record<string, unknown> | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -75,7 +72,7 @@ export default function AdminPage() {
       } else {
         router.push('/auth');
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Erreur d\'authentification:', error);
       router.push('/auth');
     }
@@ -135,18 +132,18 @@ export default function AdminPage() {
           timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
           severity: 'warning'
         },
-        {
-          id: '5',
-          type: 'system',
-          message: 'Pic d\'utilisation détecté - performance: 89%',
-          timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
-          severity: 'warning'
-        }
+            {
+              id: '5',
+              type: 'system',
+              message: 'Pic d&apos;utilisation détecté - performance: 89%',
+              timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+              severity: 'warning'
+            }
       ];
 
       setStats(mockStats);
       setActivities(mockActivities);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Erreur lors du chargement des données:', error);
     } finally {
       setLoading(false);
@@ -158,6 +155,7 @@ export default function AdminPage() {
     const time = new Date(timestamp);
     const diffInMinutes = Math.floor((now.getTime() - time.getTime()) / (1000 * 60));
     
+
     if (diffInMinutes < 60) {
       return `Il y a ${diffInMinutes} min`;
     } else if (diffInMinutes < 1440) {
@@ -165,7 +163,7 @@ export default function AdminPage() {
     } else {
       return `Il y a ${Math.floor(diffInMinutes / 1440)} jour(s)`;
     }
-  };
+}
 
   const getSeverityIcon = (severity: string) => {
     switch (severity) {
@@ -221,7 +219,7 @@ export default function AdminPage() {
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             />
-            <p className="text-gray-600">Chargement du panneau d'administration...</p>
+            <p className="text-gray-600">Chargement du panneau d&apos;administration...</p>
           </motion.div>
         </div>
       </MainLayout>
@@ -244,10 +242,10 @@ export default function AdminPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
-              Panneau d'Administration
+              Panneau d&apos;Administration
             </h1>
             <p className="text-gray-600">
-              Vue d'ensemble de la plateforme IndoFrench
+              Vue d&apos;ensemble de la plateforme IndoFrench
             </p>
           </motion.div>
 
@@ -266,17 +264,17 @@ export default function AdminPage() {
                   </div>
                   <div className="flex items-center text-green-600">
                     <TrendingUp className="w-4 h-4 mr-1" />
-                    <span className="text-sm font-medium">+{stats.users.growth}%</span>
+                    <span className="text-sm font-medium">+{stats?.users?.growth ?? 0}%</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                  {stats.users.total.toLocaleString()}
+                  {stats?.users?.total?.toLocaleString() ?? 0}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Utilisateurs total ({stats.users.active} actifs)
+                  Utilisateurs total ({stats?.users?.active ?? 0} actifs)
                 </p>
                 <p className="text-green-600 text-sm mt-2">
-                  +{stats.users.new} nouveaux aujourd'hui
+                  +{stats?.users?.new ?? 0} nouveaux aujourd&apos;hui
                 </p>
               </motion.div>
 
@@ -291,17 +289,17 @@ export default function AdminPage() {
                     <FileText className="w-6 h-6 text-green-600" />
                   </div>
                   <div className="text-green-600">
-                    <span className="text-sm font-medium">{stats.translations.avgQuality}% qualité</span>
+                    <span className="text-sm font-medium">{stats?.translations?.avgQuality ?? 0}% qualité</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                  {stats.translations.total.toLocaleString()}
+                  {stats?.translations?.total?.toLocaleString() ?? 0}
                 </h3>
                 <p className="text-gray-600 text-sm">
                   Traductions complétées
                 </p>
                 <p className="text-blue-600 text-sm mt-2">
-                  {stats.translations.today} aujourd'hui | {stats.translations.pending} en attente
+                  {stats?.translations?.today ?? 0} aujourd&apos;hui | {stats?.translations?.pending ?? 0} en attente
                 </p>
               </motion.div>
 
@@ -316,17 +314,17 @@ export default function AdminPage() {
                     <Activity className="w-6 h-6 text-purple-600" />
                   </div>
                   <div className="text-green-600">
-                    <span className="text-sm font-medium">{stats.system.uptime}</span>
+                    <span className="text-sm font-medium">{stats?.system?.uptime ?? ''}</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                  {stats.system.performance}%
+                  {stats?.system?.performance ?? 0}%
                 </h3>
                 <p className="text-gray-600 text-sm">
                   Performance système
                 </p>
                 <p className="text-gray-500 text-sm mt-2">
-                  Uptime: {stats.system.uptime}
+                  Uptime: {stats?.system?.uptime ?? ''}
                 </p>
               </motion.div>
 
@@ -341,17 +339,17 @@ export default function AdminPage() {
                     <Globe className="w-6 h-6 text-orange-600" />
                   </div>
                   <div className="text-blue-600">
-                    <span className="text-sm font-medium">{stats.system.bandwidth}% utilisé</span>
+                    <span className="text-sm font-medium">{stats?.system?.bandwidth ?? 0}% utilisé</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                  {stats.system.storage}%
+                  {stats?.system?.storage ?? 0}%
                 </h3>
                 <p className="text-gray-600 text-sm">
                   Stockage utilisé
                 </p>
                 <p className="text-gray-500 text-sm mt-2">
-                  Bande passante: {stats.system.bandwidth}%
+                  Bande passante: {stats?.system?.bandwidth ?? 0}%
                 </p>
               </motion.div>
             </div>

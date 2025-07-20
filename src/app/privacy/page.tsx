@@ -11,8 +11,8 @@ export default function PrivacyPage() {
       title: "Collecte des données",
       content: [
         "Nous collectons uniquement les données nécessaires au fonctionnement de nos services de traduction.",
-        "Informations d'inscription : nom, email, préférences linguistiques",
-        "Données de navigation : pages visitées, temps de session, préférences d'interface",
+        "Informations d&apos;inscription : nom, email, préférences linguistiques",
+        "Données de navigation : pages visitées, temps de session, préférences d&apos;interface",
         "Contenu soumis pour traduction (temporairement stocké pour le traitement)"
       ]
     },
@@ -60,11 +60,11 @@ export default function PrivacyPage() {
       icon: FileText,
       title: "Vos droits",
       content: [
-        "Droit d'accès : consultez les données que nous détenons sur vous",
+        "Droit d&apos;accès : consultez les données que nous détenons sur vous",
         "Droit de rectification : corrigez les informations inexactes",
-        "Droit à l'effacement : demandez la suppression de vos données",
+        "Droit à l&apos;effacement : demandez la suppression de vos données",
         "Droit à la portabilité : récupérez vos données dans un format standard",
-        "Droit d'opposition : refusez certains traitements de vos données"
+        "Droit d&apos;opposition : refusez certains traitements de vos données"
       ]
     }
   ];

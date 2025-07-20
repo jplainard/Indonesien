@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       try {
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
         userId = decoded.userId;
-      } catch (error) {
+      } catch (_error) {
         console.log('Token invalide ou expiré');
       }
     }
@@ -221,7 +221,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Fonction de traduction interne (réutilise la logique de l'API translate)
-async function translateTextInternal(
+async function _translateTextInternal(
   text: string, 
   sourceLang: string, 
   targetLang: string, 
@@ -326,7 +326,7 @@ async function translateTextInternal(
 }
 
 // Fonction de calcul de la qualité
-function calculateQualityScore(
+function _calculateQualityScore(
   sourceText: string, 
   translatedText: string, 
   translationType: string

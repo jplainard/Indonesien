@@ -4,14 +4,11 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Code, 
-  BookOpen, 
   Zap, 
   Shield, 
   Copy,
   Play,
   ChevronRight,
-  ChevronDown,
-  Check,
   Key,
   Globe,
   Clock,
@@ -21,10 +18,10 @@ import MainLayout from '@/components/MainLayout';
 
 export default function APIDocsPage() {
   const [selectedEndpoint, setSelectedEndpoint] = useState('translate');
-  const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
+  const [_expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
   const [apiKey, setApiKey] = useState('your-api-key-here');
 
-  const toggleSection = (section: string) => {
+  const _toggleSection = (section: string) => {
     setExpandedSections(prev => 
       prev.includes(section) 
         ? prev.filter(s => s !== section)
@@ -222,7 +219,7 @@ print(result["translated_text"])`
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Explorer l'API
+                  Explorer l&apos;API
                 </motion.a>
               </div>
             </motion.div>
@@ -314,7 +311,7 @@ print(result["translated_text"])`
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Explorer l'API
+                Explorer l&apos;API
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Testez nos endpoints directement depuis cette page
@@ -463,7 +460,7 @@ print(result["translated_text"])`
               viewport={{ once: true }}
             >
               <h2 className="text-2xl font-bold mb-4">
-                Besoin d'Aide ?
+                Besoin d&apos;Aide ?
               </h2>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
                 Notre équipe de développeurs est là pour vous aider à intégrer 
@@ -484,7 +481,7 @@ print(result["translated_text"])`
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Centre d'Aide
+                  Centre d&apos;Aide
                 </motion.a>
               </div>
             </motion.div>

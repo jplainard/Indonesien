@@ -40,7 +40,7 @@ export default function HelpPage() {
     {
       category: 'translation',
       question: 'Quels formats de fichiers sont supportés ?',
-      answer: 'Nous supportons une large gamme de formats : PDF, Word (.doc, .docx), Excel (.xls, .xlsx), PowerPoint (.ppt, .pptx), texte brut (.txt), RTF, et bien d\'autres. Pour les formats spéciaux, contactez notre équipe.'
+      answer: 'Nous supportons une large gamme de formats : PDF, Word (.doc, .docx), Excel (.xls, .xlsx), PowerPoint (.ppt, .pptx), texte brut (.txt), RTF, et bien d&apos;autres. Pour les formats spéciaux, contactez notre équipe.'
     },
     {
       category: 'translation',
@@ -59,8 +59,8 @@ export default function HelpPage() {
     },
     {
       category: 'technical',
-      question: 'Que faire si j\'ai des problèmes techniques ?',
-      answer: 'Pour les problèmes techniques, consultez d\'abord cette section d\'aide. Si le problème persiste, contactez notre support technique à support@indofrench.com ou utilisez le chat en direct (disponible 9h-18h).'
+      question: 'Que faire si j&apos;ai des problèmes techniques ?',
+      answer: 'Pour les problèmes techniques, consultez d&apos;abord cette section d&apos;aide. Si le problème persiste, contactez notre support technique à support@indofrench.com ou utilisez le chat en direct (disponible 9h-18h).'
     },
     {
       category: 'translation',
@@ -70,7 +70,7 @@ export default function HelpPage() {
     {
       category: 'account',
       question: 'Comment résilier mon abonnement ?',
-      answer: 'Vous pouvez annuler votre abonnement à tout moment depuis votre espace client. L\'annulation prend effet à la fin de votre période de facturation en cours. Aucuns frais d\'annulation ne sont appliqués.'
+      answer: 'Vous pouvez annuler votre abonnement à tout moment depuis votre espace client. L&apos;annulation prend effet à la fin de votre période de facturation en cours. Aucuns frais d&apos;annulation ne sont appliqués.'
     }
   ];
 
@@ -131,7 +131,7 @@ export default function HelpPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                  Centre d'aide
+                  Centre d&apos;aide
                 </span>
               </motion.h1>
               <motion.p 
@@ -141,7 +141,7 @@ export default function HelpPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 Trouvez rapidement les réponses à vos questions. 
-                Notre équipe est là pour vous accompagner dans votre utilisation d'IndoFrench.
+                Notre équipe est là pour vous accompagner dans votre utilisation d&apos;IndoFrench.
               </motion.p>
 
               {/* Search Bar */}
@@ -155,7 +155,7 @@ export default function HelpPage() {
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
-                    placeholder="Rechercher dans l'aide..."
+                    placeholder="Rechercher dans l&apos;aide..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-4 text-lg border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-lg"
@@ -298,7 +298,7 @@ export default function HelpPage() {
                   Aucun résultat trouvé
                 </h3>
                 <p className="text-gray-500">
-                  Essayez avec d'autres mots-clés ou contactez notre support.
+                  Essayez avec d&apos;autres mots-clés ou contactez notre support.
                 </p>
               </motion.div>
             )}

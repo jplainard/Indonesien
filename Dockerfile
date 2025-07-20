@@ -26,7 +26,8 @@ CMD ["npm", "run", "dev"]
 
 # --- Dépendances pour build/prod ---
 FROM base AS deps
-RUN npm ci --only=production && npm cache clean --force
+COPY prisma ./prisma
+RUN npm ci && npm cache clean --force
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules

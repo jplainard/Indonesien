@@ -33,8 +33,8 @@ export default function NewsPage() {
   const featuredArticle = {
     id: 1,
     title: "IndoFrench lance sa nouvelle IA de traduction révolutionnaire",
-    excerpt: "Notre équipe R&D dévoile une intelligence artificielle capable de comprendre les nuances culturelles indonésiennes et françaises pour des traductions d'une précision inégalée.",
-    content: "Après 18 mois de recherche et développement, IndoFrench est fier d'annoncer le lancement de TradAI 3.0...",
+    excerpt: "Notre équipe R&D dévoile une intelligence artificielle capable de comprendre les nuances culturelles indonésiennes et françaises pour des traductions d&apos;une précision inégalée.",
+    content: "Après 18 mois de recherche et développement, IndoFrench est fier d&apos;annoncer le lancement de TradAI 3.0...",
     author: "Marie Dubois",
     authorRole: "Directrice R&D",
     publishedAt: "2025-07-15",
@@ -50,7 +50,7 @@ export default function NewsPage() {
   const articles = [
     {
       id: 2,
-      title: "Partenariat stratégique avec l'Université Sorbonne",
+      title: "Partenariat stratégique avec l&apos;Université Sorbonne",
       excerpt: "Un accord de recherche pour développer les futures technologies de traduction automatique et former la prochaine génération de linguistes.",
       author: "Ahmad Wijaya",
       authorRole: "Directeur Partenariats",
@@ -121,7 +121,7 @@ export default function NewsPage() {
     {
       id: 7,
       title: "Intégration avec Microsoft Office 365",
-      excerpt: "Notre add-in pour Office 365 permet maintenant de traduire directement dans Word, Excel et PowerPoint sans quitter l'application.",
+      excerpt: "Notre add-in pour Office 365 permet maintenant de traduire directement dans Word, Excel et PowerPoint sans quitter l&apos;application.",
       author: "Thomas Dubois",
       authorRole: "Développeur Senior",
       publishedAt: "2025-06-28",
@@ -134,7 +134,7 @@ export default function NewsPage() {
     },
     {
       id: 8,
-      title: "Webinaire : L'avenir de la traduction automatique",
+      title: "Webinaire : L&apos;avenir de la traduction automatique",
       excerpt: "Rejoignez notre webinaire gratuit le 25 juillet pour découvrir les tendances et innovations dans le domaine de la traduction IA.",
       author: "Dr. Pierre Rousseau",
       authorRole: "Chercheur en IA",

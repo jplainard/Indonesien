@@ -10,8 +10,8 @@ export default function TermsPage() {
       icon: Users,
       title: "Acceptation des conditions",
       content: [
-        "En accédant à nos services, vous acceptez d'être lié par ces conditions d'utilisation",
-        "Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser nos services",
+        "En accédant à nos services, vous acceptez d&apos;être lié par ces conditions d&apos;utilisation",
+        "Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser nos services",
         "Nous nous réservons le droit de modifier ces conditions à tout moment",
         "Les modifications prendront effet dès leur publication sur cette page"
       ]
@@ -20,7 +20,7 @@ export default function TermsPage() {
       icon: Globe,
       title: "Description des services",
       content: [
-        "IndoFrench fournit des services de traduction entre l'indonésien et le français",
+        "IndoFrench fournit des services de traduction entre l&apos;indonésien et le français",
         "Nos services incluent la traduction de textes, documents et contenus multimédias",
         "Nous proposons des solutions pour particuliers et entreprises",
         "Certains services peuvent nécessiter un abonnement ou des frais supplémentaires"
@@ -30,7 +30,7 @@ export default function TermsPage() {
       icon: CheckCircle,
       title: "Inscription et compte utilisateur",
       content: [
-        "Vous devez fournir des informations exactes et complètes lors de l'inscription",
+        "Vous devez fournir des informations exactes et complètes lors de l&apos;inscription",
         "Vous êtes responsable de maintenir la confidentialité de vos identifiants",
         "Un seul compte par personne ou entité est autorisé",
         "Nous nous réservons le droit de suspendre ou supprimer les comptes en violation"
@@ -60,7 +60,7 @@ export default function TermsPage() {
       icon: Scale,
       title: "Limitation de responsabilité",
       content: [
-        "Nos services sont fournis 'en l'état' sans garantie de disponibilité absolue",
+        "Nos services sont fournis &#39;en l&#39;état&#39; sans garantie de disponibilité absolue",
         "Nous ne garantissons pas la perfection absolue des traductions",
         "Notre responsabilité est limitée au montant payé pour le service concerné",
         "Nous ne sommes pas responsables des dommages indirects ou consécutifs"
@@ -72,7 +72,7 @@ export default function TermsPage() {
       content: [
         "Les délais indiqués sont estimatifs et peuvent varier selon la complexité",
         "En cas de retard, nous nous efforcerons de vous informer rapidement",
-        "Les délais d'urgence sont disponibles moyennant supplément",
+        "Les délais d&apos;urgence sont disponibles moyennant supplément",
         "Force majeure peut entraîner des retards indépendants de notre volonté"
       ]
     },
@@ -80,7 +80,7 @@ export default function TermsPage() {
       icon: AlertTriangle,
       title: "Utilisations interdites",
       content: [
-        "Contenu illégal, diffamatoire, obscène ou violant les droits d'autrui",
+        "Contenu illégal, diffamatoire, obscène ou violant les droits d&apos;autrui",
         "Tentatives de piratage, hacking ou contournement de nos systèmes de sécurité",
         "Utilisation commerciale non autorisée de nos services gratuits",
         "Soumission de contenus malveillants (virus, malware, etc.)"
@@ -91,7 +91,7 @@ export default function TermsPage() {
   const pricingInfo = [
     {
       title: "Services gratuits",
-      description: "Limités en volume et fonctionnalités, destinés à l'évaluation",
+      description: "Limités en volume et fonctionnalités, destinés à l&apos;évaluation",
       details: ["5 traductions par mois", "Formats de base uniquement", "Support par email"]
     },
     {

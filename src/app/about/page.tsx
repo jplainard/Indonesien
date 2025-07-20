@@ -10,13 +10,7 @@ import {
   BookOpen,
   Languages,
   TrendingUp,
-  CheckCircle,
-  Star,
-  Clock,
-  Shield,
-  Building,
-  Briefcase,
-  GraduationCap
+  Building
 } from 'lucide-react';
 import MainLayout from '../../components/MainLayout';
 
@@ -37,7 +31,7 @@ export default function AboutPage() {
     {
       icon: Heart,
       title: "Passion Culturelle",
-      description: "Notre équipe biculturelle franco-indonésienne vit et respire les nuances des deux cultures. Cette immersion culturelle garantit des traductions qui conservent l'essence et le ton du message original."
+      description: "Notre équipe biculturelle franco-indonésienne vit et respire les nuances des deux cultures. Cette immersion culturelle garantit des traductions qui conservent l&apos;essence et le ton du message original."
     },
     {
       icon: TrendingUp,
@@ -54,13 +48,13 @@ export default function AboutPage() {
   const milestones = [
     {
       year: "2019",
-      title: "Fondation d'IndoFrench",
-      description: "Création de l'entreprise par Marie Dubois et Andi Pratama à Paris, avec l'ambition de combler le gap linguistique franco-indonésien dans le secteur B2B."
+      title: "Fondation d&apos;IndoFrench",
+      description: "Création de l&apos;entreprise par Marie Dubois et Andi Pratama à Paris, avec l&apos;ambition de combler le gap linguistique franco-indonésien dans le secteur B2B."
     },
     {
       year: "2020",
       title: "Premiers grands comptes",
-      description: "Signature des premiers contrats avec des multinationales françaises s'implantant en Indonésie : Total Énergies, Danone, et Crédit Agricole."
+      description: "Signature des premiers contrats avec des multinationales françaises s&apos;implantant en Indonésie : Total Énergies, Danone, et Crédit Agricole."
     },
     {
       year: "2021",
@@ -70,7 +64,7 @@ export default function AboutPage() {
     {
       year: "2022",
       title: "Expansion Équipe",
-      description: "Constitution d'une équipe de 25 traducteurs permanents et 150+ freelances certifiés, couvrant tous les secteurs d'activité."
+      description: "Constitution d&apos;une équipe de 25 traducteurs permanents et 150+ freelances certifiés, couvrant tous les secteurs d&apos;activité."
     },
     {
       year: "2023",
@@ -80,7 +74,7 @@ export default function AboutPage() {
     {
       year: "2024",
       title: "Leadership Marché",
-      description: "Position de leader sur le segment franco-indonésien avec 60% de part de marché et expansion vers d'autres langues d'Asie du Sud-Est."
+      description: "Position de leader sur le segment franco-indonésien avec 60% de part de marché et expansion vers d&apos;autres langues d&apos;Asie du Sud-Est."
     }
   ];
 
@@ -88,7 +82,7 @@ export default function AboutPage() {
     {
       name: "Marie Dubois",
       role: "Co-Fondatrice & Directrice Générale",
-      bio: "Master en Traduction de l'ESIT Paris, 15 ans d'expérience en cabinet d'avocats international. Spécialisée en droit des affaires et fusions-acquisitions. Auteure de deux guides sur la traduction juridique.",
+      bio: "Master en Traduction de l&apos;ESIT Paris, 15 ans d&apos;expérience en cabinet d&apos;avocats international. Spécialisée en droit des affaires et fusions-acquisitions. Auteure de deux guides sur la traduction juridique.",
       expertise: ["Droit des affaires", "M&A", "Compliance"],
       languages: ["Français (natif)", "Indonésien (C2)", "Anglais (C1)"]
     },
@@ -116,7 +110,7 @@ export default function AboutPage() {
     {
       name: "Clara Nguyen",
       role: "Responsable Innovation & IA",
-      bio: "Ingénieure en IA conversationnelle, ancienne research scientist chez Google Translate. Pilote l'intégration de nos outils d'IA propriétaires et l'amélioration continue de nos algorithmes.",
+      bio: "Ingénieure en IA conversationnelle, ancienne research scientist chez Google Translate. Pilote l&apos;intégration de nos outils d&apos;IA propriétaires et l&apos;amélioration continue de nos algorithmes.",
       expertise: ["Intelligence Artificielle", "NLP", "Innovation"],
       languages: ["Français (natif)", "Anglais (C2)", "Indonésien (B2)"]
     },
@@ -131,7 +125,7 @@ export default function AboutPage() {
 
   const recognitions = [
     {
-      title: "Prix de l'Innovation 2024",
+      title: "Prix de l&apos;Innovation 2024",
       organization: "Chambre de Commerce Franco-Indonésienne",
       description: "Récompense notre plateforme IA révolutionnaire"
     },
@@ -154,7 +148,7 @@ export default function AboutPage() {
 
   const partnerships = [
     { name: "CCFI", description: "Chambre de Commerce Franco-Indonésienne" },
-    { name: "ESIT", description: "École Supérieure d'Interprètes et de Traducteurs" },
+    { name: "ESIT", description: "École Supérieure d&apos;Interprètes et de Traducteurs" },
     { name: "SFT", description: "Société Française des Traducteurs" },
     { name: "Business France", description: "Agence nationale de développement international" }
   ];
@@ -178,7 +172,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                  À propos d'IndoFrench
+                  À propos d&apos;IndoFrench
                 </span>
               </motion.h1>
               <motion.p 
@@ -189,7 +183,7 @@ export default function AboutPage() {
               >
                 Depuis 2019, IndoFrench est le partenaire de référence pour la traduction professionnelle 
                 franco-indonésienne. Nous accompagnons entreprises et institutions dans leurs projets 
-                d'expansion internationale avec une expertise unique alliant innovation technologique 
+                d&apos;expansion internationale avec une expertise unique alliant innovation technologique 
                 et excellence linguistique.
               </motion.p>
             </motion.div>
@@ -281,7 +275,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Nos valeurs</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Les principes fondamentaux qui guident notre action quotidienne 
-                et garantissent l'excellence de nos services.
+                et garantissent l&apos;excellence de nos services.
               </p>
             </motion.div>
 
@@ -325,7 +319,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre équipe dirigeante</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Des experts passionnés avec une vision commune : révolutionner 
-                la traduction franco-indonésienne grâce à l'innovation et l'excellence.
+                la traduction franco-indonésienne grâce à l&apos;innovation et l&apos;excellence.
               </p>
             </motion.div>
 

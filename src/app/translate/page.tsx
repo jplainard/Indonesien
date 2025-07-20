@@ -345,7 +345,7 @@ export default function TranslatePage() {
               { id: 'halo', fr: 'Bonjour' },
               { id: 'terima kasih', fr: 'Merci' },
               { id: 'apa kabar', fr: 'Comment allez-vous ?' },
-              { id: 'nama saya', fr: 'Je m\'appelle' },
+              { id: 'nama saya', fr: 'Je m&apos;appelle' },
               { id: 'sampai jumpa', fr: 'Au revoir' },
               { id: 'selamat pagi', fr: 'Bon matin' }
             ].map((phrase) => (

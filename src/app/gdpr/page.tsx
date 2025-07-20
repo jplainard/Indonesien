@@ -8,9 +8,9 @@ export default function GDPRPage() {
   const gdprRights = [
     {
       icon: Eye,
-      title: "Droit d'accès",
+      title: "Droit d&apos;accès",
       description: "Obtenez une copie de toutes les données personnelles que nous détenons sur vous",
-      action: "Demander l'accès",
+      action: "Demander l&apos;accès",
       timeframe: "Réponse sous 30 jours"
     },
     {
@@ -22,8 +22,8 @@ export default function GDPRPage() {
     },
     {
       icon: Database,
-      title: "Droit à l'effacement",
-      description: "Demandez la suppression de vos données personnelles ('droit à l'oubli')",
+      title: "Droit à l&apos;effacement",
+      description: "Demandez la suppression de vos données personnelles (&#39;droit à l&#39;oubli&#39;)",
       action: "Supprimer mes données",
       timeframe: "Traitement sous 30 jours"
     },
@@ -43,9 +43,9 @@ export default function GDPRPage() {
     },
     {
       icon: UserCheck,
-      title: "Droit d'opposition",
+      title: "Droit d&apos;opposition",
       description: "Opposez-vous au traitement de vos données pour des raisons légitimes",
-      action: "S'opposer au traitement",
+      action: "S&apos;opposer au traitement",
       timeframe: "Arrêt immédiat"
     }
   ];
@@ -60,7 +60,7 @@ export default function GDPRPage() {
     {
       purpose: "Marketing et communication",
       legalBasis: "Consentement",
-      retention: "Jusqu'au retrait du consentement",
+      retention: "Jusqu&apos;au retrait du consentement",
       description: "Envoi de newsletters et informations commerciales"
     },
     {
@@ -90,7 +90,7 @@ export default function GDPRPage() {
     },
     {
       icon: Lock,
-      title: "Contrôle d'accès",
+      title: "Contrôle d&apos;accès",
       measures: [
         "Authentification multi-facteurs",
         "Principe du moindre privilège",
@@ -105,7 +105,7 @@ export default function GDPRPage() {
         "Centres de données certifiés ISO 27001",
         "Surveillance 24h/24 et 7j/7",
         "Sauvegardes chiffrées quotidiennes",
-        "Plan de continuité d'activité"
+        "Plan de continuité d&apos;activité"
       ]
     },
     {
@@ -163,12 +163,12 @@ export default function GDPRPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Qu'est-ce que le RGPD ?</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Qu&apos;est-ce que le RGPD ?</h2>
               <div className="prose prose-lg text-gray-600">
                 <p className="mb-4">
                   Le Règlement Général sur la Protection des Données (RGPD) est un règlement 
                   européen qui renforce et unifie la protection des données personnelles des 
-                  résidents de l'Union européenne.
+                  résidents de l&apos;Union européenne.
                 </p>
                 <p className="mb-4">
                   Chez IndoFrench, nous nous conformons pleinement au RGPD et nous nous engageons 
@@ -413,7 +413,7 @@ export default function GDPRPage() {
               <p className="text-gray-600 text-sm">
                 <strong>Dernière mise à jour de cette page :</strong> 20 juillet 2025<br />
                 Cette page est régulièrement mise à jour pour refléter nos pratiques actuelles 
-                et l'évolution de la réglementation RGPD.
+                et l&apos;évolution de la réglementation RGPD.
               </p>
             </motion.div>
           </div>

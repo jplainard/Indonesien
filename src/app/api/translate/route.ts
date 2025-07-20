@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       try {
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
         userId = decoded.userId;
-      } catch (error) {
+      } catch (_error) {
         console.log('Token invalide ou expiré');
       }
     }
