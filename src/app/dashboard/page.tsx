@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { User, LogOut, FileText, Clock, Award, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import MainLayout from '../../components/MainLayout';
 
 interface UserData {
   id: number;
@@ -68,39 +69,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-blue-600">
-                IndoFrench
-              </Link>
-              <span className="ml-3 text-sm text-gray-500">Tableau de bord</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">
-                Bonjour, {(user.name || user.email).replace(/'/g, "&apos;")}
-              </span>
-              <motion.button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-red-600 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <LogOut className="w-4 h-4" />
-                Déconnexion
-              </motion.button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <MainLayout 
+      title="Tableau de bord"
+      description={`Bonjour ${user.name || user.email}! Voici vos activités de traduction.`}
+    >
+      <div className="space-y-6">
         {/* Welcome Section */}
         <motion.div
-          className="bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-xl p-8 mb-8"
+          className="bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-xl p-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -225,6 +201,6 @@ export default function DashboardPage() {
         {/* Admin Panel Link */}
         {/* Le bouton admin est désormais intégré dans la section d'accueil */}
       </div>
-    </div>
+    </MainLayout>
   );
 }

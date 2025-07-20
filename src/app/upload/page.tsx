@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { Upload, FileText, X, CheckCircle, AlertCircle } from 'lucide-react';
+import MainLayout from '../../components/MainLayout';
 
 interface UploadFile {
   file: File;
@@ -147,18 +148,11 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Traduire vos documents
-          </h1>
-          <p className="text-lg text-gray-600">
-            Uploadez vos fichiers et obtenez une traduction professionnelle en quelques minutes
-          </p>
-        </div>
-
+    <MainLayout 
+      title="Traduire vos documents"
+      description="Uploadez vos fichiers et obtenez une traduction professionnelle en quelques minutes"
+    >
+      <div className="space-y-6">
         {/* Language Selection */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">Langues de traduction</h2>
@@ -395,6 +389,6 @@ export default function UploadPage() {
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

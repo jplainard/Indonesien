@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import MainLayout from "../../../components/MainLayout";
 import { 
   Users,
   UserPlus,
@@ -124,42 +125,22 @@ export default function UsersAdmin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <motion.div 
-        className="bg-white shadow-sm border-b"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <motion.div
-                className="p-3 bg-blue-100 rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Users className="w-6 h-6 text-blue-600" />
-              </motion.div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Gestion des utilisateurs</h1>
-                <p className="text-gray-600">{users.length} utilisateurs au total</p>
-              </div>
-            </div>
-            <motion.button
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <UserPlus className="w-5 h-5" />
-              Nouvel utilisateur
-            </motion.button>
-          </div>
+    <MainLayout 
+      title="Gestion des utilisateurs"
+      description="Administrez les comptes utilisateurs, rôles et permissions"
+    >
+      <div className="space-y-6">
+        {/* Actions d'en-tête */}
+        <div className="flex items-center justify-between">
+          <motion.button
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <UserPlus className="w-5 h-5" />
+            Nouvel utilisateur
+          </motion.button>
         </div>
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Statistiques rapides */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"
@@ -324,6 +305,6 @@ export default function UsersAdmin() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </MainLayout>
   );
 }
