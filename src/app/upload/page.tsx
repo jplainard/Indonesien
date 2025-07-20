@@ -149,54 +149,53 @@ export default function UploadPage() {
 
   return (
     <MainLayout 
-      title="Traduire vos documents"
-      description="Uploadez vos fichiers et obtenez une traduction professionnelle en quelques minutes"
+      title={
+        <span className="inline-flex items-center gap-2 text-2xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-600 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-sm">
+          <FileText className="w-7 h-7" /> Traduire vos documents
+        </span>
+      }
+      description={<span className="text-base text-gray-700 font-medium">Uploadez vos fichiers et obtenez une traduction professionnelle en quelques minutes</span>}
     >
       <div className="space-y-6">
-        {/* Language Selection */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Langues de traduction</h2>
-          <div className="flex items-center space-x-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Langue source
-              </label>
+        {/* Bloc configuration moderne */}
+        <div className="rounded-2xl bg-white/80 shadow-xl ring-1 ring-blue-100/60 backdrop-blur-md p-8 mb-6 border border-blue-100/40">
+          <h2 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2"><FileText className="w-6 h-6" />Langues de traduction</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-blue-700 mb-1">Langue source</label>
               <select
                 value={sourceLang}
                 onChange={(e) => setSourceLang(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 rounded-lg border border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-blue-900 font-medium shadow-sm"
               >
-                <option value="id">Indonésien</option>
-                <option value="fr">Français</option>
+                <option value="id">🇮🇩 Indonésien</option>
+                <option value="fr">🇫🇷 Français</option>
               </select>
             </div>
-            
-            <div className="flex-shrink-0 mt-6">
+            <div className="flex items-end justify-center">
               <button
                 onClick={() => {
                   const temp = sourceLang;
                   setSourceLang(targetLang);
                   setTargetLang(temp);
                 }}
-                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="p-2 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 text-blue-700 shadow hover:from-blue-200 hover:to-purple-200 transition-colors"
+                title="Inverser les langues"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               </button>
             </div>
-            
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Langue cible
-              </label>
+            <div>
+              <label className="block text-xs font-semibold text-blue-700 mb-1">Langue cible</label>
               <select
                 value={targetLang}
                 onChange={(e) => setTargetLang(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 rounded-lg border border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-blue-900 font-medium shadow-sm"
               >
-                <option value="fr">Français</option>
-                <option value="id">Indonésien</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="id">🇮🇩 Indonésien</option>
               </select>
             </div>
           </div>

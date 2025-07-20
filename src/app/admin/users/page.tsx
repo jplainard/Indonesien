@@ -126,21 +126,26 @@ export default function UsersAdmin() {
 
   return (
     <MainLayout 
-      title="Gestion des utilisateurs"
-      description="Administrez les comptes utilisateurs, rôles et permissions"
+      title={<span className="inline-flex items-center gap-2 text-2xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-600 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-sm"><Users className="w-7 h-7" /> Gestion des utilisateurs</span>}
+      description={<span className="text-base text-gray-700 font-medium">Administrez les comptes utilisateurs, rôles et permissions</span>}
     >
       <div className="space-y-6">
-        {/* Actions d'en-tête */}
-        <div className="flex items-center justify-between">
+        {/* Actions d'en-tête modernisées */}
+        <motion.div
+          className="rounded-2xl bg-white/80 shadow-xl ring-1 ring-blue-100/60 backdrop-blur-md p-8 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 border border-blue-100/40"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <motion.button
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold shadow hover:from-blue-700 hover:to-purple-700 transition-colors flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <UserPlus className="w-5 h-5" />
             Nouvel utilisateur
           </motion.button>
-        </div>
+        </motion.div>
         {/* Statistiques rapides */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"

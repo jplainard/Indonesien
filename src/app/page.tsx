@@ -87,6 +87,7 @@ export default function Home() {
   }
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -111,8 +112,21 @@ export default function Home() {
         setLoading(false);
       }
     };
-
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/me');
+        if (res.ok) {
+          const data = await res.json();
+          setIsAuthenticated(!!data?.user);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch {
+        setIsAuthenticated(false);
+      }
+    };
     fetchStats();
+    checkAuth();
   }, []);
 
   return (
@@ -129,10 +143,17 @@ export default function Home() {
               <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
               <a href="#tarifs" className="text-gray-700 hover:text-blue-600 transition-colors">Tarifs</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-              <a href="/auth" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                Connexion
-              </a>
+              {isAuthenticated ? (
+                <a href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-1">
+                  <UserCheck className="w-4 h-4" />
+                  Mon dashboard
+                </a>
+              ) : (
+                <a href="/auth" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1">
+                  <Users className="w-4 h-4" />
+                  Connexion
+                </a>
+              )}
             </nav>
           </div>
         </div>

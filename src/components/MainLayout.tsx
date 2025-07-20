@@ -4,12 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from './Navigation';
 
-// Composant pour les particules flottantes (même style que la page d'accueil)
+// Particules identiques à la page d'accueil
 function FloatingParticles() {
   const [particles, setParticles] = useState<{ left: number; top: number; x: number; delay: number; duration: number }[]>([]);
 
   useEffect(() => {
-    // Génère les positions aléatoires côté client uniquement
     setParticles(
       Array.from({ length: 12 }, () => ({
         left: Math.random() * 100,
@@ -22,7 +21,7 @@ function FloatingParticles() {
   }, []);
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 pointer-events-none">
       {particles.map((p, i) => (
         <motion.div
           key={i}
@@ -46,10 +45,12 @@ function FloatingParticles() {
   );
 }
 
+import type { ReactNode } from 'react';
+
 interface MainLayoutProps {
   children: React.ReactNode;
-  title?: string;
-  description?: string;
+  title?: ReactNode;
+  description?: ReactNode;
   className?: string;
 }
 
@@ -137,8 +138,39 @@ export default function MainLayout({
           }}
         />
 
-        {/* Particules flottantes */}
-        <FloatingParticles />
+
+      {/* Particules flottantes enrichies + icônes de traduction */}
+      <FloatingParticles />
+
+      {/* Quelques icônes flottantes supplémentaires pour renforcer l'effet "traduction" */}
+      <motion.div
+        className="absolute top-32 left-10 text-blue-400/40"
+        animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" x2="22" y1="12" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" /></svg>
+      </motion.div>
+      <motion.div
+        className="absolute top-16 right-32 text-purple-400/40"
+        animate={{ y: [0, 12, 0], rotate: [0, -8, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-32 left-32 text-green-400/40"
+        animate={{ scale: [1, 1.1, 1], rotate: [0, 10, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+      </motion.div>
+      <motion.div
+        className="absolute top-1/2 right-16 text-yellow-400/40"
+        animate={{ x: [0, 8, 0], y: [0, -8, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+      </motion.div>
 
         {/* Effet laser de scan */}
         <motion.div
@@ -169,14 +201,14 @@ export default function MainLayout({
           <div className="bg-white/10 backdrop-blur-sm border-b border-white/20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {title && (
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                <h1 className="mb-2">
                   {title}
                 </h1>
               )}
               {description && (
-                <p className="text-gray-600 text-lg">
+                <div className="mb-2">
                   {description}
-                </p>
+                </div>
               )}
             </div>
           </div>

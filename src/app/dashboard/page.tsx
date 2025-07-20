@@ -70,37 +70,37 @@ export default function DashboardPage() {
 
   return (
     <MainLayout 
-      title="Tableau de bord"
-      description={`Bonjour ${user.name || user.email}! Voici vos activités de traduction.`}
+      title={<span className="inline-flex items-center gap-2 text-2xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-600 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-sm"><User className="w-7 h-7" /> Tableau de bord</span>}
+      description={<span className="text-base text-gray-700 font-medium">Bonjour {user.name || user.email}! Voici vos activités de traduction.</span>}
     >
       <div className="space-y-6">
-        {/* Welcome Section */}
+        {/* Welcome Section modernisée */}
         <motion.div
-          className="bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-xl p-8"
+          className="rounded-2xl bg-white/80 shadow-xl ring-1 ring-blue-100/60 backdrop-blur-md p-8 mb-6 border border-blue-100/40"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl font-bold mb-2">
-            Bienvenue sur IndoFrench !
+          <h1 className="text-3xl font-extrabold mb-2 text-blue-900 flex items-center gap-2">
+            <User className="w-8 h-8 text-blue-700" /> Bienvenue sur IndoFrench !
           </h1>
-          <p className="text-blue-100 mb-4">
+          <p className="text-blue-700/80 mb-4 font-medium">
             Gérez vos traductions et accédez à tous nos services depuis votre espace personnel.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <span className="text-blue-200">Rôle:</span>
-              <span className="ml-2 font-semibold capitalize">{user.role}</span>
+              <span className="text-blue-700 font-semibold">Rôle:</span>
+              <span className="ml-2 font-semibold capitalize text-blue-900">{user.role}</span>
             </div>
             <div>
-              <span className="text-blue-200">Membre depuis:</span>
-              <span className="ml-2 font-semibold">
+              <span className="text-blue-700 font-semibold">Membre depuis:</span>
+              <span className="ml-2 font-semibold text-blue-900">
                 {new Date(user.createdAt).toLocaleDateString('fr-FR')}
               </span>
             </div>
             <div>
-              <span className="text-blue-200">Dernière connexion:</span>
-              <span className="ml-2 font-semibold">
+              <span className="text-blue-700 font-semibold">Dernière connexion:</span>
+              <span className="ml-2 font-semibold text-blue-900">
                 {user.lastLoginAt 
                   ? new Date(user.lastLoginAt).toLocaleDateString('fr-FR')
                   : 'Première connexion'
@@ -112,7 +112,7 @@ export default function DashboardPage() {
             <div className="col-span-1 md:col-span-3 mt-4 flex justify-center">
               <Link
                 href="/admin/users"
-                className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-red-600 hover:to-pink-600 transition-colors shadow-lg"
               >
                 <Award className="w-5 h-5" />
                 Accéder au panneau d&apos;administration

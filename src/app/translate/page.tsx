@@ -118,78 +118,70 @@ export default function TranslatePage() {
 
   return (
     <MainLayout 
-      title="Traduction Instantanée"
-      description="Traduisez rapidement vos textes entre l'indonésien et le français avec notre IA avancée"
+      title={
+        <span className="inline-flex items-center gap-2 text-2xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-600 to-fuchsia-500 bg-clip-text text-transparent drop-shadow-sm">
+          <Languages className="w-7 h-7" /> Traduction Instantanée
+        </span>
+      }
+      description={<span className="text-base text-gray-700 font-medium">Traduisez rapidement vos textes entre l&apos;indonésien et le français avec notre IA avancée</span>}
     >
       <div className="space-y-8">
-        {/* Language Selection */}
+        {/* Bloc configuration moderne */}
         <motion.div
-          className="bg-white rounded-lg shadow-sm border p-6 mb-6"
+          className="rounded-2xl bg-white/80 shadow-xl ring-1 ring-blue-100/60 backdrop-blur-md p-8 mb-6 border border-blue-100/40"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Languages className="w-5 h-5" />
-              Configuration de traduction
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <h2 className="text-xl font-bold flex items-center gap-2 text-blue-800">
+              <Languages className="w-6 h-6" /> Configuration de traduction
             </h2>
             <button
               onClick={() => setShowHistory(!showHistory)}
-              className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow hover:from-blue-200 hover:to-purple-200 transition-colors"
             >
-              <History className="w-4 h-4" />
-              Historique
+              <History className="w-5 h-5" /> Historique
             </button>
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Langue source
-              </label>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-blue-700 mb-1">Langue source</label>
               <select
                 value={sourceLang}
                 onChange={(e) => setSourceLang(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 rounded-lg border border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-blue-900 font-medium shadow-sm"
               >
                 <option value="id">🇮🇩 Indonésien</option>
                 <option value="fr">🇫🇷 Français</option>
               </select>
             </div>
-            
-            <div className="flex-shrink-0 mt-6">
+            <div className="flex items-end justify-center">
               <button
                 onClick={swapLanguages}
-                className="p-2 text-gray-400 hover:text-gray-600 transition-colors hover:bg-gray-100 rounded-full"
+                className="p-2 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 text-blue-700 shadow hover:from-blue-200 hover:to-purple-200 transition-colors"
                 title="Inverser les langues"
               >
-                <ArrowLeftRight className="w-5 h-5" />
+                <ArrowLeftRight className="w-6 h-6" />
               </button>
             </div>
-            
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Langue cible
-              </label>
+            <div>
+              <label className="block text-xs font-semibold text-blue-700 mb-1">Langue cible</label>
               <select
                 value={targetLang}
                 onChange={(e) => setTargetLang(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 rounded-lg border border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-blue-900 font-medium shadow-sm"
               >
                 <option value="fr">🇫🇷 Français</option>
                 <option value="id">🇮🇩 Indonésien</option>
               </select>
             </div>
-
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Type de traduction
-              </label>
+            <div>
+              <label className="block text-xs font-semibold text-blue-700 mb-1">Type de traduction</label>
               <select
                 value={translationType}
                 onChange={(e) => setTranslationType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 rounded-lg border border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-blue-900 font-medium shadow-sm"
               >
                 <option value="ai">🤖 Intelligence Artificielle</option>
                 <option value="auto">⚡ Automatique</option>
