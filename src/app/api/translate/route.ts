@@ -1,10 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 export async function POST(request: NextRequest) {
   try {
+    // Vérification de l'authentification
+    const token = request.cookies.get('auth-token')?.value;
+    let userId = null;
+    
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
+        userId = decoded.userId;
+      } catch (error) {
+        console.log('Token invalide ou expiré');
+      }
+    }
+
     const { text, sourceLang, targetLang, translationType = 'ai' } = await request.json();
 
     // Validation des paramètres
@@ -54,7 +69,7 @@ export async function POST(request: NextRequest) {
         quality,
         isPublic: false,
         translationType,
-        // userId sera ajouté quand on aura l'authentification
+        userId: userId // Associer à l'utilisateur si connecté
       }
     });
 

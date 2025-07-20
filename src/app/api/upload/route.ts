@@ -4,13 +4,28 @@ import { join } from 'path';
 import { PrismaClient } from '@prisma/client';
 import { FileTextExtractor, AITranslationService } from '../../../lib/fileTranslation';
 import { DocumentGenerator } from '../../../lib/documentGenerator';
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
   try {
+    // Vérification de l'authentification
+    const token = request.cookies.get('auth-token')?.value;
+    let userId = null;
+    
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
+        userId = decoded.userId;
+      } catch (error) {
+        console.log('Token invalide ou expiré');
+      }
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const sourceLang = formData.get('sourceLanguage') as string;
@@ -154,6 +169,7 @@ export async function POST(request: NextRequest) {
         quality: translationResult.confidence,
         isPublic: false,
         translationType: 'ai',
+        userId: userId // Associer à l'utilisateur si connecté
         // Nouveaux champs seront ajoutés après redémarrage
         // fileName: file.name,
         // fileSize: file.size,
@@ -161,7 +177,6 @@ export async function POST(request: NextRequest) {
         // processingTime,
         // segmentsCount: translationResult.segmentsCount,
         // method: translationResult.method,
-        // userId sera ajouté quand on aura l'authentification
       }
     });
 

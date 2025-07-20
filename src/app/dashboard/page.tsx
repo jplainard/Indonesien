@@ -20,18 +20,23 @@ interface UserData {
 export default function DashboardPage() {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<{ totalTranslations: number; inProgress: number; averageQuality: number } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuthAndStats = async () => {
       try {
         const response = await fetch('/api/auth/me');
         const data = await response.json();
-
         if (response.ok) {
           setUser(data.user);
+          // Charger les stats utilisateur
+          const statsRes = await fetch('/api/user-stats');
+          if (statsRes.ok) {
+            const statsData = await statsRes.json();
+            setStats(statsData);
+          }
         } else {
-          // Non authentifié, rediriger vers la page de connexion
           router.push('/auth');
         }
       } catch (error) {
@@ -41,7 +46,7 @@ export default function DashboardPage() {
         setLoading(false);
       }
     };
-    checkAuth();
+    checkAuthAndStats();
   }, [router]);
 
   const handleLogout = async () => {
@@ -184,15 +189,15 @@ export default function DashboardPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-6">Vos statistiques</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600 mb-2">0</div>
+              <div className="text-2xl font-bold text-blue-600 mb-2">{stats ? stats.totalTranslations : 0}</div>
               <div className="text-gray-600">Documents traduits</div>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-2xl font-bold text-green-600 mb-2">0</div>
+              <div className="text-2xl font-bold text-green-600 mb-2">{stats ? stats.inProgress : 0}</div>
               <div className="text-gray-600">En cours</div>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-2xl font-bold text-purple-600 mb-2">100%</div>
+              <div className="text-2xl font-bold text-purple-600 mb-2">{stats ? `${stats.averageQuality}%` : '—'}</div>
               <div className="text-gray-600">Qualité moyenne</div>
             </div>
           </div>
