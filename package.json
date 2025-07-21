@@ -5,7 +5,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "prisma generate && next build",
+        "vercel-build": "./vercel-build.sh",
         "start": "next start",
         "lint": "next lint",
         "type-check": "tsc --noEmit",
@@ -21,6 +22,8 @@
         "quick-start": "./quick-start.sh --dev-local",
         "docker:dev": "./dev.sh",
         "docker:prod": "./prod.sh",
+        "deploy:vercel": "./deploy-vercel.sh",
+        "deploy:vercel:prod": "./deploy-vercel.sh --production",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",

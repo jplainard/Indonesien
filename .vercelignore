@@ -1,0 +1,7 @@
+# Fichiers à ignorer lors du déploiement Vercel
+node_modules/.prisma
+.prisma
+.env.local
+.env.production.local
+uploads/*
+!uploads/.gitkeep

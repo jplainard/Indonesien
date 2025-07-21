@@ -28,21 +28,26 @@ export default function Navigation() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Vérifier l'authentification
-    const checkAuth = async () => {
-      try {
-        const response = await fetch('/api/auth/me');
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
+    // Vérifier l'authentification seulement sur les pages qui nécessitent une connexion
+    const protectedRoutes = ['/dashboard', '/profile', '/settings', '/admin', '/translate', '/upload'];
+    const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
+    
+    if (isProtectedRoute) {
+      const checkAuth = async () => {
+        try {
+          const response = await fetch('/api/auth/me');
+          if (response.ok) {
+            const userData = await response.json();
+            setUser(userData);
+          }
+        } catch (error) {
+          console.error('Erreur lors de la vérification d\'authentification:', error);
         }
-      } catch (error) {
-        console.error('Erreur lors de la vérification d\'authentification:', error);
-      }
-    };
+      };
 
-    checkAuth();
-  }, []);
+      checkAuth();
+    }
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {

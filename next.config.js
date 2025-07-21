@@ -5,8 +5,8 @@ const nextConfig = {
     // Optimisations pour le développement
   },
   
-  // Configuration pour Docker et production
-  output: 'standalone',
+  // Configuration pour production (standalone pour Docker, export pour Vercel)
+  output: process.env.VERCEL ? undefined : 'standalone',
   
   // Configuration pour éviter les problèmes de permissions et de cache
   typescript: {
