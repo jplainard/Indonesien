@@ -376,7 +376,7 @@ export default function LegalPage() {
                   59100 Roubaix, France.
                 </p>
                 <p>
-                  <strong>Développement :</strong> Site développé en interne par l'équipe technique IndoFrench.
+                  <strong>Développement :</strong> Site développé en interne par l&apos;équipe technique IndoFrench.
                 </p>
               </div>
             </motion.div>

@@ -123,10 +123,10 @@ export default function TermsPage() {
                 </div>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Conditions d'Utilisation
+                Conditions d&apos;Utilisation
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Les règles et conditions qui régissent l'utilisation de nos services 
+                Les règles et conditions qui régissent l&apos;utilisation de nos services 
                 de traduction IndoFrench.
               </p>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
@@ -152,17 +152,17 @@ export default function TermsPage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Préambule</h2>
               <div className="prose prose-lg text-gray-600">
                 <p className="mb-4">
-                  Les présentes conditions générales d'utilisation (CGU) régissent l'accès et 
-                  l'utilisation des services proposés par IndoFrench SAS, société de traduction 
+                  Les présentes conditions générales d&apos;utilisation (CGU) régissent l&apos;accès et 
+                  l&apos;utilisation des services proposés par IndoFrench SAS, société de traduction 
                   spécialisée dans la paire linguistique indonésien-français.
                 </p>
                 <p className="mb-4">
-                  Ces conditions s'appliquent à tous les utilisateurs de nos services, qu'ils 
-                  soient particuliers ou professionnels, et quel que soit le mode d'accès 
+                  Ces conditions s&apos;appliquent à tous les utilisateurs de nos services, qu&apos;ils 
+                  soient particuliers ou professionnels, et quel que soit le mode d&apos;accès 
                   (site web, applications mobiles, API).
                 </p>
                 <p>
-                  L'utilisation de nos services implique l'acceptation pleine et entière de 
+                  L&apos;utilisation de nos services implique l&apos;acceptation pleine et entière de 
                   ces conditions. Nous vous invitons à les lire attentivement.
                 </p>
               </div>
@@ -309,7 +309,7 @@ export default function TermsPage() {
               </h3>
               <p className="text-gray-600 mb-6">
                 Notre équipe juridique est à votre disposition pour répondre à 
-                toutes vos questions concernant ces conditions d'utilisation.
+                toutes vos questions concernant ces conditions d&apos;utilisation.
               </p>
               <a
                 href="mailto:legal@indofrench.com"

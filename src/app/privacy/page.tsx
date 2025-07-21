@@ -133,14 +133,14 @@ export default function PrivacyPage() {
                   informations personnelles.
                 </p>
                 <p className="mb-4">
-                  Cette politique de confidentialité s'applique à tous nos services de traduction, 
+                  Cette politique de confidentialité s&apos;applique à tous nos services de traduction, 
                   notre site web, nos applications mobiles et nos API. Elle explique quelles 
                   données nous collectons, pourquoi nous les collectons, comment nous les utilisons 
                   et quels sont vos droits.
                 </p>
                 <p>
                   En utilisant nos services, vous acceptez les pratiques décrites dans cette 
-                  politique. Si vous avez des questions, n'hésitez pas à nous contacter.
+                  politique. Si vous avez des questions, n&apos;hésitez pas à nous contacter.
                 </p>
               </div>
             </motion.div>
@@ -200,7 +200,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold mb-6">Nous contacter</h2>
               <p className="text-blue-100 mb-8">
                 Pour toute question concernant cette politique de confidentialité ou 
-                l'exercice de vos droits, contactez-nous :
+                l&apos;exercice de vos droits, contactez-nous :
               </p>
               
               <div className="grid md:grid-cols-2 gap-8">

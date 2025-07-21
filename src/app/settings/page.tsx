@@ -3,14 +3,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Settings, 
   Bell, 
   Globe, 
   Shield,
-  Moon,
-  Sun,
-  Smartphone,
-  Mail,
+  Settings,
   Save,
   Check,
   X
@@ -346,7 +342,7 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-6">
-                    {section.settings.map((setting, settingIndex) => (
+                    {section.settings.map((setting, _settingIndex) => (
                       <div key={setting.key} className="flex items-center justify-between">
                         <div className="flex-grow">
                           <label className="block text-sm font-medium text-gray-700 mb-1">

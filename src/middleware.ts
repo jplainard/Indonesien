@@ -57,7 +57,7 @@ export async function middleware(request: NextRequest) {
       // Vérifier la validité du token
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
-    } catch (error) {
+    } catch (_error) {
       // Token invalide, rediriger vers la page de connexion
       const url = request.nextUrl.clone();
       url.pathname = '/auth';
@@ -79,7 +79,7 @@ export async function middleware(request: NextRequest) {
         const url = request.nextUrl.clone();
         url.pathname = '/dashboard';
         return NextResponse.redirect(url);
-      } catch (error) {
+      } catch (_error) {
         // Token invalide, laisser accéder à /auth
         const response = NextResponse.next();
         response.cookies.delete('auth-token');

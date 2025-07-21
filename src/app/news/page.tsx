@@ -6,13 +6,11 @@ import {
   Calendar, 
   User, 
   ArrowRight, 
-  Tag,
   Clock,
   Eye,
   Heart,
   Share2,
-  Search,
-  Filter
+  Search
 } from 'lucide-react';
 import { useState } from 'react';
 import MainLayout from '@/components/MainLayout';
@@ -185,7 +183,7 @@ export default function NewsPage() {
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Découvrez les dernières nouvelles, innovations et événements 
-                de l'univers IndoFrench. Restez informé de nos avancées 
+                de l&apos;univers IndoFrench. Restez informé de nos avancées 
                 technologiques et de notre croissance.
               </p>
             </motion.div>
@@ -300,7 +298,7 @@ export default function NewsPage() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Lire l'article
+                      Lire l&apos;article
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </motion.button>
                   </div>
@@ -432,7 +430,7 @@ export default function NewsPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  S'abonner
+                  S&apos;abonner
                 </motion.button>
               </div>
             </motion.div>

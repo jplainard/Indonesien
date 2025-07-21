@@ -231,7 +231,7 @@ export default function UploadPage() {
                 <li>• <strong>RTF</strong> : Texte enrichi supporté</li>
               </ul>
               <p className="text-sm text-blue-600 mt-2">
-                <strong>Astuce :</strong> Si votre PDF est un document scanné, utilisez d'abord un outil de reconnaissance de caractères (OCR) ou copiez-collez le texte manuellement dans l'outil de traduction de texte.
+                <strong>Astuce :</strong> Si votre PDF est un document scanné, utilisez d&apos;abord un outil de reconnaissance de caractères (OCR) ou copiez-collez le texte manuellement dans l&apos;outil de traduction de texte.
               </p>
             </div>
           </div>

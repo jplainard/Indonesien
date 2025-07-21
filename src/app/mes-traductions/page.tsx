@@ -6,12 +6,8 @@ import {
   FileText, 
   Clock, 
   Star, 
-  Download, 
-  Eye, 
   Calendar,
   Languages,
-  Trash2,
-  Filter,
   Search,
   ChevronDown
 } from 'lucide-react';
@@ -122,7 +118,7 @@ export default function MesTraductionsPage() {
       }
       description={
         <span className="text-base text-gray-700 font-medium">
-          Retrouvez l'historique de toutes vos traductions ({data.totalCount} au total)
+          Retrouvez l&apos;historique de toutes vos traductions ({data.totalCount} au total)
         </span>
       }
     >

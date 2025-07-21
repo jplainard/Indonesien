@@ -85,7 +85,7 @@ export default function Footer() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                S'abonner
+                S&apos;abonner
               </motion.button>
             </div>
           </motion.div>
@@ -112,7 +112,7 @@ export default function Footer() {
                 </Link>
                 <p className="text-gray-400 mb-6 leading-relaxed">
                   Votre partenaire de confiance pour la traduction professionnelle 
-                  entre l'indonésien et le français. Qualité, rapidité et 
+                  entre l&apos;indonésien et le français. Qualité, rapidité et 
                   confidentialité garanties.
                 </p>
                 

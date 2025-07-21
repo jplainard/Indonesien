@@ -5,17 +5,11 @@ import { motion } from 'framer-motion';
 import { 
   Activity, 
   Server, 
-  Database, 
-  Globe, 
-  Zap,
   CheckCircle,
   AlertCircle,
   XCircle,
   Clock,
-  TrendingUp,
-  Wifi,
-  HardDrive,
-  Monitor
+  TrendingUp
 } from 'lucide-react';
 import MainLayout from '@/components/MainLayout';
 
@@ -259,7 +253,7 @@ export default function StatusPage() {
                 Statut Système IndoFrench
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Surveillez en temps réel l'état de nos services et infrastructures. 
+                Surveillez en temps réel l&apos;état de nos services et infrastructures. 
                 Transparence totale sur les performances et incidents.
               </p>
               
@@ -589,7 +583,7 @@ export default function StatusPage() {
                 Restez Informé
               </h2>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-                Recevez des notifications en temps réel sur l'état de nos services 
+                Recevez des notifications en temps réel sur l&apos;état de nos services 
                 et soyez le premier informé des maintenances planifiées.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -598,7 +592,7 @@ export default function StatusPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  S'abonner aux notifications
+                  S&apos;abonner aux notifications
                 </motion.button>
                 <motion.button
                   className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"

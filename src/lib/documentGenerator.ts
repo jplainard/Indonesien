@@ -197,7 +197,7 @@ Généré par IndoFrench - Plateforme de traduction automatique
   static generateTranslationSummary(
     originalText: string,
     translatedText: string,
-    meta: any
+    meta: Record<string, unknown>
   ) {
     const summary = {
       originalPreview: originalText.length > 200 ? 

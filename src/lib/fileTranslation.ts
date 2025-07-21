@@ -51,8 +51,8 @@ export class FileTextExtractor {
   private static async extractFromPDF(buffer: Buffer): Promise<string> {
     try {
       console.log('🔍 Extraction PDF avec pdf-parse...');
-      const pdfParse = require('pdf-parse');
-      const data = await pdfParse(buffer);
+      const pdfParse = await import('pdf-parse');
+      const data = await pdfParse.default(buffer);
       const text = data.text?.trim() || '';
       
       // Vérifier si le PDF contient des pages mais pas de texte (PDF scanné)
@@ -113,7 +113,7 @@ export class FileTextExtractor {
       const rtfContent = buffer.toString('utf-8');
       
       // Extraction basique du texte RTF (enlever les balises de formatage)
-      let text = rtfContent
+      const text = rtfContent
         .replace(/\{\\[^}]*\}/g, '') // Supprimer les commandes RTF
         .replace(/\\[a-z]+\d*/g, '') // Supprimer les commandes de formatage
         .replace(/[{}]/g, '') // Supprimer les accolades

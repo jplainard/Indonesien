@@ -9,7 +9,6 @@ import {
   Zap,
   Shield,
   Clock,
-  Users,
   FileText,
   Headphones,
   Globe
@@ -410,7 +409,7 @@ export default function PricingPage() {
                 Prêt à commencer ?
               </h2>
               <p className="text-blue-100 text-lg mb-8">
-                Démarrez votre essai gratuit dès aujourd'hui. 
+                Démarrez votre essai gratuit dès aujourd&apos;hui. 
                 Aucune carte bancaire requise.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

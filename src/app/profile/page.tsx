@@ -8,7 +8,6 @@ import {
   Phone, 
   Building, 
   MapPin, 
-  Calendar,
   Edit3,
   Save,
   X,
@@ -16,8 +15,6 @@ import {
   Shield,
   Bell,
   Globe,
-  Eye,
-  EyeOff,
   Key,
   Trash2
 } from 'lucide-react';
@@ -539,7 +536,7 @@ export default function ProfilePage() {
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">Langue et région</h3>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Langue de l'interface</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Langue de l&apos;interface</label>
                         <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                           <option value="fr">Français</option>
                           <option value="en">English</option>

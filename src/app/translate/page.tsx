@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Languages, ArrowLeftRight, Copy, Download, History } from 'lucide-react';
-import Link from 'next/link';
 import MainLayout from '../../components/MainLayout';
 
 interface Translation {
@@ -236,7 +235,7 @@ export default function TranslatePage() {
               onClick={loadRecentTranslations}
               className="mt-4 w-full py-2 text-sm text-blue-600 hover:text-blue-700 transition-colors"
             >
-              Actualiser l'historique
+              Actualiser l&apos;historique
             </button>
           </motion.div>
         )}

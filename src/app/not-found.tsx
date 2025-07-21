@@ -68,7 +68,7 @@ export default function NotFoundPage() {
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Oups ! La page que vous recherchez semble avoir été déplacée, 
-            supprimée ou n'a jamais existé.
+            supprimée ou n&apos;a jamais existé.
           </p>
           <p className="text-gray-500">
             Ne vous inquiétez pas, il nous arrive à tous de nous perdre parfois. 
