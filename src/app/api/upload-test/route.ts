@@ -10,16 +10,24 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    // Ne pas essayer de lire le corps pour ce test.
-    // On veut juste voir si la fonction est déclenchée.
-    console.log(`Requête POST reçue sur /api/upload-test à ${new Date().toISOString()}`);
+    const contentType = request.headers.get('content-type');
+    let hasFormData = false;
+    let message = "API Upload Test - POST reçu avec succès";
+
+    if (contentType && contentType.includes('multipart/form-data')) {
+      hasFormData = true;
+      message = "API Upload Test - POST avec multipart/form-data reçu";
+      // On ne tente pas de parser le corps pour l'instant.
+      // On veut juste confirmer que ce type de requête arrive.
+    }
     
     return NextResponse.json({
-      message: "API Upload Test - POST reçu avec succès",
+      message: message,
       timestamp: new Date().toISOString(),
       status: "OK",
+      hasFormData: hasFormData,
       headers: {
-        'content-type': request.headers.get('content-type'),
+        'content-type': contentType,
         'content-length': request.headers.get('content-length'),
       }
     });
