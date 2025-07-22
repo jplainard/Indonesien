@@ -64,10 +64,6 @@ export default function ProfilePage() {
     security: true
   });
 
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
-
   const fetchUserProfile = async () => {
     try {
       const response = await fetch('/api/auth/me');
@@ -91,6 +87,10 @@ export default function ProfilePage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
 
   const handleSaveProfile = async () => {
     setSaving(true);

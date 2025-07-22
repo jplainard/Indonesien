@@ -54,11 +54,6 @@ export default function AdminPage() {
   const [user, setUser] = useState<Record<string, unknown> | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
-    fetchAdminData();
-  }, []);
-
   const checkAuth = async () => {
     try {
       const response = await fetch('/api/auth/me');
@@ -77,6 +72,11 @@ export default function AdminPage() {
       router.push('/auth');
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+    fetchAdminData();
+  }, []);
 
   const fetchAdminData = async () => {
     try {

@@ -53,12 +53,28 @@ export async function POST(request: NextRequest) {
       return new Response(JSON.stringify({ error: 'No file uploaded' }), { status: 400 });
     }
 
-    // 3. Text Extraction (Simplified for Edge)
+    // 3. Text Extraction (Edge-compatible, PDF support)
     let originalText = '';
     if (file.type === 'text/plain') {
       originalText = await file.text();
     } else if (file.type === 'application/pdf') {
-      originalText = `Le fichier PDF "${file.name}" a été reçu. L'extraction de texte pour les PDF est en cours de mise à jour.`;
+      try {
+        // Extraction PDF basique avec PDF.js (Edge-compatible)
+        // PDF.js doit être importé dynamiquement et utilisé côté Edge
+        const pdfjsLib = await import('pdfjs-dist/build/pdf');
+        const pdfData = new Uint8Array(await file.arrayBuffer());
+        const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+        const pdf = await loadingTask.promise;
+        let text = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          text += (content.items as Array<{ str: string }>).map((item) => item.str).join(' ') + '\n';
+        }
+        originalText = text.trim() || `[PDF reçu, mais aucun texte extrait]`;
+      } catch (err) {
+        originalText = `[Erreur extraction PDF: ${err instanceof Error ? err.message : 'inconnue'}]`;
+      }
     } else {
       originalText = `Type de fichier '${file.type}' non supporté pour l'extraction de texte.`;
     }
@@ -70,13 +86,38 @@ export async function POST(request: NextRequest) {
     // 4. Translation
     const translationResult = await translateTextBasic(originalText, sourceLang, targetLang);
 
-    // 5. Send Response (Database logic is temporarily skipped)
+    // 5. Save to database via internal REST API (Edge-compatible)
+    let saveResult = null;
+    try {
+      const saveRes = await fetch(`/api/save-translation`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: token,
+          fileName: file.name,
+          fileSize: file.size,
+          sourceText: originalText,
+          sourceLang,
+          targetText: translationResult.translatedText,
+          targetLang,
+          quality: 85,
+          translationType: 'auto',
+          isPublic: false,
+        })
+      });
+      saveResult = await saveRes.json();
+    } catch (saveErr) {
+      saveResult = { error: saveErr instanceof Error ? saveErr.message : 'Erreur inconnue' };
+    }
+
+    // 6. Send Response
     return new Response(JSON.stringify({
       success: true,
       translation: translationResult.translatedText,
       original: originalText,
       fileName: file.name,
-      message: "Upload and translation successful (Edge Runtime).",
+      saveResult,
+      message: "Upload, extraction, traduction et sauvegarde terminés (Edge Runtime).",
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

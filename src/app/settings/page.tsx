@@ -45,11 +45,6 @@ export default function SettingsPage() {
     analytics: true
   });
 
-  useEffect(() => {
-    checkAuth();
-    loadSettings();
-  }, []);
-
   const checkAuth = async () => {
     try {
       const response = await fetch('/api/auth/me');
@@ -66,6 +61,11 @@ export default function SettingsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+    loadSettings();
+  }, []);
 
   const loadSettings = async () => {
     // Simulation du chargement des paramètres
