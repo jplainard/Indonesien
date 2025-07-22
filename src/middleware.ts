@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
 
   // Si c'est une route statique ou API non protégée, laisser passer
   if (pathname.startsWith('/_next/') || 
-      pathname.startsWith('/api/') && !pathname.startsWith('/api/auth/me')) {
+      (pathname.startsWith('/api/') && !pathname.startsWith('/api/auth/me') && !pathname.startsWith('/api/upload'))) {
     return NextResponse.next();
   }
 
