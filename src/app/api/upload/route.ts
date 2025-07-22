@@ -10,24 +10,28 @@ import prisma from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
-    // Authentification Bearer token (header ou cookie)
+    // Authentification Bearer token (header ou cookie) - OPTIONNELLE
     let token = request.cookies.get('auth-token')?.value;
+    let userId = null;
+    
     if (!token) {
       const authHeader = request.headers.get('authorization');
       if (authHeader && authHeader.startsWith('Bearer ')) {
         token = authHeader.substring(7);
       }
     }
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
-    }
-    // Vérification du token
-    const { default: jwt } = await import('jsonwebtoken');
-    const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
-    try {
-      jwt.verify(token, JWT_SECRET);
-    } catch (_err) {
-      return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
+    
+    // Si token présent, on le vérifie et récupère l'userId
+    if (token) {
+      try {
+        const { default: jwt } = await import('jsonwebtoken');
+        const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
+        const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
+        userId = decoded.userId;
+      } catch (_err) {
+        console.log('Token invalide ou expiré, traitement en mode anonyme');
+        // Continue en mode anonyme
+      }
     }
 
     // 2. File Handling
@@ -80,10 +84,7 @@ export async function POST(request: NextRequest) {
 
     // Sauvegarde en base de données
     let savedTranslationId: number | null = null;
-    // Tentative de récupération de l'utilisateur (désactivé temporairement)
-    // Pour l'instant, on sauvegarde sans utilisateur
-    // TODO: Réactiver l'authentification plus tard
-    const userId = null;
+    // L'userId est déjà défini en haut du fichier selon l'authentification
     try {
       const savedTranslation = await prisma.translation.create({
         data: {
