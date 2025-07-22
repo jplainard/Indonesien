@@ -27,6 +27,8 @@ interface UploadFile {
     summary?: UploadSummary;
     metadata?: UploadMetadata;
     error?: string;
+    details?: string;
+    ocrUrl?: string;
   };
 }
 
@@ -377,6 +379,17 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                           <span className="text-sm font-medium text-red-800">Erreur</span>
                         </div>
                         <p className="text-xs text-red-600">{uploadFile.result.error}</p>
+                        {/* Affichage aide OCR si PDF extraction failed */}
+                        {uploadFile.result.details && uploadFile.result.error === 'PDF extraction failed' && (
+                          <div className="mt-2 text-xs text-blue-700 bg-blue-50 rounded p-2">
+                            <strong>Conseil :</strong> {uploadFile.result.details}
+                            {uploadFile.result.ocrUrl && (
+                              <div className="mt-1">
+                                <a href={uploadFile.result.ocrUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-600 hover:text-blue-800">Outil OCR en ligne</a>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

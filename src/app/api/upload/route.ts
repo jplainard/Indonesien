@@ -63,8 +63,15 @@ export async function POST(request: NextRequest) {
       } catch (_err: unknown) {
         // Extraction PDF échouée
         const errorMsg = (_err as Error)?.message || String(_err);
-        console.error('Erreur extraction PDF:', errorMsg);
-        return NextResponse.json({ error: 'PDF extraction failed' }, { status: 500 });
+        const ocrUrl = 'https://www.onlineocr.net/';
+        console.error('[PDF extraction] Impossible d\'extraire le texte :', errorMsg);
+        console.info(`[PDF extraction] Conseils utilisateur : Utiliser un OCR (${ocrUrl}), copier-coller le texte, ou uploader un fichier texte.`);
+        return NextResponse.json({
+          error: 'PDF extraction failed',
+          details: `Impossible d'extraire le texte du PDF.\n\nCe document semble être une image scannée ou protégé par mot de passe.\n\n👉 Pour traduire ce type de fichier :\n1. Utilisez un outil OCR (ex: ${ocrUrl}) pour convertir le PDF en texte.\n2. Ou copiez-collez le texte dans l'outil de traduction.\n3. Ou uploadez directement un fichier texte (.txt).`,
+          suggestion: 'Préférez les PDF créés numériquement ou Word (.docx) pour une extraction optimale.',
+          ocrUrl
+        }, { status: 500 });
       }
     }
 

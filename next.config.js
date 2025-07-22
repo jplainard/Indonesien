@@ -28,26 +28,24 @@ const nextConfig = {
   },
   
   // Configuration pour WSL et développement local
-  webpack: (config, { dev, isServer }) => {
-    if (dev) {
-      // Configuration pour éviter les problèmes de permissions en développement
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
-        ignored: /node_modules/,
+    webpack: (config, { dev, isServer }) => {
+      if (dev) {
+        // Configuration pour éviter les problèmes de permissions en développement
+        config.watchOptions = {
+          poll: 1000,
+          aggregateTimeout: 300,
+          ignored: /node_modules/,
+        };
+      }
+      
+      // Ignore le module 'canvas' pour pdfjs-dist car on n'en a pas besoin pour l'extraction de texte
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        canvas: false,
       };
-    }
-    
-    // Ignore le module 'canvas' pour pdfjs-dist car on n'en a pas besoin pour l'extraction de texte
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      canvas: false,
-    };
-    
-    return config;
-  },
-  webpack: (config, { dev, _isServer }) => {
-  },
+      
+      return config;
+    },
   
   // Configuration pour éviter les problèmes de build
   distDir: '.next',
