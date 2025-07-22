@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export async function GET() {
   return NextResponse.json({
     message: "API Upload Test - GET fonctionne",

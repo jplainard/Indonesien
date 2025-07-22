@@ -163,6 +163,12 @@ function cleanExtractedText(text: string): string {
     .trim();
 }
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
