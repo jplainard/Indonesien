@@ -22,8 +22,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Décoder le token pour récupérer l'userId
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string };
-    const userId = decoded.userId;
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string | number; email: string };
+    const userId = typeof decoded.userId === 'string' ? parseInt(decoded.userId, 10) : decoded.userId;
 
     // Récupérer les traductions de l'utilisateur
     const translations = await prisma.translation.findMany({

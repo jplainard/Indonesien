@@ -46,6 +46,8 @@ const nextConfig = {
     
     return config;
   },
+  webpack: (config, { dev, _isServer }) => {
+  },
   
   // Configuration pour éviter les problèmes de build
   distDir: '.next',
