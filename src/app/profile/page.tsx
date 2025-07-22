@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import MainLayout from '../../components/MainLayout';
+import Image from 'next/image';
 
 interface UserProfile {
   id: number;
@@ -199,7 +200,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-2xl font-bold text-blue-600">
                     {user.avatar ? (
-                      <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full object-cover" />
+                      <Image src={user.avatar} alt={user.name || 'Avatar'} width={96} height={96} className="w-24 h-24 rounded-full object-cover" />
                     ) : (
                       user.name?.charAt(0)?.toUpperCase() || 'U'
                     )}
