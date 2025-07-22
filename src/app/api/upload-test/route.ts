@@ -1,19 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
-export const runtime = 'edge'; // Use the Edge runtime
+export const runtime = 'edge';
+
+export async function GET(_request: NextRequest) {
+  return new Response(
+    JSON.stringify({
+      message: "API Upload Test - GET fonctionne",
+      timestamp: new Date().toISOString(),
+      status: "OK"
+    }),
+    {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const contentType = request.headers.get('content-type') || '';
-    let message = "Edge API - POST received";
-    if (contentType.includes('multipart/form-data')) {
-      message = "Edge API - multipart/form-data POST received";
+    const contentType = request.headers.get('content-type');
+    let hasFormData = false;
+    let message = "API Upload Test - POST reçu avec succès";
+
+    if (contentType && contentType.includes('multipart/form-data')) {
+      hasFormData = true;
+      message = "API Upload Test - POST avec multipart/form-data reçu";
     }
     
     return new Response(
       JSON.stringify({
         message: message,
         timestamp: new Date().toISOString(),
+        status: "OK",
+        hasFormData: hasFormData,
+        headers: {
+          'content-type': contentType,
+          'content-length': request.headers.get('content-length'),
+        }
       }),
       {
         status: 200,
@@ -21,11 +44,11 @@ export async function POST(request: NextRequest) {
       }
     );
   } catch (error) {
-    console.error('❌ Error in Edge upload-test API:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('❌ Erreur dans l\'API upload-test:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
     return new Response(
       JSON.stringify({
-        error: "POST Error",
+        error: "Erreur lors du traitement de la requête POST",
         details: errorMessage
       }),
       {
@@ -34,10 +57,4 @@ export async function POST(request: NextRequest) {
       }
     );
   }
-}
-
-export async function GET(request: NextRequest) {
-  return NextResponse.json({
-    message: "Edge API - GET works",
-  });
 }
