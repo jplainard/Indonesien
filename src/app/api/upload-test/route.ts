@@ -25,6 +25,15 @@ export async function POST(request: NextRequest) {
     if (contentType && contentType.includes('multipart/form-data')) {
       hasFormData = true;
       message = "API Upload Test - POST avec multipart/form-data reçu";
+      
+      // In the Edge runtime, we can now try to parse the form data
+      const formData = await request.formData();
+      const file = formData.get('file');
+      if (file) {
+        message = `Edge API - Fichier '${(file as File).name}' reçu avec succès.`;
+      } else {
+        message = "Edge API - multipart/form-data reçu, mais aucun fichier trouvé.";
+      }
     }
     
     return new Response(
@@ -33,10 +42,6 @@ export async function POST(request: NextRequest) {
         timestamp: new Date().toISOString(),
         status: "OK",
         hasFormData: hasFormData,
-        headers: {
-          'content-type': contentType,
-          'content-length': request.headers.get('content-length'),
-        }
       }),
       {
         status: 200,
