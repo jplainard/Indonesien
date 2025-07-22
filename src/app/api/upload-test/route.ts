@@ -19,29 +19,33 @@ export async function GET(_request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const contentType = request.headers.get('content-type');
-    let hasFormData = false;
-    let message = "API Upload Test - POST reçu avec succès";
-
-    if (contentType && contentType.includes('multipart/form-data')) {
-      hasFormData = true;
-      message = "API Upload Test - POST avec multipart/form-data reçu";
-      
-      // In the Edge runtime, we can now try to parse the form data
-      const formData = await request.formData();
-      const file = formData.get('file');
-      if (file) {
-        message = `Edge API - Fichier '${(file as File).name}' reçu avec succès.`;
-      } else {
-        message = "Edge API - multipart/form-data reçu, mais aucun fichier trouvé.";
-      }
+    if (!contentType || !contentType.includes('multipart/form-data')) {
+      return new Response(
+        JSON.stringify({ error: 'Content-Type must be multipart/form-data' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
-    
+
+    const formData = await request.formData();
+    const file = formData.get('file') as File | null;
+
+    if (!file) {
+      return new Response(
+        JSON.stringify({ error: 'No file found in form data' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const fileBuffer = await file.arrayBuffer();
+
     return new Response(
       JSON.stringify({
-        message: message,
+        message: `Edge API - Fichier '${file.name}' reçu avec succès.`,
+        fileName: file.name,
+        fileSize: file.size,
+        fileType: file.type,
+        bufferSize: fileBuffer.byteLength,
         timestamp: new Date().toISOString(),
-        status: "OK",
-        hasFormData: hasFormData,
       }),
       {
         status: 200,
@@ -54,7 +58,8 @@ export async function POST(request: NextRequest) {
     return new Response(
       JSON.stringify({
         error: "Erreur lors du traitement de la requête POST",
-        details: errorMessage
+        details: errorMessage,
+        errorStack: error instanceof Error ? error.stack : undefined,
       }),
       {
         status: 500,
