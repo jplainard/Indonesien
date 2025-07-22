@@ -1,51 +1,34 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import * as pdfjsLib from 'pdfjs-dist';
-import jwt from 'jsonwebtoken';
+// PDF.js importé dynamiquement si besoin
+// Authentification JWT importée dynamiquement si besoin
 
 // Retrait du runtime edge pour supporter Prisma
 // export const runtime = 'edge';
 
-const JWT_SECRET = (process.env.JWT_SECRET || 'fallback_secret_key') as string;
+// const JWT_SECRET = (process.env.JWT_SECRET || 'fallback_secret_key') as string;
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('Début du traitement de la requête POST /api/upload');
-    console.log('Vérification de la variable d\'environnement JWT_SECRET...');
-    if (!process.env.JWT_SECRET) {
-      console.warn('Attention: La variable d\'environnement JWT_SECRET n\'est pas définie. Utilisation d\'une clé de secours.');
-    } else {
-      console.log('La variable d\'environnement JWT_SECRET est définie.');
-    }
-    
-    // Test simple pour vérifier que la route fonctionne
-    return NextResponse.json({ 
-      message: 'Route /api/upload POST fonctionne',
-      timestamp: new Date().toISOString()
-    }, { status: 200 });
-    
-    // Code d'authentification temporairement commenté pour tester
-    /*
-    // 1. Authentication
-    const token = request.cookies.get('auth-token')?.value;
-    console.log('Token reçu:', token ? `un token de ${token.length} caractères` : 'aucun');
-
+    // Authentification Bearer token (header ou cookie)
+    let token = request.cookies.get('auth-token')?.value;
     if (!token) {
-      console.log('Erreur: Aucun token fourni.');
-      return new Response(JSON.stringify({ error: 'Unauthorized: No token provided' }), { status: 401 });
+      const authHeader = request.headers.get('authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
     }
-    */
-
-    /*
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
+    }
+    // Vérification du token
+    const { default: jwt } = await import('jsonwebtoken');
+    const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
     try {
-      console.log('Tentative de vérification du token...');
-      await jwtVerify(token, JWT_SECRET);
-      console.log('Token vérifié avec succès.');
+      jwt.verify(token, JWT_SECRET);
     } catch (err) {
-      console.error('Erreur de vérification du token:', err);
-      return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
     }
-    */
 
     // 2. File Handling
     const formData = await request.formData();
