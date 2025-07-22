@@ -35,6 +35,7 @@
     "dependencies": {
         "@analytics/google-analytics": "^1.1.0",
         "@auth/prisma-adapter": "^2.10.0",
+        "@clerk/nextjs": "^6.25.4",
         "@google-analytics/data": "^5.2.0",
         "@google-cloud/translate": "^9.2.0",
         "@headlessui/react": "^2.2.4",
