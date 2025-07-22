@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { jwtVerify } from 'jose';
 
 export const runtime = 'edge';
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'fallback_secret_key_for_edge'
-);
+// const JWT_SECRET = new TextEncoder().encode(
+//   process.env.JWT_SECRET || 'fallback_secret_key_for_edge'
+// );
 
 // Basic translation function (Edge compatible)
 async function translateTextBasic(text: string, sourceLang: string, targetLang: string) {
@@ -58,6 +57,7 @@ export async function POST(request: NextRequest) {
     }
     */
 
+    /*
     try {
       console.log('Tentative de vérification du token...');
       await jwtVerify(token, JWT_SECRET);
@@ -66,16 +66,18 @@ export async function POST(request: NextRequest) {
       console.error('Erreur de vérification du token:', err);
       return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), { status: 401 });
     }
+    */
 
     // 2. File Handling
     const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-    const sourceLang = formData.get('sourceLang') as string || 'id';
-    const targetLang = formData.get('targetLang') as string || 'fr';
+    const fileEntry = formData.get('file');
+    const sourceLang = (formData.get('sourceLang') as string) || 'id';
+    const targetLang = (formData.get('targetLang') as string) || 'fr';
 
-    if (!file) {
-      return new Response(JSON.stringify({ error: 'No file uploaded' }), { status: 400 });
+    if (!(fileEntry instanceof File)) {
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
+    const file = fileEntry as File;
 
     // 3. Text Extraction (Edge-compatible, PDF support)
     let originalText = '';
@@ -96,55 +98,23 @@ export async function POST(request: NextRequest) {
           text += (content.items as Array<{ str: string }>).map((item) => item.str).join(' ') + '\n';
         }
         originalText = text.trim() || `[PDF reçu, mais aucun texte extrait]`;
-      } catch (err) {
-        originalText = `[Erreur extraction PDF: ${err instanceof Error ? err.message : 'inconnue'}]`;
+      } catch (err: unknown) {
+        // Extraction PDF échouée
+        const errorMsg = (err as Error)?.message || String(err);
+        console.error('Erreur extraction PDF:', errorMsg);
+        return NextResponse.json({ error: 'PDF extraction failed' }, { status: 500 });
       }
-    } else {
-      originalText = `Type de fichier '${file.type}' non supporté pour l'extraction de texte.`;
     }
 
-    if (!originalText) {
-        return new Response(JSON.stringify({ error: 'Could not extract text from file.' }), { status: 400 });
-    }
+    // Traduction (mock)
+    const translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
 
-    // 4. Translation
-    const translationResult = await translateTextBasic(originalText, sourceLang, targetLang);
-
-    // 5. Save to database via internal REST API (Edge-compatible)
-    let saveResult = null;
-    try {
-      const saveRes = await fetch(`/api/save-translation`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: token,
-          fileName: file.name,
-          fileSize: file.size,
-          sourceText: originalText,
-          sourceLang,
-          targetText: translationResult.translatedText,
-          targetLang,
-          quality: 85,
-          translationType: 'auto',
-          isPublic: false,
-        })
-      });
-      saveResult = await saveRes.json();
-    } catch (saveErr) {
-      saveResult = { error: saveErr instanceof Error ? saveErr.message : 'Erreur inconnue' };
-    }
-
-    // 6. Send Response
-    return new Response(JSON.stringify({
-      success: true,
-      translation: translationResult.translatedText,
-      original: originalText,
-      fileName: file.name,
-      saveResult,
-      message: "Upload, extraction, traduction et sauvegarde terminés (Edge Runtime).",
-    }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
+    // Réponse
+    return NextResponse.json({
+      originalText,
+      translatedText,
+      sourceLang,
+      targetLang,
     });
 
   } catch (error) {
