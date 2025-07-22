@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     }
     try {
       await jwtVerify(token, JWT_SECRET);
-    } catch (err) {
+    } catch (_err) {
       return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), { status: 401 });
     }
 
