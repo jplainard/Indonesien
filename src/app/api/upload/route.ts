@@ -1,4 +1,4 @@
-import { type NextRequest } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
 export const runtime = 'edge';
@@ -39,6 +39,15 @@ export async function POST(request: NextRequest) {
     } else {
       console.log('La variable d\'environnement JWT_SECRET est définie.');
     }
+    
+    // Test simple pour vérifier que la route fonctionne
+    return NextResponse.json({ 
+      message: 'Route /api/upload POST fonctionne',
+      timestamp: new Date().toISOString()
+    }, { status: 200 });
+    
+    // Code d'authentification temporairement commenté pour tester
+    /*
     // 1. Authentication
     const token = request.cookies.get('auth-token')?.value;
     console.log('Token reçu:', token ? `un token de ${token.length} caractères` : 'aucun');
@@ -47,6 +56,7 @@ export async function POST(request: NextRequest) {
       console.log('Erreur: Aucun token fourni.');
       return new Response(JSON.stringify({ error: 'Unauthorized: No token provided' }), { status: 401 });
     }
+    */
 
     try {
       console.log('Tentative de vérification du token...');
