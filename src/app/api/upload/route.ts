@@ -9,6 +9,8 @@ import prisma from '@/lib/prisma';
 // const JWT_SECRET = (process.env.JWT_SECRET || 'fallback_secret_key') as string;
 
 export async function POST(request: NextRequest) {
+  console.log('🔍 [API Upload] Début de la requête');
+  
   try {
     // Authentification Bearer token (header ou cookie) - OBLIGATOIRE
     let token = request.cookies.get('auth-token')?.value;
@@ -21,6 +23,7 @@ export async function POST(request: NextRequest) {
     }
     
     if (!token) {
+      console.log('❌ [API Upload] Aucun token fourni');
       return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
     }
     
@@ -31,26 +34,33 @@ export async function POST(request: NextRequest) {
       const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
       userId = decoded.userId;
+      console.log('✅ [API Upload] Token valide, userId:', userId);
     } catch (_err) {
+      console.log('❌ [API Upload] Token invalide');
       return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
     }
 
     // 2. File Handling
+    console.log('📁 [API Upload] Traitement du fichier');
     const formData = await request.formData();
     const fileEntry = formData.get('file');
     const sourceLang = (formData.get('sourceLang') as string) || 'id';
     const targetLang = (formData.get('targetLang') as string) || 'fr';
 
     if (!(fileEntry instanceof File)) {
+      console.log('❌ [API Upload] Aucun fichier fourni');
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
     const file = fileEntry as File;
+    console.log(`📄 [API Upload] Fichier reçu: ${file.name}, type: ${file.type}, taille: ${file.size}`);
 
     // 3. Text Extraction (Edge-compatible, PDF support)
     let originalText = '';
     if (file.type === 'text/plain') {
+      console.log('📝 [API Upload] Extraction texte plain');
       originalText = await file.text();
     } else if (file.type === 'application/pdf') {
+      console.log('📊 [API Upload] Extraction PDF');
       try {
         // Extraction PDF basique avec PDF.js (Edge-compatible)
         // PDF.js doit être importé dynamiquement et utilisé côté Edge
@@ -65,6 +75,7 @@ export async function POST(request: NextRequest) {
           text += (content.items as Array<{ str: string }>).map((item) => item.str).join(' ') + '\n';
         }
         originalText = text.trim() || `[PDF reçu, mais aucun texte extrait]`;
+        console.log(`✅ [API Upload] PDF extrait: ${originalText.length} caractères`);
       } catch (_err: unknown) {
         // Extraction PDF échouée
         const errorMsg = (_err as Error)?.message || String(_err);
@@ -78,15 +89,25 @@ export async function POST(request: NextRequest) {
           ocrUrl
         }, { status: 500 });
       }
+    } else {
+      console.log(`❌ [API Upload] Type de fichier non supporté: ${file.type}`);
+      return NextResponse.json({ 
+        error: 'Unsupported file type',
+        details: `Le type de fichier "${file.type}" n'est pas supporté. Formats acceptés: PDF (.pdf) et Texte (.txt)`
+      }, { status: 400 });
     }
+
+    console.log(`📝 [API Upload] Texte extrait: ${originalText.length} caractères`);
 
     // Traduction (mock)
     const translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
+    console.log(`🔄 [API Upload] Traduction générée: ${translatedText.length} caractères`);
 
     // Sauvegarde en base de données
     let savedTranslationId: number | null = null;
     // L'userId est déjà défini en haut du fichier selon l'authentification
     try {
+      console.log('💾 [API Upload] Sauvegarde en base de données');
       const savedTranslation = await prisma.translation.create({
         data: {
           sourceText: originalText,
@@ -111,6 +132,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Retourner la réponse de succès
+    console.log('🎉 [API Upload] Succès, retour de la réponse');
     return NextResponse.json({
       success: true,
       message: 'Fichier traduit avec succès',
@@ -131,12 +153,12 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('❌ Erreur dans /api/upload (Edge):', error);
+    console.error('❌ Erreur dans /api/upload:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return new Response(JSON.stringify({
+    return NextResponse.json({
       error: "Erreur lors du traitement du fichier",
       details: errorMessage,
-    }), {
+    }, {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

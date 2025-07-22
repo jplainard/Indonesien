@@ -121,7 +121,28 @@ export default function UploadPage() {
         body: formData,
       });
 
-      const data = await response.json();
+      console.log('🔍 [Frontend] Response status:', response.status);
+      console.log('🔍 [Frontend] Response headers:', Object.fromEntries(response.headers.entries()));
+      
+      // Vérifier si la réponse est bien du JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        console.error('❌ [Frontend] Réponse non-JSON reçue, content-type:', contentType);
+        const textResponse = await response.text();
+        console.error('❌ [Frontend] Contenu de la réponse:', textResponse);
+        throw new Error(`Réponse invalide du serveur (type: ${contentType}). Contenu: ${textResponse.substring(0, 200)}`);
+      }
+
+      let data;
+      try {
+        data = await response.json();
+        console.log('✅ [Frontend] JSON parsé avec succès:', data);
+      } catch (jsonError) {
+        console.error('❌ [Frontend] Erreur parsing JSON:', jsonError);
+        const textResponse = await response.text();
+        console.error('❌ [Frontend] Contenu brut de la réponse:', textResponse);
+        throw new Error(`Impossible de parser la réponse JSON: ${jsonError}. Contenu: ${textResponse.substring(0, 200)}`);
+      }
 
       if (response.ok) {
         setFiles(prev => prev.map(f => 
