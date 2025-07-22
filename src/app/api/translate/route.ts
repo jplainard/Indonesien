@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '../../../generated/prisma';
-import { getServerSession } from 'next-auth';
 import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
