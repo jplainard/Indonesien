@@ -45,27 +45,27 @@ export default function SettingsPage() {
     analytics: true
   });
 
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me');
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData.user);
-      } else {
-        router.push('/auth');
-      }
-    } catch (error) {
-      console.error('Erreur d&apos;authentification:', error);
-      router.push('/auth');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData.user);
+        } else {
+          router.push('/auth');
+        }
+      } catch (error) {
+        console.error('Erreur d&apos;authentification:', error);
+        router.push('/auth');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     checkAuth();
     loadSettings();
-  }, []);
+  }, [router]);
 
   const loadSettings = async () => {
     // Simulation du chargement des paramètres

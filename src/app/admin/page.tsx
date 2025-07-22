@@ -54,29 +54,29 @@ export default function AdminPage() {
   const [user, setUser] = useState<Record<string, unknown> | null>(null);
   const router = useRouter();
 
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me');
-      if (response.ok) {
-        const userData = await response.json();
-        if (userData.user.role !== 'admin') {
-          router.push('/dashboard');
-          return;
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const userData = await response.json();
+          if (userData.user.role !== 'admin') {
+            router.push('/dashboard');
+            return;
+          }
+          setUser(userData.user);
+        } else {
+          router.push('/auth');
         }
-        setUser(userData.user);
-      } else {
+      } catch (error: unknown) {
+        console.error('Erreur d\'authentification:', error);
         router.push('/auth');
       }
-    } catch (error: unknown) {
-      console.error('Erreur d\'authentification:', error);
-      router.push('/auth');
-    }
-  };
+    };
 
-  useEffect(() => {
     checkAuth();
     fetchAdminData();
-  }, []);
+  }, [router]);
 
   const fetchAdminData = async () => {
     try {

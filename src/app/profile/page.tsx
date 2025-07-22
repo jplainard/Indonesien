@@ -64,33 +64,33 @@ export default function ProfilePage() {
     security: true
   });
 
-  const fetchUserProfile = async () => {
-    try {
-      const response = await fetch('/api/auth/me');
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData.user);
-        setEditForm({
-          name: userData.user.name || '',
-          email: userData.user.email || '',
-          phone: userData.user.phone || '',
-          company: userData.user.company || '',
-          address: userData.user.address || ''
-        });
-      } else {
-        router.push('/auth');
-      }
-    } catch (error) {
-      console.error('Erreur lors du chargement du profil:', error);
-      router.push('/auth');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData.user);
+          setEditForm({
+            name: userData.user.name || '',
+            email: userData.user.email || '',
+            phone: userData.user.phone || '',
+            company: userData.user.company || '',
+            address: userData.user.address || ''
+          });
+        } else {
+          router.push('/auth');
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement du profil:', error);
+        router.push('/auth');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchUserProfile();
-  }, []);
+  }, [router]);
 
   const handleSaveProfile = async () => {
     setSaving(true);
