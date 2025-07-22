@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../../generated/prisma';
 import { FileTextExtractor, AITranslationService } from '../../../lib/fileTranslation';
 import { DocumentGenerator } from '../../../lib/documentGenerator';
 import jwt from 'jsonwebtoken';
