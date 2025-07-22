@@ -10,9 +10,8 @@ import prisma from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
-    // Authentification Bearer token (header ou cookie) - OPTIONNELLE
+    // Authentification Bearer token (header ou cookie) - OBLIGATOIRE
     let token = request.cookies.get('auth-token')?.value;
-    let userId = null;
     
     if (!token) {
       const authHeader = request.headers.get('authorization');
@@ -21,17 +20,19 @@ export async function POST(request: NextRequest) {
       }
     }
     
-    // Si token présent, on le vérifie et récupère l'userId
-    if (token) {
-      try {
-        const { default: jwt } = await import('jsonwebtoken');
-        const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
-        const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
-        userId = decoded.userId;
-      } catch (_err) {
-        console.log('Token invalide ou expiré, traitement en mode anonyme');
-        // Continue en mode anonyme
-      }
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized: No token provided' }, { status: 401 });
+    }
+    
+    // Vérification du token et récupération de l'userId
+    let userId = null;
+    try {
+      const { default: jwt } = await import('jsonwebtoken');
+      const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
+      const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
+      userId = decoded.userId;
+    } catch (_err) {
+      return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
     }
 
     // 2. File Handling
