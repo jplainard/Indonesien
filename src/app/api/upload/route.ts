@@ -33,6 +33,12 @@ async function translateTextBasic(text: string, sourceLang: string, targetLang: 
 export async function POST(request: NextRequest) {
   try {
     console.log('Début du traitement de la requête POST /api/upload');
+    console.log('Vérification de la variable d\'environnement JWT_SECRET...');
+    if (!process.env.JWT_SECRET) {
+      console.warn('Attention: La variable d\'environnement JWT_SECRET n\'est pas définie. Utilisation d\'une clé de secours.');
+    } else {
+      console.log('La variable d\'environnement JWT_SECRET est définie.');
+    }
     // 1. Authentication
     const token = request.cookies.get('auth-token')?.value;
     console.log('Token reçu:', token ? `un token de ${token.length} caractères` : 'aucun');
