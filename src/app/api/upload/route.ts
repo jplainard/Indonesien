@@ -110,6 +110,26 @@ export async function POST(request: NextRequest) {
       // Continue même si la sauvegarde échoue
     }
 
+    // Retourner la réponse de succès
+    return NextResponse.json({
+      success: true,
+      message: 'Fichier traduit avec succès',
+      translationId: savedTranslationId,
+      original: {
+        filename: file.name,
+        text: originalText,
+        length: originalText.length
+      },
+      translated: {
+        text: translatedText,
+        length: translatedText.length
+      },
+      metadata: {
+        method: file.type === 'application/pdf' ? 'pdf-extraction' : 'text-direct',
+        userId: userId
+      }
+    });
+
   } catch (error) {
     console.error('❌ Erreur dans /api/upload (Edge):', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
