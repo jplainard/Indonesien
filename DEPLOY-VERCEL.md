@@ -32,9 +32,9 @@ Dans le dashboard Vercel (vercel.com/dashboard) :
 3. Ajoutez ces variables **OBLIGATOIRES** :
 
 ```env
-DATABASE_URL=postgresql://user:pass@host:port/db
-NEXTAUTH_SECRET=un-secret-tres-long-et-complexe
-NEXTAUTH_URL=https://votre-domaine.vercel.app
+DATABASE_URL=postgresql://neondb_owner:npg_0otuQI2HAsCm@ep-broad-night-a29tfp3l-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+NEXTAUTH_SECRET=ubwspTZbPI2niWi1CpHiQtw0RJMph+nszhnWE6xMEuls=
+NEXTAUTH_URL=https://indonesien-6umumygz8-antoines-projects-13eef197.vercel.app
 ```
 
 ### 2.3 Variables optionnelles (selon vos besoins)

@@ -24,10 +24,12 @@ Ce guide documente tous les scripts et outils de maintenance pour garantir le bo
 - [ ] Vérification des logs d'erreur dans `/var/log/` et Docker
 - [ ] Monitoring des performances via le dashboard admin
 - [ ] Backup automatique de la base de données
-- [ ] Vérification de l'espace disque disponible
+- [ ] **Test des APIs principales** : `/api/health`, `/api/stats`, `/api/translate`
+- [ ] **Vérification site production** : https://indonesien-jx0sr303l-antoines-projects-13eef197.vercel.app
 - [ ] Contrôle des nouvelles pages (404, erreurs)
 - [ ] Test rapide des formulaires de contact
 - [ ] Monitoring du dashboard admin accessible
+- [ ] **Validation base de données** : `curl -s .../api/debug-stats`
 
 ### Hebdomadaires 📅
 - [ ] Mise à jour des dépendances non-critiques avec `npm update`
