@@ -127,7 +127,7 @@ export default function UploadPage() {
             ...f, 
             status: 'success', 
             progress: 100,
-            result: data.translation
+            result: data  // L'API retourne directement les données, pas data.translation
           } : f
         ));
         console.log('✅ Upload réussi:', data);
@@ -157,6 +157,34 @@ export default function UploadPage() {
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const downloadTranslatedFile = (uploadFile: UploadFile) => {
+    if (!uploadFile.result?.translatedFile) return;
+    
+    const content = `Traduction ${sourceLang.toUpperCase()} → ${targetLang.toUpperCase()}
+
+Fichier original: ${uploadFile.file.name}
+Taille: ${formatFileSize(uploadFile.file.size)}
+Date de traduction: ${new Date().toLocaleString('fr-FR')}
+
+--- TEXTE TRADUIT ---
+
+${uploadFile.result.translatedFile}
+
+--- FIN DE LA TRADUCTION ---
+
+Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
+    
+    const blob = new Blob([content], { type: 'text/plain; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `traduit-${uploadFile.file.name.replace(/\.[^/.]+$/, '')}-${Date.now()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -329,14 +357,13 @@ export default function UploadPage() {
                                 <div>⏱️ Traité en: {uploadFile.result.metadata?.processingTime}</div>
                               </div>
                             )}
-                            {uploadFile.result.downloadUrl && (
-                              <a
-                                href={uploadFile.result.downloadUrl}
-                                download
+                            {uploadFile.result.translatedFile && (
+                              <button
+                                onClick={() => downloadTranslatedFile(uploadFile)}
                                 className="inline-flex items-center gap-1 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
                               >
                                 📁 Télécharger le document traduit
-                              </a>
+                              </button>
                             )}
                           </div>
                         )}

@@ -1,10 +1,12 @@
 import { type NextRequest, NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
+import * as pdfjsLib from 'pdfjs-dist';
+import jwt from 'jsonwebtoken';
 
-export const runtime = 'edge';
+// Retrait du runtime edge pour supporter Prisma
+// export const runtime = 'edge';
 
-// const JWT_SECRET = new TextEncoder().encode(
-//   process.env.JWT_SECRET || 'fallback_secret_key_for_edge'
-// );
+const JWT_SECRET = (process.env.JWT_SECRET || 'fallback_secret_key') as string;
 
 export async function POST(request: NextRequest) {
   try {
@@ -86,10 +88,45 @@ export async function POST(request: NextRequest) {
     // Traduction (mock)
     const translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
 
+    // Sauvegarde en base de données
+    let savedTranslationId = null;
+    try {
+      // Tentative de récupération de l'utilisateur (désactivé temporairement)
+      // Pour l'instant, on sauvegarde sans utilisateur
+      // TODO: Réactiver l'authentification plus tard
+      const userId = null;
+
+      // Sauvegarde de la traduction
+      const savedTranslation = await prisma.translation.create({
+        data: {
+          sourceText: originalText,
+          sourceLang,
+          targetText: translatedText,
+          targetLang,
+          fileName: file.name,
+          fileSize: file.size,
+          translationType: 'auto',
+          quality: 85, // Score fixe pour les traductions automatiques
+          processingTime: 1.5, // Temps fictif
+          segmentsCount: Math.ceil(originalText.length / 100),
+          method: file.type === 'application/pdf' ? 'pdf-extraction' : 'text-direct',
+          userId: userId, // null si pas authentifié
+        }
+      });
+      
+      savedTranslationId = savedTranslation.id;
+      console.log('✅ Traduction sauvegardée avec ID:', savedTranslationId);
+      
+    } catch (err) {
+      console.error('❌ Erreur lors de la sauvegarde:', err);
+      // Continue même si la sauvegarde échoue
+    }
+
     // Réponse
     return NextResponse.json({
       originalText,
       translatedText,
+      translatedFile: translatedText,  // Ajout pour téléchargement frontend
       sourceLang,
       targetLang,
     });

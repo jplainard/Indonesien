@@ -37,6 +37,13 @@ const nextConfig = {
         ignored: /node_modules/,
       };
     }
+    
+    // Ignore le module 'canvas' pour pdfjs-dist car on n'en a pas besoin pour l'extraction de texte
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      canvas: false,
+    };
+    
     return config;
   },
   

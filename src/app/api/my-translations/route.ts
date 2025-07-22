@@ -7,13 +7,22 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-producti
 export async function GET(request: NextRequest) {
   try {
     // Vérification de l'authentification
-    const token = request.cookies.get('auth-token')?.value;
+    let token = request.cookies.get('auth-token')?.value;
+    
+    // Si pas de token dans les cookies, chercher dans l'en-tête Authorization
+    if (!token) {
+      const authHeader = request.headers.get('authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+    
     if (!token) {
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 });
     }
 
     // Décoder le token pour récupérer l'userId
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number; email: string };
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string };
     const userId = decoded.userId;
 
     // Récupérer les traductions de l'utilisateur
