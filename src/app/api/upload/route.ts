@@ -32,14 +32,22 @@ async function translateTextBasic(text: string, sourceLang: string, targetLang: 
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('Début du traitement de la requête POST /api/upload');
     // 1. Authentication
     const token = request.cookies.get('auth-token')?.value;
+    console.log('Token reçu:', token ? `un token de ${token.length} caractères` : 'aucun');
+
     if (!token) {
+      console.log('Erreur: Aucun token fourni.');
       return new Response(JSON.stringify({ error: 'Unauthorized: No token provided' }), { status: 401 });
     }
+
     try {
+      console.log('Tentative de vérification du token...');
       await jwtVerify(token, JWT_SECRET);
-    } catch (_err) {
+      console.log('Token vérifié avec succès.');
+    } catch (err) {
+      console.error('Erreur de vérification du token:', err);
       return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), { status: 401 });
     }
 
