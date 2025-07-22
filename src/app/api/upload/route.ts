@@ -60,9 +60,9 @@ export async function POST(request: NextRequest) {
           text += (content.items as Array<{ str: string }>).map((item) => item.str).join(' ') + '\n';
         }
         originalText = text.trim() || `[PDF reçu, mais aucun texte extrait]`;
-      } catch (err: unknown) {
+      } catch (_err: unknown) {
         // Extraction PDF échouée
-        const errorMsg = (err as Error)?.message || String(err);
+        const errorMsg = (_err as Error)?.message || String(_err);
         console.error('Erreur extraction PDF:', errorMsg);
         return NextResponse.json({ error: 'PDF extraction failed' }, { status: 500 });
       }
@@ -72,14 +72,12 @@ export async function POST(request: NextRequest) {
     const translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
 
     // Sauvegarde en base de données
-    let savedTranslationId = null;
+    let savedTranslationId: number | null = null;
+    // Tentative de récupération de l'utilisateur (désactivé temporairement)
+    // Pour l'instant, on sauvegarde sans utilisateur
+    // TODO: Réactiver l'authentification plus tard
+    const userId = null;
     try {
-      // Tentative de récupération de l'utilisateur (désactivé temporairement)
-      // Pour l'instant, on sauvegarde sans utilisateur
-      // TODO: Réactiver l'authentification plus tard
-      const userId = null;
-
-      // Sauvegarde de la traduction
       const savedTranslation = await prisma.translation.create({
         data: {
           sourceText: originalText,
@@ -96,23 +94,12 @@ export async function POST(request: NextRequest) {
           userId: userId, // null si pas authentifié
         }
       });
-      
       savedTranslationId = savedTranslation.id;
       console.log('✅ Traduction sauvegardée avec ID:', savedTranslationId);
-      
-    } catch (err) {
-      console.error('❌ Erreur lors de la sauvegarde:', err);
+    } catch (_err: unknown) {
+      console.error('❌ Erreur lors de la sauvegarde:', _err);
       // Continue même si la sauvegarde échoue
     }
-
-    // Réponse
-    return NextResponse.json({
-      originalText,
-      translatedText,
-      translatedFile: translatedText,  // Ajout pour téléchargement frontend
-      sourceLang,
-      targetLang,
-    });
 
   } catch (error) {
     console.error('❌ Erreur dans /api/upload (Edge):', error);
