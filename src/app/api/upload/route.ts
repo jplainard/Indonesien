@@ -6,29 +6,6 @@ export const runtime = 'edge';
 //   process.env.JWT_SECRET || 'fallback_secret_key_for_edge'
 // );
 
-// Basic translation function (Edge compatible)
-async function translateTextBasic(text: string, sourceLang: string, targetLang: string) {
-  const basicTranslations: Record<string, Record<string, string>> = {
-    'id-fr': {
-      'halo': 'bonjour', 'selamat pagi': 'bon matin', 'terima kasih': 'merci', 'dokumen': 'document', 'file': 'fichier',
-    },
-    'fr-id': {
-      'bonjour': 'halo', 'bon matin': 'selamat pagi', 'merci': 'terima kasih', 'document': 'dokumen', 'fichier': 'file',
-    }
-  };
-  const langPair = `${sourceLang}-${targetLang}`;
-  const dictionary = basicTranslations[langPair] || {};
-  let translatedText = text.toLowerCase();
-  Object.entries(dictionary).forEach(([source, target]) => {
-    const regex = new RegExp(`\\b${source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-    translatedText = translatedText.replace(regex, target);
-  });
-  if (translatedText === text.toLowerCase()) {
-    translatedText = `[Traduction simple Edge] ${text}`;
-  }
-  return { translatedText };
-}
-
 export async function POST(request: NextRequest) {
   try {
     console.log('Début du traitement de la requête POST /api/upload');
