@@ -483,19 +483,19 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                         {/* Ancien affichage pour compatibilité */}
                         {uploadFile.result.details && uploadFile.result.error === 'PDF extraction failed' && !uploadFile.result.errorType && (
                           <div className="mt-2 text-xs text-blue-700 bg-blue-50 rounded p-3">
-                            <div className="font-bold text-blue-800 mb-1">Impossible d'extraire le texte du PDF</div>
+                            <div className="font-bold text-blue-800 mb-1">Impossible d&apos;extraire le texte du PDF</div>
                             <div className="mb-2">
-                              <span className="font-semibold">Fichier :</span> {uploadFile.result.fileInfo?.name || uploadFile.file.name}<br />
-                              <span className="font-semibold">Taille :</span> {uploadFile.result.fileInfo?.size ? formatFileSize(uploadFile.result.fileInfo.size) : formatFileSize(uploadFile.file.size)}<br />
-                              <span className="font-semibold">Type :</span> {uploadFile.result.fileInfo?.type || uploadFile.file.type}
+                              <span className="font-semibold">Fichier&nbsp;:</span> {uploadFile.file.name}<br />
+                              <span className="font-semibold">Taille&nbsp;:</span> {formatFileSize(uploadFile.file.size)}<br />
+                              <span className="font-semibold">Type&nbsp;:</span> {uploadFile.file.type}
                             </div>
                             <div className="mb-2">
-                              <strong>Conseil :</strong> {uploadFile.result.details}
+                              <strong>Conseil&nbsp;:</strong> {uploadFile.result.details}
                             </div>
                             {uploadFile.result.ocrUrl && (
                               <div className="mt-2">
                                 <a href={uploadFile.result.ocrUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors">
-                                  🖹 Ouvrir l'OCR en ligne
+                                  🖹 Ouvrir l&apos;OCR en ligne
                                 </a>
                               </div>
                             )}
