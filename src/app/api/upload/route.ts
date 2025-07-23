@@ -61,78 +61,30 @@ export async function POST(request: NextRequest) {
       originalText = await file.text();
     } else if (file.type === 'application/pdf') {
       console.log('📊 [API Upload] Extraction PDF');
+      
+      // Extraction PDF automatique avec pdf-parse
+      console.log('📊 [API Upload] Extraction PDF via pdf-parse');
       try {
-        // Méthode 1: Tentative d'extraction simple avec PDF.js
-        const pdfjsLib = await import('pdfjs-dist/build/pdf');
-        
-        // Configuration pour Edge Runtime
-        if (typeof pdfjsLib.GlobalWorkerOptions !== 'undefined') {
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
-        }
-        
-        const pdfData = new Uint8Array(await file.arrayBuffer());
-        const loadingTask = pdfjsLib.getDocument({ 
-          data: pdfData,
-          useSystemFonts: true,
-          disableFontFace: true
-        });
-        
-        const pdf = await loadingTask.promise;
-        let text = '';
-        
-        // Extraction page par page avec gestion d'erreur
-        for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) { // Limiter à 10 pages max
-          try {
-            const page = await pdf.getPage(i);
-            const content = await page.getTextContent();
-            const pageText = (content.items as Array<{ str: string }>)
-              .map((item) => item.str)
-              .join(' ');
-            text += pageText + '\n';
-          } catch (pageErr) {
-            console.warn(`[PDF] Erreur page ${i}:`, pageErr);
-            text += `[Page ${i}: extraction échouée]\n`;
-          }
-        }
-        
-        originalText = text.trim();
-        
+        const pdfParse = (await import('pdf-parse')).default;
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const data = await pdfParse(buffer);
+        originalText = data.text.trim();
         if (!originalText || originalText.length < 10) {
-          // PDF probablement scanné ou protégé
-          throw new Error('PDF appears to be scanned or protected');
+          throw new Error('PDF appears to be scanned, empty or protected');
         }
-        
         console.log(`✅ [API Upload] PDF extrait: ${originalText.length} caractères`);
-        
-      } catch (_err: unknown) {
-        // Extraction PDF échouée - retourner une erreur explicite avec solutions
-        const errorMsg = (_err as Error)?.message || String(_err);
-        console.error('[PDF extraction] Échec extraction:', errorMsg);
-        
+      } catch (err) {
+        const ocrUrl = 'https://www.onlineocr.net/fr/';
+        console.error('[PDF extraction] Impossible d\'extraire le texte :', err);
         return NextResponse.json({
           error: 'PDF extraction failed',
-          errorType: 'pdf_extraction_failed',
-          details: `Ce PDF ne peut pas être lu automatiquement.\n\n🔍 Causes possibles :\n• PDF scanné (image)\n• PDF protégé par mot de passe\n• PDF corrompu\n• Fonts non supportées\n\n✅ Solutions :\n1. Convertir le PDF en texte avec un OCR en ligne\n2. Copier-coller le texte manuellement\n3. Utiliser un fichier texte (.txt) à la place`,
-          solutions: [
-            {
-              title: "OCR en ligne",
-              description: "Convertir le PDF en texte automatiquement",
-              url: "https://www.onlineocr.net/fr/",
-              action: "Uploader votre PDF sur ce site pour extraire le texte"
-            },
-            {
-              title: "Copier-coller manuel",
-              description: "Ouvrir le PDF et copier le texte",
-              url: null,
-              action: "Ouvrir le PDF dans un lecteur et copier le texte dans l'outil de traduction texte"
-            },
-            {
-              title: "Conversion en .txt",
-              description: "Sauvegarder le contenu en fichier texte",
-              url: null,
-              action: "Copier le texte du PDF et le sauvegarder en fichier .txt"
-            }
-          ]
+          details: `Impossible d'extraire le texte du PDF : ${file.name} (${file.size} octets, type: ${file.type}).\n\nCe document semble être une image scannée, vide ou protégé par mot de passe.\n\n👉 Pour traduire ce type de fichier :\n1. Utilisez un outil OCR (ex: ${ocrUrl}) pour convertir le PDF en texte.\n2. Ou copiez-collez le texte dans l'outil de traduction.\n3. Ou uploadez directement un fichier texte (.txt).`,
+          ocrUrl,
+          fileInfo: {
+            name: file.name,
+            size: file.size,
+            type: file.type
+          }
         }, { status: 422 });
       }
     } else {
@@ -166,7 +118,7 @@ export async function POST(request: NextRequest) {
           quality: 85, // Score fixe pour les traductions automatiques
           processingTime: 1.5, // Temps fictif
           segmentsCount: Math.ceil(originalText.length / 100),
-          method: file.type === 'application/pdf' ? 'pdf-extraction' : 'text-direct',
+          method: 'text-direct', // Seuls les fichiers texte arrivent ici
           userId: userId, // null si pas authentifié
         }
       });
@@ -193,7 +145,7 @@ export async function POST(request: NextRequest) {
         length: translatedText.length
       },
       metadata: {
-        method: file.type === 'application/pdf' ? 'pdf-extraction' : 'text-direct',
+        method: 'text-direct', // Seuls les fichiers texte arrivent ici
         userId: userId
       }
     });
