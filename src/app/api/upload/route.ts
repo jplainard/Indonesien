@@ -62,32 +62,78 @@ export async function POST(request: NextRequest) {
     } else if (file.type === 'application/pdf') {
       console.log('📊 [API Upload] Extraction PDF');
       try {
-        // Extraction PDF basique avec PDF.js (Edge-compatible)
-        // PDF.js doit être importé dynamiquement et utilisé côté Edge
+        // Méthode 1: Tentative d'extraction simple avec PDF.js
         const pdfjsLib = await import('pdfjs-dist/build/pdf');
+        
+        // Configuration pour Edge Runtime
+        if (typeof pdfjsLib.GlobalWorkerOptions !== 'undefined') {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+        }
+        
         const pdfData = new Uint8Array(await file.arrayBuffer());
-        const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+        const loadingTask = pdfjsLib.getDocument({ 
+          data: pdfData,
+          useSystemFonts: true,
+          disableFontFace: true
+        });
+        
         const pdf = await loadingTask.promise;
         let text = '';
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const content = await page.getTextContent();
-          text += (content.items as Array<{ str: string }>).map((item) => item.str).join(' ') + '\n';
+        
+        // Extraction page par page avec gestion d'erreur
+        for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) { // Limiter à 10 pages max
+          try {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            const pageText = (content.items as Array<{ str: string }>)
+              .map((item) => item.str)
+              .join(' ');
+            text += pageText + '\n';
+          } catch (pageErr) {
+            console.warn(`[PDF] Erreur page ${i}:`, pageErr);
+            text += `[Page ${i}: extraction échouée]\n`;
+          }
         }
-        originalText = text.trim() || `[PDF reçu, mais aucun texte extrait]`;
+        
+        originalText = text.trim();
+        
+        if (!originalText || originalText.length < 10) {
+          // PDF probablement scanné ou protégé
+          throw new Error('PDF appears to be scanned or protected');
+        }
+        
         console.log(`✅ [API Upload] PDF extrait: ${originalText.length} caractères`);
+        
       } catch (_err: unknown) {
-        // Extraction PDF échouée
+        // Extraction PDF échouée - retourner une erreur explicite avec solutions
         const errorMsg = (_err as Error)?.message || String(_err);
-        const ocrUrl = 'https://www.onlineocr.net/';
-        console.error('[PDF extraction] Impossible d\'extraire le texte :', errorMsg);
-        console.info(`[PDF extraction] Conseils utilisateur : Utiliser un OCR (${ocrUrl}), copier-coller le texte, ou uploader un fichier texte.`);
+        console.error('[PDF extraction] Échec extraction:', errorMsg);
+        
         return NextResponse.json({
           error: 'PDF extraction failed',
-          details: `Impossible d'extraire le texte du PDF.\n\nCe document semble être une image scannée ou protégé par mot de passe.\n\n👉 Pour traduire ce type de fichier :\n1. Utilisez un outil OCR (ex: ${ocrUrl}) pour convertir le PDF en texte.\n2. Ou copiez-collez le texte dans l'outil de traduction.\n3. Ou uploadez directement un fichier texte (.txt).`,
-          suggestion: 'Préférez les PDF créés numériquement ou Word (.docx) pour une extraction optimale.',
-          ocrUrl
-        }, { status: 500 });
+          errorType: 'pdf_extraction_failed',
+          details: `Ce PDF ne peut pas être lu automatiquement.\n\n🔍 Causes possibles :\n• PDF scanné (image)\n• PDF protégé par mot de passe\n• PDF corrompu\n• Fonts non supportées\n\n✅ Solutions :\n1. Convertir le PDF en texte avec un OCR en ligne\n2. Copier-coller le texte manuellement\n3. Utiliser un fichier texte (.txt) à la place`,
+          solutions: [
+            {
+              title: "OCR en ligne",
+              description: "Convertir le PDF en texte automatiquement",
+              url: "https://www.onlineocr.net/fr/",
+              action: "Uploader votre PDF sur ce site pour extraire le texte"
+            },
+            {
+              title: "Copier-coller manuel",
+              description: "Ouvrir le PDF et copier le texte",
+              url: null,
+              action: "Ouvrir le PDF dans un lecteur et copier le texte dans l'outil de traduction texte"
+            },
+            {
+              title: "Conversion en .txt",
+              description: "Sauvegarder le contenu en fichier texte",
+              url: null,
+              action: "Copier le texte du PDF et le sauvegarder en fichier .txt"
+            }
+          ]
+        }, { status: 422 });
       }
     } else {
       console.log(`❌ [API Upload] Type de fichier non supporté: ${file.type}`);
