@@ -160,7 +160,6 @@ export async function POST(request: NextRequest) {
       details: errorMessage,
     }, {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
     });
   }
 }
