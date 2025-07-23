@@ -389,13 +389,13 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                         {/* Affichage aide OCR si PDF extraction failed */}
                         {uploadFile.result.details && uploadFile.result.errorType === 'pdf_extraction_failed' && (
                           <div className="mt-3 text-sm text-gray-700 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-                            <div className="font-medium text-yellow-800 mb-2">📄 Problème d'extraction PDF</div>
+                            <div className="font-medium text-yellow-800 mb-2">📄 Problème d&apos;extraction PDF</div>
                             <p className="text-xs text-gray-600 mb-3">{uploadFile.result.details}</p>
                             
                             {uploadFile.result.solutions && (
                               <div className="space-y-2">
                                 <div className="font-medium text-gray-800 text-xs">Solutions recommandées :</div>
-                                {uploadFile.result.solutions.map((solution: any, index: number) => (
+                                {uploadFile.result.solutions.map((solution: { title: string; description: string; url: string | null; action: string; }, index: number) => (
                                   <div key={index} className="bg-white border border-gray-200 rounded p-2">
                                     <div className="font-medium text-xs text-gray-800">{solution.title}</div>
                                     <div className="text-xs text-gray-600 mb-1">{solution.description}</div>
