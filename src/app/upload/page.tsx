@@ -36,6 +36,12 @@ interface UploadFile {
       url: string | null;
       action: string;
     }>;
+    quickAction?: {
+      title: string;
+      description: string;
+      buttonText: string;
+      url: string;
+    };
   };
 }
 
@@ -386,6 +392,63 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                           <span className="text-sm font-medium text-red-800">Erreur</span>
                         </div>
                         <p className="text-xs text-red-600">{uploadFile.result.error}</p>
+                        
+                        {/* Nouveau design pour PDF non supporté */}
+                        {uploadFile.result.errorType === 'pdf_not_supported' && (
+                          <div className="mt-3 text-sm bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="text-lg">📄</span>
+                              <div>
+                                <div className="font-medium text-blue-800">PDF détecté</div>
+                                <div className="text-xs text-blue-600">Choisissez une solution alternative</div>
+                              </div>
+                            </div>
+                            
+                            <p className="text-xs text-blue-700 mb-4">{uploadFile.result.details}</p>
+                            
+                            {/* Action rapide recommandée */}
+                            {uploadFile.result.quickAction && (
+                              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                                <div className="font-medium text-green-800 text-sm mb-1">{uploadFile.result.quickAction.title}</div>
+                                <div className="text-xs text-green-600 mb-2">{uploadFile.result.quickAction.description}</div>
+                                <a 
+                                  href={uploadFile.result.quickAction.url}
+                                  className="inline-flex items-center px-3 py-1 text-xs bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                                >
+                                  {uploadFile.result.quickAction.buttonText} →
+                                </a>
+                              </div>
+                            )}
+                            
+                            {/* Autres solutions */}
+                            {uploadFile.result.solutions && (
+                              <div className="space-y-2">
+                                <div className="font-medium text-blue-800 text-xs">Autres solutions :</div>
+                                <div className="grid grid-cols-1 gap-2">
+                                  {uploadFile.result.solutions.map((solution: { title: string; description: string; url: string | null; action: string; }, index: number) => (
+                                    <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 hover:border-blue-300 transition-colors">
+                                      <div className="font-medium text-xs text-blue-800 mb-1">{solution.title}</div>
+                                      <div className="text-xs text-blue-600 mb-2">{solution.description}</div>
+                                      {solution.url ? (
+                                        <a 
+                                          href={solution.url} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer" 
+                                          className="text-xs text-blue-600 hover:text-blue-800 underline font-medium"
+                                        >
+                                          {solution.action} →
+                                        </a>
+                                      ) : (
+                                        <div className="text-xs text-blue-500">{solution.action}</div>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        
                         {/* Affichage aide OCR si PDF extraction failed */}
                         {uploadFile.result.details && uploadFile.result.errorType === 'pdf_extraction_failed' && (
                           <div className="mt-3 text-sm text-gray-700 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
@@ -419,11 +482,21 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                         )}
                         {/* Ancien affichage pour compatibilité */}
                         {uploadFile.result.details && uploadFile.result.error === 'PDF extraction failed' && !uploadFile.result.errorType && (
-                          <div className="mt-2 text-xs text-blue-700 bg-blue-50 rounded p-2">
-                            <strong>Conseil :</strong> {uploadFile.result.details}
+                          <div className="mt-2 text-xs text-blue-700 bg-blue-50 rounded p-3">
+                            <div className="font-bold text-blue-800 mb-1">Impossible d'extraire le texte du PDF</div>
+                            <div className="mb-2">
+                              <span className="font-semibold">Fichier :</span> {uploadFile.result.fileInfo?.name || uploadFile.file.name}<br />
+                              <span className="font-semibold">Taille :</span> {uploadFile.result.fileInfo?.size ? formatFileSize(uploadFile.result.fileInfo.size) : formatFileSize(uploadFile.file.size)}<br />
+                              <span className="font-semibold">Type :</span> {uploadFile.result.fileInfo?.type || uploadFile.file.type}
+                            </div>
+                            <div className="mb-2">
+                              <strong>Conseil :</strong> {uploadFile.result.details}
+                            </div>
                             {uploadFile.result.ocrUrl && (
-                              <div className="mt-1">
-                                <a href={uploadFile.result.ocrUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-600 hover:text-blue-800">Outil OCR en ligne</a>
+                              <div className="mt-2">
+                                <a href={uploadFile.result.ocrUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors">
+                                  🖹 Ouvrir l'OCR en ligne
+                                </a>
                               </div>
                             )}
                           </div>
