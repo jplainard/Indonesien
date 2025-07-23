@@ -392,6 +392,26 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
                           <span className="text-sm font-medium text-red-800">Erreur</span>
                         </div>
                         <p className="text-xs text-red-600">{uploadFile.result.error}</p>
+                        {/* Message explicatif pour PDF extraction failed, même sans errorType */}
+                        {uploadFile.result.error === 'PDF extraction failed' && (
+                          <div className="mt-4 text-sm text-blue-900 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div className="font-bold text-blue-800 mb-2">Impossible d&apos;extraire le texte du PDF</div>
+                            <div className="mb-2">
+                              <span className="font-semibold">Fichier&nbsp;:</span> {uploadFile.file.name}<br />
+                              <span className="font-semibold">Taille&nbsp;:</span> {formatFileSize(uploadFile.file.size)}<br />
+                              <span className="font-semibold">Type&nbsp;:</span> {uploadFile.file.type}
+                            </div>
+                            <div className="mb-2">
+                              <strong>Pourquoi ?</strong> Ce PDF semble être une image scannée, vide ou protégé par mot de passe.<br />
+                              <strong>Que faire ?</strong> Utilisez un outil OCR pour convertir le PDF en texte, ou copiez-collez le texte dans l&apos;outil de traduction, ou uploadez directement un fichier texte (.txt).
+                            </div>
+                            <div className="mt-2">
+                              <a href={uploadFile.result.ocrUrl || 'https://www.onlineocr.net/fr/'} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors">
+                                🖹 Ouvrir l&apos;OCR en ligne
+                              </a>
+                            </div>
+                          </div>
+                        )}
                         
                         {/* Nouveau design pour PDF non supporté */}
                         {uploadFile.result.errorType === 'pdf_not_supported' && (
