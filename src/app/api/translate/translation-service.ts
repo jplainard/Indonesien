@@ -3,7 +3,7 @@ export async function translateText(
   text: string, 
   sourceLang: string, 
   targetLang: string, 
-  translationType: string = 'ai'
+  _translationType: string = 'ai'
 ): Promise<string> {
   
   // Dictionnaire de base pour des traductions simples (fallback)

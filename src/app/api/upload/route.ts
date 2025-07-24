@@ -68,23 +68,23 @@ export async function POST(request: NextRequest) {
       console.log('📊 [API Upload] Extraction PDF via pdf-parse (mode sécurisé)');
       try {
         // Créer le répertoire de test si nécessaire pour éviter l'erreur ENOENT
-        const fs = require('fs');
-        const path = require('path');
-        const testDir = path.join(process.cwd(), 'test', 'data');
+        const fs = await import('fs');
+        const path = await import('path');
+        const testDir = path.default.join(process.cwd(), 'test', 'data');
         
         // Créer le répertoire s'il n'existe pas
-        if (!fs.existsSync(testDir)) {
-          fs.mkdirSync(testDir, { recursive: true });
+        if (!fs.default.existsSync(testDir)) {
+          fs.default.mkdirSync(testDir, { recursive: true });
           // Créer un fichier de test vide pour satisfaire pdf-parse
-          const testFile = path.join(testDir, '05-versions-space.pdf');
-          if (!fs.existsSync(testFile)) {
-            fs.writeFileSync(testFile, Buffer.alloc(0));
+          const testFile = path.default.join(testDir, '05-versions-space.pdf');
+          if (!fs.default.existsSync(testFile)) {
+            fs.default.writeFileSync(testFile, Buffer.alloc(0));
           }
         }
         
-        const pdfParse = require('pdf-parse');
+        const pdfParse = await import('pdf-parse');
         const buffer = Buffer.from(await file.arrayBuffer());
-        const data = await pdfParse(buffer);
+        const data = await pdfParse.default(buffer);
         originalText = data.text.trim();
         if (!originalText || originalText.length < 10) {
           throw new Error('PDF appears to be scanned, empty or protected');
