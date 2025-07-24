@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { LogIn, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,7 +15,6 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const router = useRouter();
 
   // Log persistant pour debug
   console.log('🏗️ [AUTH PAGE] Composant rendu, loading:', loading);
