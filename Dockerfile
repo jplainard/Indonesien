@@ -13,13 +13,19 @@ COPY package.json package-lock.json* ./
 
 # --- Dépendances pour dev ---
 FROM base AS dev
+# Copier d'abord le schéma Prisma avant npm ci
+COPY prisma ./prisma
 RUN npm ci
 
-# Changer le propriétaire du dossier vers l'utilisateur nextjs
-RUN chown -R nextjs:nodejs /app
+# Copier les fichiers du projet
+COPY . .
+
+# Créer le dossier .next avec les bonnes permissions
+RUN mkdir -p .next && chown -R nextjs:nodejs /app
+
+# Changer vers l'utilisateur nextjs après avoir défini les permissions
 USER nextjs
 
-COPY --chown=nextjs:nodejs . .
 RUN npx prisma generate
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
