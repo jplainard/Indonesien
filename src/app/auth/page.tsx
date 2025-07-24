@@ -27,12 +27,20 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('🚀 [FORM] Event reçu, tentative preventDefault');
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
+    e.stopPropagation();
+    
     console.log('🔄 Début de la soumission du formulaire');
     console.log('📊 FormData:', formData);
+    
+    if (loading) {
+      console.log('⚠️ [FORM] Déjà en cours de traitement, abandon');
+      return;
+    }
+    
+    setLoading(true);
+    setError('');
 
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
@@ -61,21 +69,27 @@ export default function LoginPage() {
         console.log('✅ Connexion réussie, redirection...');
         console.log('🔄 [REDIRECTION] Tentative router.push vers /dashboard');
         
+        // Empêcher tout autre traitement
+        setLoading(false); // Important: débloquer l'UI
+        
         try {
           // Essai avec router.push
-          router.push('/dashboard');
+          await router.push('/dashboard');
           console.log('✅ [REDIRECTION] router.push exécuté');
           
-          // Fallback avec window.location si router.push ne fonctionne pas
+          // Fallback avec window.location si router.push ne fonctionne pas après 2s
           setTimeout(() => {
-            console.log('⚠️ [REDIRECTION] Fallback avec window.location après 1s');
+            console.log('⚠️ [REDIRECTION] Fallback avec window.location après 2s');
             window.location.href = '/dashboard';
-          }, 1000);
+          }, 2000);
         } catch (error) {
           console.error('❌ [REDIRECTION] Erreur avec router.push:', error);
-          console.log('🔄 [REDIRECTION] Utilisation de window.location');
+          console.log('🔄 [REDIRECTION] Utilisation immédiate de window.location');
           window.location.href = '/dashboard';
         }
+        
+        // Sortir de la fonction pour éviter d'arriver au finally
+        return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
@@ -164,7 +178,18 @@ export default function LoginPage() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
+        <form 
+          onSubmit={handleSubmit} 
+          className="space-y-6" 
+          suppressHydrationWarning
+          noValidate
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && loading) {
+              console.log('⚠️ [FORM] Enter pressé pendant loading, empêchement');
+              e.preventDefault();
+            }
+          }}
+        >
           {/* Name Field (only for registration) */}
           {!isLogin && (
             <motion.div
@@ -244,6 +269,15 @@ export default function LoginPage() {
           <motion.button
             type="submit"
             disabled={loading}
+            onClick={(e) => {
+              console.log('🖱️ [BUTTON] Clic détecté');
+              if (loading) {
+                console.log('⚠️ [BUTTON] Déjà en cours, empêchement du clic');
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+              }
+            }}
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             whileHover={{ scale: loading ? 1 : 1.02 }}
             whileTap={{ scale: loading ? 1 : 0.98 }}
