@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LogIn, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -40,17 +42,6 @@ export default function LoginPage() {
     console.log('📊 FormData:', formData);
     console.log('🔍 [DEBUG] Loading state:', loading);
     
-    if (loading) {
-      console.log('⚠️ [FORM] Déjà en cours de traitement, abandon');
-      return false;
-    }
-    
-    // Bloquer immédiatement toute autre soumission
-    setLoading(true);
-    setError('');
-    
-    console.log('🔒 [STATE] Loading mis à true, formulaire bloqué');
-
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
       const body = isLogin 
@@ -77,7 +68,18 @@ export default function LoginPage() {
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection immédiate...');
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
-        window.location.replace('/dashboard');
+        router.push('/dashboard');
+        return;
+      } else {
+        console.log('❌ Erreur de connexion:', data.error);
+        setError(data.error || 'Une erreur est survenue');
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('💥 Erreur:', error);
+      setError('Erreur de connexion au serveur');
+      setLoading(false);
+    }
         return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
