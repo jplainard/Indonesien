@@ -88,32 +88,15 @@ export default function LoginPage() {
       console.log('📥 Response data:', data);
 
       if (response.ok) {
-        console.log('✅ Connexion réussie, redirection...');
-        console.log('🔄 [REDIRECTION] Tentative router.push vers /dashboard');
-        console.log('🔍 [DEBUG] Avant redirection - Window location:', window.location.href);
+        console.log('✅ Connexion réussie, redirection immédiate...');
         
-        // Garder loading à true pour éviter les re-soumissions
-        // setLoading(false); // COMMENTÉ pour éviter les re-clicks
+        // Redirection immédiate avec window.location
+        console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
+        window.location.href = '/dashboard';
         
-        try {
-          console.log('🚀 [REDIRECTION] Début router.push...');
-          
-          // Redirection immédiate sans attendre
-          window.location.href = '/dashboard';
-          console.log('✅ [REDIRECTION] window.location.href exécuté');
-          
-          // router.push en parallèle (optionnel)
-          router.push('/dashboard');
-          console.log('✅ [REDIRECTION] router.push exécuté');
-          
-        } catch (error) {
-          console.error('❌ [REDIRECTION] Erreur:', error);
-          window.location.href = '/dashboard';
-        }
-        
-        // Empêcher absolument le continue
-        console.log('🛑 [REDIRECTION] Sortie forcée de la fonction');
-        return false;
+        // Cette ligne ne devrait jamais s'exécuter
+        console.log('⚠️ [REDIRECTION] Cette ligne ne devrait pas apparaître');
+        return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
