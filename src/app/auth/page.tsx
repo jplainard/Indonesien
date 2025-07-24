@@ -56,7 +56,7 @@ export default function LoginPage() {
         setError(data.error || 'Une erreur est survenue');
         setLoading(false);
       }
-    } catch (error) {
+    } catch (_error) {
       setError('Erreur de connexion au serveur');
       setLoading(false);
     }
