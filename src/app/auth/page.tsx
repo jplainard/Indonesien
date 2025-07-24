@@ -18,6 +18,20 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const router = useRouter();
 
+  // Log persistant pour debug
+  console.log('🏗️ [AUTH PAGE] Composant rendu, loading:', loading);
+  
+  // Empêcher le rechargement de page
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', (e) => {
+      if (loading) {
+        console.log('⚠️ [WINDOW] Tentative de fermeture pendant loading');
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -28,19 +42,27 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     console.log('🚀 [FORM] Event reçu, tentative preventDefault');
+    console.log('🚀 [FORM] Event type:', e.type, 'Event target:', e.target);
+    
+    // Triple protection contre la soumission
     e.preventDefault();
     e.stopPropagation();
+    e.nativeEvent?.preventDefault?.();
     
     console.log('🔄 Début de la soumission du formulaire');
     console.log('📊 FormData:', formData);
+    console.log('🔍 [DEBUG] Loading state:', loading);
     
     if (loading) {
       console.log('⚠️ [FORM] Déjà en cours de traitement, abandon');
-      return;
+      return false;
     }
     
+    // Bloquer immédiatement toute autre soumission
     setLoading(true);
     setError('');
+    
+    console.log('🔒 [STATE] Loading mis à true, formulaire bloqué');
 
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
@@ -68,28 +90,30 @@ export default function LoginPage() {
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection...');
         console.log('🔄 [REDIRECTION] Tentative router.push vers /dashboard');
+        console.log('🔍 [DEBUG] Avant redirection - Window location:', window.location.href);
         
-        // Empêcher tout autre traitement
-        setLoading(false); // Important: débloquer l'UI
+        // Garder loading à true pour éviter les re-soumissions
+        // setLoading(false); // COMMENTÉ pour éviter les re-clicks
         
         try {
-          // Essai avec router.push
-          await router.push('/dashboard');
+          console.log('🚀 [REDIRECTION] Début router.push...');
+          
+          // Redirection immédiate sans attendre
+          window.location.href = '/dashboard';
+          console.log('✅ [REDIRECTION] window.location.href exécuté');
+          
+          // router.push en parallèle (optionnel)
+          router.push('/dashboard');
           console.log('✅ [REDIRECTION] router.push exécuté');
           
-          // Fallback avec window.location si router.push ne fonctionne pas après 2s
-          setTimeout(() => {
-            console.log('⚠️ [REDIRECTION] Fallback avec window.location après 2s');
-            window.location.href = '/dashboard';
-          }, 2000);
         } catch (error) {
-          console.error('❌ [REDIRECTION] Erreur avec router.push:', error);
-          console.log('🔄 [REDIRECTION] Utilisation immédiate de window.location');
+          console.error('❌ [REDIRECTION] Erreur:', error);
           window.location.href = '/dashboard';
         }
         
-        // Sortir de la fonction pour éviter d'arriver au finally
-        return;
+        // Empêcher absolument le continue
+        console.log('🛑 [REDIRECTION] Sortie forcée de la fonction');
+        return false;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
@@ -183,11 +207,17 @@ export default function LoginPage() {
           className="space-y-6" 
           suppressHydrationWarning
           noValidate
+          action="javascript:void(0);"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && loading) {
               console.log('⚠️ [FORM] Enter pressé pendant loading, empêchement');
               e.preventDefault();
+              e.stopPropagation();
             }
+          }}
+          onReset={(e) => {
+            console.log('⚠️ [FORM] Reset tenté, empêchement');
+            e.preventDefault();
           }}
         >
           {/* Name Field (only for registration) */}
