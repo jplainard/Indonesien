@@ -31,11 +31,17 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
+    console.log('🔄 Début de la soumission du formulaire');
+    console.log('📊 FormData:', formData);
+
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
       const body = isLogin 
         ? { email: formData.email, password: formData.password }
         : formData;
+
+      console.log('🎯 Endpoint:', endpoint);
+      console.log('📤 Body:', body);
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -45,19 +51,26 @@ export default function LoginPage() {
         body: JSON.stringify(body),
       });
 
+      console.log('📥 Response status:', response.status);
+      console.log('📥 Response ok:', response.ok);
+
       const data = await response.json();
+      console.log('📥 Response data:', data);
 
       if (response.ok) {
+        console.log('✅ Connexion réussie, redirection...');
         // Connexion/inscription réussie
         router.push('/dashboard'); // Rediriger vers le tableau de bord
       } else {
+        console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
       }
     } catch (error) {
-      console.error('Erreur:', error);
+      console.error('💥 Erreur:', error);
       setError('Erreur de connexion au serveur');
     } finally {
       setLoading(false);
+      console.log('🏁 Fin de la soumission');
     }
   };
 
