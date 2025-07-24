@@ -76,14 +76,20 @@ export default function LoginPage() {
 
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection immédiate...');
-        
-        // Redirection immédiate - pas de logs après
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
         
-        // Force la redirection immédiate sans délai
+        // Nettoyer tous les états avant redirection
+        setLoading(false);
+        setError('');
+        setFormData({ email: '', password: '', name: '' });
+        
+        // Attendre un tick pour s'assurer que les états sont nettoyés
+        await new Promise(resolve => setTimeout(resolve, 0));
+        
+        // Redirection immédiate et propre
         window.location.replace('/dashboard');
         
-        // Ne pas continuer l'exécution
+        // Arrêt complet
         return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
@@ -176,17 +182,13 @@ export default function LoginPage() {
           className="space-y-6" 
           suppressHydrationWarning
           noValidate
-          action="javascript:void(0);"
+          autoComplete="off"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && loading) {
               console.log('⚠️ [FORM] Enter pressé pendant loading, empêchement');
               e.preventDefault();
               e.stopPropagation();
             }
-          }}
-          onReset={(e) => {
-            console.log('⚠️ [FORM] Reset tenté, empêchement');
-            e.preventDefault();
           }}
         >
           {/* Name Field (only for registration) */}
@@ -227,6 +229,7 @@ export default function LoginPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
+                autoComplete="email"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 placeholder="votre@email.com"
               />
@@ -246,6 +249,7 @@ export default function LoginPage() {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
+                autoComplete="current-password"
                 className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 placeholder={isLogin ? 'Votre mot de passe' : 'Minimum 8 caractères'}
               />
