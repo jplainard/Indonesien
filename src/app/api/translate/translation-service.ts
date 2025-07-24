@@ -149,60 +149,81 @@ export async function translateText(
     const targetCode = langMap[targetLang] || targetLang;
     
     // Diviser le texte en chunks si trop long (MyMemory limite à ~500 caractères)
-    const maxChunkSize = 400;
+    const maxChunkSize = 400; // Réduire pour être sûr
     const textChunks = [];
     
     if (text.length <= maxChunkSize) {
       textChunks.push(text);
     } else {
-      // Diviser par phrases ou paragraphes
-      const sentences = text.split(/[.!?]\s+/);
-      let currentChunk = '';
+      // Diviser par phrases ou paragraphes plus intelligemment
+      let remainingText = text;
       
-      for (const sentence of sentences) {
-        if ((currentChunk + sentence).length > maxChunkSize && currentChunk) {
-          textChunks.push(currentChunk.trim());
-          currentChunk = sentence;
-        } else {
-          currentChunk += (currentChunk ? '. ' : '') + sentence;
+      while (remainingText.length > 0) {
+        if (remainingText.length <= maxChunkSize) {
+          textChunks.push(remainingText);
+          break;
         }
-      }
-      
-      if (currentChunk) {
-        textChunks.push(currentChunk.trim());
+        
+        // Chercher un point de découpe approprié
+        let cutPoint = maxChunkSize;
+        
+        // Essayer de couper à une phrase
+        const sentenceEnd = remainingText.lastIndexOf('.', cutPoint);
+        if (sentenceEnd > cutPoint * 0.5) {
+          cutPoint = sentenceEnd + 1;
+        } else {
+          // Sinon couper à un espace
+          const spaceIndex = remainingText.lastIndexOf(' ', cutPoint);
+          if (spaceIndex > cutPoint * 0.5) {
+            cutPoint = spaceIndex;
+          }
+        }
+        
+        textChunks.push(remainingText.substring(0, cutPoint).trim());
+        remainingText = remainingText.substring(cutPoint).trim();
       }
     }
     
     const translatedChunks = [];
     
-    for (const chunk of textChunks) {
+    for (let i = 0; i < textChunks.length; i++) {
+      const chunk = textChunks[i];
+      console.log(`🔄 [Traduction] Chunk ${i + 1}/${textChunks.length} (${chunk.length} chars): ${chunk.substring(0, 100)}...`);
+      
       const encodedText = encodeURIComponent(chunk);
       const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=${sourceCode}|${targetCode}`;
       
-      console.log(`🔄 [Traduction] Requête API: ${chunk.substring(0, 50)}...`);
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'User-Agent': 'IndoFrench-Translator/1.0',
-        },
-      });
-      
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`);
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'User-Agent': 'IndoFrench-Translator/1.0',
+          },
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log(`📥 [Traduction] Réponse API:`, data);
+        
+        if (data.responseStatus === 200 && data.responseData?.translatedText) {
+          translatedChunks.push(data.responseData.translatedText);
+          console.log(`✅ [Traduction] Chunk ${i + 1} traduit: ${data.responseData.translatedText.substring(0, 100)}...`);
+        } else {
+          throw new Error(`Translation failed: ${data.responseDetails || data.responseStatus || 'Unknown error'}`);
+        }
+        
+        // Délai entre les requêtes pour éviter le rate limiting
+        if (i < textChunks.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 200));
+        }
+        
+      } catch (chunkError) {
+        console.error(`❌ [Traduction] Erreur chunk ${i + 1}:`, chunkError);
+        throw chunkError; // Propager l'erreur pour passer au fallback
       }
-      
-      const data = await response.json();
-      
-      if (data.responseStatus === 200 && data.responseData?.translatedText) {
-        translatedChunks.push(data.responseData.translatedText);
-        console.log(`✅ [Traduction] Chunk traduit: ${data.responseData.translatedText.substring(0, 50)}...`);
-      } else {
-        throw new Error(`Translation failed: ${data.responseDetails || 'Unknown error'}`);
-      }
-      
-      // Délai entre les requêtes pour éviter le rate limiting
-      await new Promise(resolve => setTimeout(resolve, 100));
     }
     
     const result = translatedChunks.join('. ');

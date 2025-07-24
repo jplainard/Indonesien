@@ -44,8 +44,10 @@ export async function POST(request: NextRequest) {
     console.log('📁 [API Upload] Traitement du fichier');
     const formData = await request.formData();
     const fileEntry = formData.get('file');
-    const sourceLang = (formData.get('sourceLang') as string) || 'id';
-    const targetLang = (formData.get('targetLang') as string) || 'fr';
+    const sourceLang = (formData.get('sourceLanguage') as string) || (formData.get('sourceLang') as string) || 'id';
+    const targetLang = (formData.get('targetLanguage') as string) || (formData.get('targetLang') as string) || 'fr';
+
+    console.log('🌐 [API Upload] Langues détectées:', { sourceLang, targetLang });
 
     if (!fileEntry || typeof fileEntry === 'string') {
       console.log('❌ [API Upload] Aucun fichier fourni');
