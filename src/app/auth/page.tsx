@@ -18,17 +18,6 @@ export default function LoginPage() {
 
   // Log persistant pour debug
   console.log('🏗️ [AUTH PAGE] Composant rendu, loading:', loading);
-  
-  // Empêcher le rechargement de page
-  if (typeof window !== 'undefined') {
-    window.addEventListener('beforeunload', (e) => {
-      if (loading) {
-        console.log('⚠️ [WINDOW] Tentative de fermeture pendant loading');
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    });
-  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -88,28 +77,22 @@ export default function LoginPage() {
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection immédiate...');
         
-        // Redirection immédiate avec window.location et arrêt complet
+        // Redirection immédiate - pas de logs après
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
-        window.location.href = '/dashboard';
         
-        // Arrêt complet de l'exécution - ne pas continuer
-        throw new Error('REDIRECTION_SUCCESS'); // This will stop execution
+        // Force la redirection immédiate sans délai
+        window.location.replace('/dashboard');
+        
+        // Ne pas continuer l'exécution
+        return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
       }
     } catch (error) {
-      // Ignorer l'erreur de redirection intentionnelle
-      if (error instanceof Error && error.message === 'REDIRECTION_SUCCESS') {
-        console.log('🎯 [REDIRECTION] Arrêt intentionnel après redirection');
-        return; // Ne pas continuer le traitement
-      }
-      
       console.error('💥 Erreur:', error);
       setError('Erreur de connexion au serveur');
-    } finally {
       setLoading(false);
-      console.log('🏁 Fin de la soumission');
     }
   };
 
