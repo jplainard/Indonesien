@@ -80,17 +80,6 @@ export default function LoginPage() {
       setError('Erreur de connexion au serveur');
       setLoading(false);
     }
-        return;
-      } else {
-        console.log('❌ Erreur de connexion:', data.error);
-        setError(data.error || 'Une erreur est survenue');
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error('💥 Erreur:', error);
-      setError('Erreur de connexion au serveur');
-      setLoading(false);
-    }
   };
 
   return (
