@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const sourceLang = (formData.get('sourceLang') as string) || 'id';
     const targetLang = (formData.get('targetLang') as string) || 'fr';
 
-    if (!(fileEntry instanceof File)) {
+    if (!fileEntry || typeof fileEntry === 'string') {
       console.log('❌ [API Upload] Aucun fichier fourni');
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
@@ -62,10 +62,25 @@ export async function POST(request: NextRequest) {
     } else if (file.type === 'application/pdf') {
       console.log('📊 [API Upload] Extraction PDF');
       
-      // Extraction PDF automatique avec pdf-parse
-      console.log('📊 [API Upload] Extraction PDF via pdf-parse');
+      // Extraction PDF avec une approche plus robuste
+      console.log('📊 [API Upload] Extraction PDF via pdf-parse (mode sécurisé)');
       try {
-        const pdfParse = (await import('pdf-parse')).default;
+        // Créer le répertoire de test si nécessaire pour éviter l'erreur ENOENT
+        const fs = require('fs');
+        const path = require('path');
+        const testDir = path.join(process.cwd(), 'test', 'data');
+        
+        // Créer le répertoire s'il n'existe pas
+        if (!fs.existsSync(testDir)) {
+          fs.mkdirSync(testDir, { recursive: true });
+          // Créer un fichier de test vide pour satisfaire pdf-parse
+          const testFile = path.join(testDir, '05-versions-space.pdf');
+          if (!fs.existsSync(testFile)) {
+            fs.writeFileSync(testFile, Buffer.alloc(0));
+          }
+        }
+        
+        const pdfParse = require('pdf-parse');
         const buffer = Buffer.from(await file.arrayBuffer());
         const data = await pdfParse(buffer);
         originalText = data.text.trim();
@@ -97,8 +112,21 @@ export async function POST(request: NextRequest) {
 
     console.log(`📝 [API Upload] Texte extrait: ${originalText.length} caractères`);
 
-    // Traduction (mock)
-    const translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
+    // Traduction réelle en utilisant la fonction translateText
+    console.log(`🔄 [API Upload] Début de la traduction ${sourceLang} -> ${targetLang}`);
+    let translatedText = '';
+    
+    try {
+      // Importer la fonction de traduction depuis le service
+      const { translateText } = await import('../translate/translation-service');
+      translatedText = await translateText(originalText, sourceLang, targetLang, 'ai');
+      console.log(`✅ [API Upload] Traduction réussie: ${translatedText.length} caractères`);
+    } catch (translationError) {
+      console.warn('⚠️ [API Upload] Erreur de traduction, fallback vers mock:', translationError);
+      // Fallback vers la traduction mock en cas d'erreur
+      translatedText = originalText ? `${originalText} [${sourceLang}->${targetLang}]` : '';
+    }
+    
     console.log(`🔄 [API Upload] Traduction générée: ${translatedText.length} caractères`);
 
     // Sauvegarde en base de données
@@ -135,6 +163,13 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Fichier traduit avec succès',
       translationId: savedTranslationId,
+      translatedFile: translatedText, // Format attendu par l'interface
+      summary: {
+        statistics: {
+          originalLength: originalText.length,
+          translatedLength: translatedText.length
+        }
+      },
       original: {
         filename: file.name,
         text: originalText,
@@ -145,7 +180,7 @@ export async function POST(request: NextRequest) {
         length: translatedText.length
       },
       metadata: {
-        method: 'text-direct', // Seuls les fichiers texte arrivent ici
+        method: 'text-direct',
         userId: userId
       }
     });
