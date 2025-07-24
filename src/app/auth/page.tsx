@@ -59,8 +59,23 @@ export default function LoginPage() {
 
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection...');
-        // Connexion/inscription réussie
-        router.push('/dashboard'); // Rediriger vers le tableau de bord
+        console.log('🔄 [REDIRECTION] Tentative router.push vers /dashboard');
+        
+        try {
+          // Essai avec router.push
+          router.push('/dashboard');
+          console.log('✅ [REDIRECTION] router.push exécuté');
+          
+          // Fallback avec window.location si router.push ne fonctionne pas
+          setTimeout(() => {
+            console.log('⚠️ [REDIRECTION] Fallback avec window.location après 1s');
+            window.location.href = '/dashboard';
+          }, 1000);
+        } catch (error) {
+          console.error('❌ [REDIRECTION] Erreur avec router.push:', error);
+          console.log('🔄 [REDIRECTION] Utilisation de window.location');
+          window.location.href = '/dashboard';
+        }
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
