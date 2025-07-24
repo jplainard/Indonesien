@@ -77,34 +77,12 @@ export default function LoginPage() {
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection immédiate...');
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
-        
-        // SOLUTION RADICALE : Vider physiquement tous les champs du formulaire
-        const form = document.querySelector('form') as HTMLFormElement;
-        if (form) {
-          const inputs = form.querySelectorAll('input');
-          inputs.forEach(input => {
-            input.value = '';
-            input.defaultValue = '';
-          });
-          form.reset();
-        }
-        
-        // Nettoyer les états React APRÈS avoir vidé le DOM
-        setLoading(false);
-        setError('');
-        setFormData({ email: '', password: '', name: '' });
-        
-        // Forcer un tick de rendu pour s'assurer que tout est nettoyé
-        await new Promise(resolve => setTimeout(resolve, 50));
-        
-        // Redirection immédiate et propre
         window.location.replace('/dashboard');
-        
-        // Arrêt complet
         return;
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
+        setLoading(false);
       }
     } catch (error) {
       console.error('💥 Erreur:', error);
