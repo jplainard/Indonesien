@@ -18,9 +18,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Log persistant pour debug
-  console.log('🏗️ [AUTH PAGE] Composant rendu, loading:', loading);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -30,26 +27,18 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log('🚀 [FORM] Event reçu, tentative preventDefault');
-    console.log('🚀 [FORM] Event type:', e.type, 'Event target:', e.target);
-    
-    // Triple protection contre la soumission
     e.preventDefault();
-    e.stopPropagation();
-    e.nativeEvent?.preventDefault?.();
     
-    console.log('🔄 Début de la soumission du formulaire');
-    console.log('📊 FormData:', formData);
-    console.log('🔍 [DEBUG] Loading state:', loading);
+    if (loading) return;
     
+    setLoading(true);
+    setError('');
+
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
       const body = isLogin 
         ? { email: formData.email, password: formData.password }
         : formData;
-
-      console.log('🎯 Endpoint:', endpoint);
-      console.log('📤 Body:', body);
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -59,24 +48,15 @@ export default function LoginPage() {
         body: JSON.stringify(body),
       });
 
-      console.log('📥 Response status:', response.status);
-      console.log('📥 Response ok:', response.ok);
-
       const data = await response.json();
-      console.log('📥 Response data:', data);
 
       if (response.ok) {
-        console.log('✅ Connexion réussie, redirection immédiate...');
-        console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
         router.push('/dashboard');
-        return;
       } else {
-        console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
         setLoading(false);
       }
     } catch (error) {
-      console.error('💥 Erreur:', error);
       setError('Erreur de connexion au serveur');
       setLoading(false);
     }
