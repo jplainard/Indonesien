@@ -88,18 +88,23 @@ export default function LoginPage() {
       if (response.ok) {
         console.log('✅ Connexion réussie, redirection immédiate...');
         
-        // Redirection immédiate avec window.location
+        // Redirection immédiate avec window.location et arrêt complet
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
         window.location.href = '/dashboard';
         
-        // Cette ligne ne devrait jamais s'exécuter
-        console.log('⚠️ [REDIRECTION] Cette ligne ne devrait pas apparaître');
-        return;
+        // Arrêt complet de l'exécution - ne pas continuer
+        throw new Error('REDIRECTION_SUCCESS'); // This will stop execution
       } else {
         console.log('❌ Erreur de connexion:', data.error);
         setError(data.error || 'Une erreur est survenue');
       }
     } catch (error) {
+      // Ignorer l'erreur de redirection intentionnelle
+      if (error instanceof Error && error.message === 'REDIRECTION_SUCCESS') {
+        console.log('🎯 [REDIRECTION] Arrêt intentionnel après redirection');
+        return; // Ne pas continuer le traitement
+      }
+      
       console.error('💥 Erreur:', error);
       setError('Erreur de connexion au serveur');
     } finally {
