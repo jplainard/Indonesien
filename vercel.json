@@ -1,31 +1,51 @@
 {
   "version": 2,
-  "routes": [
+  "name": "indofrench",
+  "builds": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "package.json",
+      "use": "@vercel/next"
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "NODE_VERSION": "20.x"
+    "NODE_ENV": "production"
   },
-  "build": {
-    "env": {
-      "NODE_ENV": "production",
-      "NODE_VERSION": "20.x"
-    }
-  },
+  "regions": ["cdg1"],
   "functions": {
-    "src/app/**/*.ts": {
-      "maxDuration": 30
-    },
-    "src/app/**/route.ts": {
+    "src/app/api/**/*.ts": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/api/uploads/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/admin",
+      "destination": "/admin/",
+      "permanent": false
+    }
+  ]
 }
