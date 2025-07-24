@@ -77,14 +77,14 @@ export default function PricingPage() {
         "Volume illimité",
         "Toutes paires de langues",
         "Délai express: 12h",
-        "Support 24/7 prioritaire",
+        "Support prioritaire",
         "Révision premium",
         "API d'intégration",
         "Traduction spécialisée",
-        "Équipe dédiée",
-        "SLA garantie 99.9%",
+        "Contact dédié",
+        "Engagement qualité",
         "Facturation personnalisée",
-        "Formation de votre équipe"
+        "Formation personnalisée"
       ],
       limitations: [],
       popular: false,
@@ -216,7 +216,7 @@ export default function PricingPage() {
         </section>
 
         {/* Pricing Plans */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-3 gap-8">
               {plans.map((plan, index) => {
@@ -307,10 +307,10 @@ export default function PricingPage() {
         </section>
 
         {/* Additional Services */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              className="text-center mb-16"
+              className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -357,10 +357,10 @@ export default function PricingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              className="text-center mb-16"
+              className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}

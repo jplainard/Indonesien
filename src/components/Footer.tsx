@@ -18,7 +18,7 @@ export default function Footer() {
   const footerLinks = {
     company: [
       { label: 'À propos', href: '/about' },
-      { label: 'Notre équipe', href: '/about#team' },
+      { label: 'Nos fondateurs', href: '/about#team' },
       { label: 'Carrières', href: '/careers' },
       { label: 'Actualités', href: '/news' }
     ],

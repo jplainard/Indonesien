@@ -31,24 +31,24 @@ export default function EnterprisePage() {
     },
     {
       icon: Zap,
-      title: "Performance Garantie",
-      description: "SLA 99.99%, temps de réponse optimisés, capacité scalable selon vos besoins",
+      title: "Performance Fiable",
+      description: "Temps de réponse optimisés, infrastructure stable, capacité adaptable",
       benefits: [
-        "SLA 99.99% garanti",
-        "Réponse < 100ms",
-        "Scalabilité automatique",
-        "Cache géographique"
+        "Réponse rapide",
+        "Infrastructure stable",
+        "Capacité adaptable",
+        "Monitoring continu"
       ]
     },
     {
       icon: HeadphonesIcon,
-      title: "Support Prioritaire",
-      description: "Équipe dédiée, support 24/7, account manager personnel, formation incluse",
+      title: "Support Dédié",
+      description: "Accompagnement personnalisé, suivi privilégié, contact direct, formation incluse",
       benefits: [
-        "Support 24h/24 7j/7",
-        "Account manager dédié",
+        "Support prioritaire",
+        "Contact direct",
         "Formation personnalisée",
-        "Maintenance proactive"
+        "Suivi privilégié"
       ]
     },
     {

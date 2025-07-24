@@ -40,7 +40,7 @@ export default function HelpPage() {
     {
       category: 'translation',
       question: 'Quels formats de fichiers sont supportés ?',
-      answer: 'Nous supportons une large gamme de formats : PDF, Word (.doc, .docx), Excel (.xls, .xlsx), PowerPoint (.ppt, .pptx), texte brut (.txt), RTF, et bien d&apos;autres. Pour les formats spéciaux, contactez notre équipe.'
+      answer: 'Nous supportons une large gamme de formats : PDF, Word (.doc, .docx), Excel (.xls, .xlsx), PowerPoint (.ppt, .pptx), texte brut (.txt), RTF, et bien d&apos;autres. Pour les formats spéciaux, contactez-nous directement.'
     },
     {
       category: 'translation',
@@ -141,7 +141,7 @@ export default function HelpPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 Trouvez rapidement les réponses à vos questions. 
-                Notre équipe est là pour vous accompagner dans votre utilisation d&apos;IndoFrench.
+                Nous sommes là pour vous accompagner dans votre utilisation d&apos;IndoFrench.
               </motion.p>
 
               {/* Search Bar */}
@@ -320,7 +320,7 @@ export default function HelpPage() {
                 Vous ne trouvez pas votre réponse ?
               </h2>
               <p className="text-blue-100 text-lg mb-8">
-                Notre équipe support est disponible pour vous aider. 
+                Notre support est disponible pour vous aider. 
                 Nous répondons généralement sous 2 heures.
               </p>
               

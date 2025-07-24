@@ -98,12 +98,12 @@ export default function Home() {
         // Données de démonstration en cas d'erreur
         setStats({
           overview: {
-            totalTranslations: 12847,
-            totalUsers: 3421,
+            totalTranslations: 5243,
+            totalUsers: 587,
             languagePairs: 12,
             todayTranslations: 47,
             averageQuality: 96,
-            publicTranslations: 8943
+            publicTranslations: 3124
           }
         });
       } finally {

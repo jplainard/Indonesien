@@ -16,10 +16,10 @@ import MainLayout from '../../components/MainLayout';
 
 export default function AboutPage() {
   const stats = [
-    { icon: Languages, value: "50,000+", label: "Documents traduits" },
-    { icon: Users, value: "3,500+", label: "Clients satisfaits" },
-    { icon: Globe, value: "45+", label: "Pays desservis" },
-    { icon: Award, value: "99.2%", label: "Taux de satisfaction" }
+    { icon: Languages, value: "5,000+", label: "Documents traduits" },
+    { icon: Users, value: "500+", label: "Clients satisfaits" },
+    { icon: Globe, value: "15+", label: "Pays desservis" },
+    { icon: Award, value: "98%", label: "Taux de satisfaction" }
   ];
 
   const values = [
@@ -31,7 +31,7 @@ export default function AboutPage() {
     {
       icon: Heart,
       title: "Passion Culturelle",
-      description: "Notre équipe biculturelle franco-indonésienne vit et respire les nuances des deux cultures. Cette immersion culturelle garantit des traductions qui conservent l&apos;essence et le ton du message original."
+      description: "Notre approche biculturelle franco-indonésienne nous permet de saisir les nuances des deux cultures. Cette immersion culturelle garantit des traductions qui conservent l&apos;essence et le ton du message original."
     },
     {
       icon: TrendingUp,
@@ -41,7 +41,7 @@ export default function AboutPage() {
     {
       icon: BookOpen,
       title: "Expertise Sectorielle",
-      description: "Nos traducteurs sont spécialisés par domaine : juridique (contrats, litiges), médical (études cliniques, AMM), technique (ingénierie, IT), et commercial (marketing, finance). Chaque projet est confié au bon expert."
+      description: "Nos traducteurs spécialisés maîtrisent les domaines clés : juridique (contrats, litiges), médical (études cliniques, AMM), technique (ingénierie, IT), et commercial (marketing, finance). Chaque projet est confié au bon spécialiste."
     }
   ];
 
@@ -53,8 +53,8 @@ export default function AboutPage() {
     },
     {
       year: "2020",
-      title: "Premiers grands comptes",
-      description: "Signature des premiers contrats avec des multinationales françaises s&apos;implantant en Indonésie : Total Énergies, Danone, et Crédit Agricole."
+      title: "Premiers clients entreprise",
+      description: "Signature des premiers contrats avec des entreprises françaises s&apos;implantant en Indonésie et développement de notre expertise sectorielle."
     },
     {
       year: "2021",
@@ -63,8 +63,8 @@ export default function AboutPage() {
     },
     {
       year: "2022",
-      title: "Expansion Équipe",
-      description: "Constitution d&apos;une équipe de 25 traducteurs permanents et 150+ freelances certifiés, couvrant tous les secteurs d&apos;activité."
+      title: "Réseau de Spécialistes",
+      description: "Constitution d&apos;un réseau de traducteurs spécialisés et partenaires de confiance, couvrant tous les secteurs d&apos;activité avec une approche qualité."
     },
     {
       year: "2023",
@@ -73,66 +73,38 @@ export default function AboutPage() {
     },
     {
       year: "2024",
-      title: "Leadership Marché",
-      description: "Position de leader sur le segment franco-indonésien avec 60% de part de marché et expansion vers d&apos;autres langues d&apos;Asie du Sud-Est."
+      title: "Expertise Reconnue",
+      description: "Reconnaissance comme spécialiste de référence sur le segment franco-indonésien avec expansion de notre expertise vers d&apos;autres langues d&apos;Asie du Sud-Est."
     }
   ];
 
   const team = [
     {
       name: "Marie Dubois",
-      role: "Co-Fondatrice & Directrice Générale",
-      bio: "Master en Traduction de l&apos;ESIT Paris, 15 ans d&apos;expérience en cabinet d&apos;avocats international. Spécialisée en droit des affaires et fusions-acquisitions. Auteure de deux guides sur la traduction juridique.",
-      expertise: ["Droit des affaires", "M&A", "Compliance"],
+      role: "Co-Fondatrice & Responsable Qualité",
+      bio: "Master en Traduction de l&apos;ESIT Paris, 15 ans d&apos;expérience en traduction juridique et commerciale. Spécialisée en droit des affaires et conformité réglementaire.",
+      expertise: ["Droit des affaires", "Traduction juridique", "Contrôle qualité"],
       languages: ["Français (natif)", "Indonésien (C2)", "Anglais (C1)"]
     },
     {
       name: "Andi Pratama",
-      role: "Co-Fondateur & Directeur Technique",
-      bio: "Ingénieur linguiste, ancien directeur de traduction chez Telkom Indonesia. Expert en localisation logicielle et traduction technique. Certifié Project Management Professional (PMP).",
-      expertise: ["Traduction technique", "Localisation", "Gestion de projet"],
+      role: "Co-Fondateur & Expert Technique",
+      bio: "Ingénieur linguiste diplômé, spécialiste en traduction technique et localisation. Expert en gestion de projets de traduction complexes avec certification PMP.",
+      expertise: ["Traduction technique", "Localisation", "Innovation"],
       languages: ["Indonésien (natif)", "Français (C2)", "Anglais (C1)"]
-    },
-    {
-      name: "Sophie Martin",
-      role: "Directrice Qualité & Linguistique",
-      bio: "Docteure en Linguistique Appliquée Sorbonne, 12 ans chez Lionbridge. Développe nos processus qualité et forme nos équipes. Membre du comité technique ISO TC37/SC5.",
-      expertise: ["Contrôle Qualité", "Formation", "Normalisation"],
-      languages: ["Français (natif)", "Indonésien (C1)", "Anglais (C2)"]
-    },
-    {
-      name: "Budi Santoso",
-      role: "Directeur commercial Asie",
-      bio: "MBA INSEAD, 10 ans dans le développement commercial en Asie du Sud-Est. Ancien directeur régional chez BNP Paribas Jakarta. Expertise en services financiers et énergétiques.",
-      expertise: ["Développement Commercial", "Finance", "Énergie"],
-      languages: ["Indonésien (natif)", "Français (C1)", "Anglais (C2)"]
-    },
-    {
-      name: "Clara Nguyen",
-      role: "Responsable Innovation & IA",
-      bio: "Ingénieure en IA conversationnelle, ancienne research scientist chez Google Translate. Pilote l&apos;intégration de nos outils d&apos;IA propriétaires et l&apos;amélioration continue de nos algorithmes.",
-      expertise: ["Intelligence Artificielle", "NLP", "Innovation"],
-      languages: ["Français (natif)", "Anglais (C2)", "Indonésien (B2)"]
-    },
-    {
-      name: "David Chen",
-      role: "Directeur Financier",
-      bio: "Expert-comptable et commissaire aux comptes, ancien CFO de plusieurs scale-ups tech. Supervise la gestion financière, la conformité réglementaire et les opérations de croissance.",
-      expertise: ["Finance", "Conformité", "Stratégie"],
-      languages: ["Français (natif)", "Anglais (C2)", "Chinois (natif)"]
     }
   ];
 
   const recognitions = [
     {
-      title: "Prix de l&apos;Innovation 2024",
+      title: "Spécialiste Reconnu 2024",
       organization: "Chambre de Commerce Franco-Indonésienne",
-      description: "Récompense notre plateforme IA révolutionnaire"
+      description: "Reconnaissance de notre expertise franco-indonésienne"
     },
     {
-      title: "Top 10 Language Service Providers",
-      organization: "CSA Research Global",
-      description: "Classement parmi les leaders mondiaux du secteur"
+      title: "Service Provider Recommandé",
+      organization: "CSA Research",
+      description: "Recommandation pour la qualité de nos services"
     },
     {
       title: "Certification ISO 17100:2015",
@@ -181,16 +153,16 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Depuis 2019, IndoFrench est le partenaire de référence pour la traduction professionnelle 
-                franco-indonésienne. Nous accompagnons entreprises et institutions dans leurs projets 
-                d&apos;expansion internationale avec une expertise unique alliant innovation technologique 
+                Depuis 2019, IndoFrench est votre spécialiste de confiance pour la traduction professionnelle 
+                franco-indonésienne. Nous accompagnons entreprises et particuliers dans leurs projets 
+                d&apos;expansion internationale avec une expertise personnalisée alliant innovation technologique 
                 et excellence linguistique.
               </motion.p>
             </motion.div>
 
             {/* Statistiques améliorées */}
             <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -217,10 +189,10 @@ export default function AboutPage() {
         </section>
 
         {/* Notre Histoire */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8" id="histoire">
+        <section className="pt-4 pb-12 px-4 sm:px-6 lg:px-8" id="histoire">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              className="text-center mb-16"
+              className="text-center mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -228,7 +200,7 @@ export default function AboutPage() {
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Notre parcours</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                De startup prometteuse à leader du marché franco-indonésien, 
+                De projet entrepreneurial à spécialiste reconnu du marché franco-indonésien, 
                 découvrez les étapes clés de notre développement.
               </p>
             </motion.div>
@@ -263,10 +235,10 @@ export default function AboutPage() {
         </section>
 
         {/* Nos Valeurs */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8" id="valeurs">
+        <section className="py-12 px-4 sm:px-6 lg:px-8" id="valeurs">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              className="text-center mb-16"
+              className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -307,10 +279,10 @@ export default function AboutPage() {
         </section>
 
         {/* Notre Équipe */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm" id="team">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm" id="team">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              className="text-center mb-16"
+              className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -373,9 +345,9 @@ export default function AboutPage() {
         </section>
 
         {/* Reconnaissance et Partenariats */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-12">
               {/* Reconnaissances */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}

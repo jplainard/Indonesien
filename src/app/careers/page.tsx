@@ -19,99 +19,19 @@ export default function CareersPage() {
   const jobOffers = [
     {
       id: 1,
-      title: "Traducteur Senior Indonésien-Français",
+      title: "Traducteur Spécialisé Indonésien-Français",
       department: "Traduction",
-      location: "Paris, France",
-      type: "CDI",
-      level: "Senior",
-      description: "Nous recherchons un traducteur expérimenté pour rejoindre notre équipe de traduction spécialisée.",
+      location: "Remote / Paris",
+      type: "Freelance / Collaboration",
+      level: "Expérimenté",
+      description: "Nous recherchons des traducteurs expérimentés pour renforcer notre réseau de spécialistes.",
       requirements: [
-        "Master en traduction ou équivalent",
-        "5+ années d&apos;expérience en traduction professionnelle",
+        "Formation en traduction ou équivalent",
+        "3+ années d&apos;expérience en traduction professionnelle",
         "Maîtrise parfaite du français et de l&apos;indonésien",
-        "Spécialisation dans les domaines juridique ou technique"
+        "Spécialisation dans un domaine technique"
       ],
-      benefits: ["Télétravail possible", "Formation continue", "Primes de performance"]
-    },
-    {
-      id: 2,
-      title: "Développeur Full-Stack",
-      department: "Technique",
-      location: "Paris, France / Remote",
-      type: "CDI",
-      level: "Intermédiaire",
-      description: "Rejoignez notre équipe technique pour développer les outils de traduction de demain.",
-      requirements: [
-        "Expérience avec React, Node.js, TypeScript",
-        "Connaissance des API de traduction (Google, DeepL)",
-        "Expérience en IA/ML pour le traitement du langage",
-        "Maîtrise de l&apos;anglais technique"
-      ],
-      benefits: ["Remote-friendly", "Stack moderne", "Projets innovants"]
-    },
-    {
-      id: 3,
-      title: "Chef de Projet International",
-      department: "Management",
-      location: "Jakarta, Indonésie",
-      type: "CDI",
-      level: "Senior",
-      description: "Pilotez des projets de traduction à grande échelle pour nos clients internationaux.",
-      requirements: [
-        "Expérience en gestion de projet (PMP apprécié)",
-        "Bilingue français-indonésien obligatoire",
-        "Connaissance de l&apos;industrie de la traduction",
-        "Compétences en négociation et relation client"
-      ],
-      benefits: ["Expatriation", "Package complet", "Évolution rapide"]
-    },
-    {
-      id: 4,
-      title: "Spécialiste Marketing Digital",
-      department: "Marketing",
-      location: "Paris, France",
-      type: "CDI",
-      level: "Junior/Intermédiaire",
-      description: "Développez notre présence digitale et nos campagnes marketing multilingues.",
-      requirements: [
-        "Formation en marketing digital ou communication",
-        "Maîtrise des outils SEO/SEM",
-        "Expérience en marketing de contenu",
-        "Créativité et rigueur analytique"
-      ],
-      benefits: ["Environnement créatif", "Outils modernes", "Formation marketing"]
-    },
-    {
-      id: 5,
-      title: "Ingénieur IA Linguistique",
-      department: "R&D",
-      location: "Paris, France",
-      type: "CDI",
-      level: "Senior",
-      description: "Développez des modèles d&apos;IA avancés pour améliorer la qualité de nos traductions.",
-      requirements: [
-        "PhD en informatique ou linguistique computationnelle",
-        "Expérience avec TensorFlow/PyTorch",
-        "Publication dans des revues scientifiques",
-        "Passion pour les langues et l&apos;IA"
-      ],
-      benefits: ["Recherche appliquée", "Conférences internationales", "Impact mondial"]
-    },
-    {
-      id: 6,
-      title: "Customer Success Manager",
-      department: "Commercial",
-      location: "Paris, France / Remote",
-      type: "CDI",
-      level: "Intermédiaire",
-      description: "Accompagnez nos clients dans leur réussite et développez les relations à long terme.",
-      requirements: [
-        "Expérience en relation client B2B",
-        "Excellent sens de la communication",
-        "Maîtrise de l&apos;anglais professionnel",
-        "Empathie et orientation solution"
-      ],
-      benefits: ["Contact client international", "Formation produit", "Évolution interne"]
+      benefits: ["Télétravail", "Projets variés", "Tarifs compétitifs"]
     }
   ];
 
@@ -182,7 +102,7 @@ export default function CareersPage() {
     <MainLayout>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         {/* Hero Section */}
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <section className="relative py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -195,12 +115,12 @@ export default function CareersPage() {
                 </div>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Rejoignez l&apos;Aventure IndoFrench
+                Collaborez avec IndoFrench
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Construisez votre carrière dans une entreprise innovante qui connecte 
-                les cultures à travers la traduction. Découvrez nos opportunités 
-                d&apos;emploi dans un environnement international stimulant.
+                Rejoignez notre réseau de spécialistes de la traduction franco-indonésienne. 
+                Découvrez nos opportunités de collaboration dans un environnement professionnel 
+                et flexible.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.a
@@ -209,7 +129,7 @@ export default function CareersPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Voir nos offres d&apos;emploi
+                  Voir nos opportunités
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </motion.a>
                 <motion.a
