@@ -78,13 +78,24 @@ export default function LoginPage() {
         console.log('✅ Connexion réussie, redirection immédiate...');
         console.log('🚀 [REDIRECTION] Redirection vers /dashboard');
         
-        // Nettoyer tous les états avant redirection
+        // SOLUTION RADICALE : Vider physiquement tous les champs du formulaire
+        const form = document.querySelector('form') as HTMLFormElement;
+        if (form) {
+          const inputs = form.querySelectorAll('input');
+          inputs.forEach(input => {
+            input.value = '';
+            input.defaultValue = '';
+          });
+          form.reset();
+        }
+        
+        // Nettoyer les états React APRÈS avoir vidé le DOM
         setLoading(false);
         setError('');
         setFormData({ email: '', password: '', name: '' });
         
-        // Attendre un tick pour s'assurer que les états sont nettoyés
-        await new Promise(resolve => setTimeout(resolve, 0));
+        // Forcer un tick de rendu pour s'assurer que tout est nettoyé
+        await new Promise(resolve => setTimeout(resolve, 50));
         
         // Redirection immédiate et propre
         window.location.replace('/dashboard');
