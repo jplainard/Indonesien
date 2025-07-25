@@ -44,12 +44,16 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
+        credentials: 'include', // Important pour les cookies
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        window.location.href = '/dashboard';
+        // Attendre un peu pour que le cookie soit défini
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 100);
       } else {
         setError(data.error || 'Une erreur est survenue');
         setLoading(false);
