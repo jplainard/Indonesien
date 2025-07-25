@@ -62,8 +62,8 @@ export default function UsersAdmin() {
       const response = await fetch('/api/users');
       const data = await response.json();
       setUsers(data);
-    } catch (error) {
-      console.error('Erreur lors du chargement des utilisateurs:', error);
+    } catch (_error) {
+      // Erreur silencieuse lors du chargement des utilisateurs
     } finally {
       setLoading(false);
     }
@@ -74,8 +74,8 @@ export default function UsersAdmin() {
       const response = await fetch('/api/roles');
       const data = await response.json();
       setRoles(data);
-    } catch (error) {
-      console.error('Erreur lors du chargement des rôles:', error);
+    } catch (_error) {
+      // Erreur silencieuse lors du chargement des rôles
     }
   };
 

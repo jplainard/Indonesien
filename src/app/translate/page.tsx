@@ -54,8 +54,7 @@ export default function TranslatePage() {
       } else {
         alert(`Erreur: ${data.error}`);
       }
-    } catch (error) {
-      console.error('Erreur lors de la traduction:', error);
+    } catch (_error) {
       alert('Erreur lors de la traduction');
     } finally {
       setLoading(false);
@@ -69,8 +68,8 @@ export default function TranslatePage() {
       if (response.ok) {
         setRecentTranslations(data.translations);
       }
-    } catch (error) {
-      console.error('Erreur lors du chargement de l\'historique:', error);
+    } catch (_error) {
+      // Erreur silencieuse lors du chargement de l'historique
     }
   };
 

@@ -93,8 +93,7 @@ export default function Home() {
         const response = await fetch('/api/stats');
         const data = await response.json();
         setStats(data);
-      } catch (error) {
-        console.error('Erreur lors du chargement des statistiques:', error);
+      } catch (_error) {
         // Données de démonstration en cas d'erreur
         setStats({
           overview: {

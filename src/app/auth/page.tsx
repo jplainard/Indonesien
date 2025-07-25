@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LogIn, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -51,7 +49,7 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push('/dashboard');
+        window.location.href = '/dashboard';
       } else {
         setError(data.error || 'Une erreur est survenue');
         setLoading(false);
@@ -145,7 +143,6 @@ export default function LoginPage() {
           autoComplete="off"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && loading) {
-              console.log('⚠️ [FORM] Enter pressé pendant loading, empêchement');
               e.preventDefault();
               e.stopPropagation();
             }
@@ -233,9 +230,7 @@ export default function LoginPage() {
             type="submit"
             disabled={loading}
             onClick={(e) => {
-              console.log('🖱️ [BUTTON] Clic détecté');
               if (loading) {
-                console.log('⚠️ [BUTTON] Déjà en cours, empêchement du clic');
                 e.preventDefault();
                 e.stopPropagation();
                 return false;

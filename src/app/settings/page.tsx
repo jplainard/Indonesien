@@ -55,8 +55,7 @@ export default function SettingsPage() {
         } else {
           router.push('/auth');
         }
-      } catch (error) {
-        console.error('Erreur d&apos;authentification:', error);
+      } catch (_error) {
         router.push('/auth');
       } finally {
         setLoading(false);
@@ -81,8 +80,8 @@ export default function SettingsPage() {
       
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
-    } catch (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
+    } catch (_error) {
+      // Erreur silencieuse lors de la sauvegarde
     } finally {
       setSaving(false);
     }

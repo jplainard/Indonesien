@@ -51,8 +51,7 @@ export default function MesTraductionsPage() {
         } else if (response.status === 401) {
           router.push('/auth');
         }
-      } catch (error) {
-        console.error('Erreur lors du chargement:', error);
+      } catch (_error) {
         router.push('/auth');
       } finally {
         setLoading(false);

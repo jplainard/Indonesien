@@ -82,8 +82,7 @@ export default function ProfilePage() {
         } else {
           router.push('/auth');
         }
-      } catch (error) {
-        console.error('Erreur lors du chargement du profil:', error);
+      } catch (_error) {
         router.push('/auth');
       } finally {
         setLoading(false);
@@ -111,8 +110,7 @@ export default function ProfilePage() {
       } else {
         alert('Erreur lors de la sauvegarde');
       }
-    } catch (error) {
-      console.error('Erreur:', error);
+    } catch (_error) {
       alert('Erreur lors de la sauvegarde');
     } finally {
       setSaving(false);
@@ -146,8 +144,7 @@ export default function ProfilePage() {
         const error = await response.json();
         alert(error.message || 'Erreur lors du changement de mot de passe');
       }
-    } catch (error) {
-      console.error('Erreur:', error);
+    } catch (_error) {
       alert('Erreur lors du changement de mot de passe');
     }
   };

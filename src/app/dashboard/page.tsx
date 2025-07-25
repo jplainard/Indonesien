@@ -45,8 +45,7 @@ export default function DashboardPage() {
         } else {
           router.push('/auth');
         }
-      } catch (error) {
-        console.error('Erreur lors de la vérification:', error);
+      } catch (_error) {
         router.push('/auth');
       } finally {
         setLoading(false);
@@ -59,8 +58,8 @@ export default function DashboardPage() {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
       router.push('/');
-    } catch (error) {
-      console.error('Erreur lors de la déconnexion:', error);
+    } catch (_error) {
+      // Erreur silencieuse lors de la déconnexion
     }
   };
 

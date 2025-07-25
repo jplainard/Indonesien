@@ -68,8 +68,7 @@ export default function AdminPage() {
         } else {
           router.push('/auth');
         }
-      } catch (error: unknown) {
-        console.error('Erreur d\'authentification:', error);
+      } catch (_error: unknown) {
         router.push('/auth');
       }
     };
@@ -143,8 +142,8 @@ export default function AdminPage() {
 
       setStats(mockStats);
       setActivities(mockActivities);
-    } catch (error: unknown) {
-      console.error('Erreur lors du chargement des données:', error);
+    } catch (_error: unknown) {
+      // Erreur silencieuse lors du chargement des données
     } finally {
       setLoading(false);
     }

@@ -101,7 +101,6 @@ export default function UploadPage() {
 
     // Validation côté client
     if (!uploadFile.file) {
-      console.error('No file provided');
       setFiles(prev => prev.map(f => 
         f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
       ));
@@ -109,7 +108,6 @@ export default function UploadPage() {
     }
 
     if (!sourceLang || !targetLang) {
-      console.error('Source or target language missing:', { sourceLang, targetLang });
       setFiles(prev => prev.map(f => 
         f.id === uploadFile.id ? { ...f, status: 'error', progress: 0 } : f
       ));
@@ -120,13 +118,6 @@ export default function UploadPage() {
     formData.append('file', uploadFile.file);
     formData.append('sourceLanguage', sourceLang);
     formData.append('targetLanguage', targetLang);
-
-    console.log('Uploading file:', {
-      fileName: uploadFile.file.name,
-      fileSize: uploadFile.file.size,
-      sourceLanguage: sourceLang,
-      targetLanguage: targetLang
-    });
 
     try {
       const response = await fetch('/api/upload', {
@@ -145,12 +136,10 @@ export default function UploadPage() {
             result: data
           } : f
         ));
-        console.log('✅ Upload réussi:', data);
       } else {
         throw new Error(data.error || 'Upload failed');
       }
     } catch (error) {
-      console.error('Upload exception:', error);
       setFiles(prev => prev.map(f => 
         f.id === uploadFile.id ? { 
           ...f, 
