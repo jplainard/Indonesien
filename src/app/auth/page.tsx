@@ -192,7 +192,7 @@ export default function LoginPage() {
                 required
                 autoComplete="email"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="votre@email.com"
+                placeholder="Votre@email.com"
               />
             </div>
           </div>

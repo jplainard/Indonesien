@@ -20,96 +20,156 @@ export default function PricingPage() {
 
   const plans = [
     {
+      name: "Freemium",
+      description: "Découvrez l'Indonésie sans engagement",
+      icon: Globe,
+      price: {
+        monthly: 0,
+        yearly: 0
+      },
+      features: [
+        "50 pages par mois",
+        "IA de traduction basique",
+        "Calculateur de marché gratuit",
+        "Guides d'expansion (PDF)",
+        "Templates légaux de base",
+        "Support communautaire"
+      ],
+      limitations: [
+        "Pas de révision humaine",
+        "Délai standard: 72h"
+      ],
+      popular: false,
+      cta: "Commencer gratuitement",
+      highlight: "🎁 NOUVEAU"
+    },
+    {
       name: "Starter",
-      description: "Parfait pour les particuliers et petites entreprises",
+      description: "Parfait pour tester le marché indonésien",
       icon: FileText,
       price: {
+        monthly: 14.99,
+        yearly: 149
+      },
+      originalPrice: {
         monthly: 29,
         yearly: 290
       },
       features: [
-        "Jusqu'à 10 pages par mois",
-        "Traduction FR ↔ ID uniquement",
-        "Délai standard: 48h",
-        "Support par email",
-        "Révision de base",
-        "Formats: PDF, Word, TXT"
+        "500 pages par mois",
+        "IA culturelle avancée",
+        "Support email prioritaire",
+        "Templates sectoriels",
+        "Veille marché mensuelle",
+        "Formats: PDF, Word, Excel"
       ],
       limitations: [
-        "Pas de traduction technique",
-        "Pas de service urgent"
+        "Révision humaine limitée"
       ],
       popular: false,
-      cta: "Commencer gratuitement"
+      cta: "Démarrer l'expansion",
+      discount: "-48%"
     },
     {
       name: "Professional",
-      description: "Idéal pour les entreprises en croissance",
+      description: "Expansion sérieuse avec accompagnement",
       icon: Crown,
       price: {
+        monthly: 39.99,
+        yearly: 399
+      },
+      originalPrice: {
         monthly: 99,
         yearly: 990
       },
       features: [
-        "Jusqu'à 50 pages par mois",
-        "Toutes paires de langues",
-        "Délai prioritaire: 24h",
+        "2000 pages par mois",
+        "Révision humaine native",
+        "API d'intégration",
+        "Account manager dédié",
+        "Études de marché trimestrielles",
+        "Templates légaux avancés",
         "Support téléphonique",
-        "Double révision",
-        "Tous formats supportés",
-        "Traduction technique",
-        "Glossaire personnalisé",
-        "Chef de projet dédié"
+        "Délai prioritaire: 24h",
+        "Réseau partenaires Indonésie"
       ],
       limitations: [],
       popular: true,
-      cta: "Démarrer l'essai gratuit"
+      cta: "Accélérer l'expansion",
+      discount: "-60%"
     },
     {
       name: "Enterprise",
-      description: "Solution sur-mesure pour les grandes entreprises",
+      description: "Solution complète d'expansion indonésienne",
       icon: Zap,
       price: {
+        monthly: 149,
+        yearly: 1490
+      },
+      originalPrice: {
         monthly: 299,
         yearly: 2990
       },
       features: [
         "Volume illimité",
-        "Toutes paires de langues",
-        "Délai express: 12h",
-        "Support prioritaire",
-        "Révision premium",
-        "API d'intégration",
-        "Traduction spécialisée",
-        "Contact dédié",
-        "Engagement qualité",
-        "Facturation personnalisée",
-        "Formation personnalisée"
+        "Équipe dédiée en Indonésie",
+        "Setup filiale locale",
+        "Accompagnement réglementaire",
+        "Due diligence partenaires",
+        "Réseau business local",
+        "SLA 12h garanti",
+        "Support 24/7",
+        "Reporting exécutif",
+        "Formation équipes",
+        "Success manager dédié"
       ],
       limitations: [],
       popular: false,
-      cta: "Contactez-nous"
+      cta: "Planifier l'expansion",
+      discount: "-50%"
     }
   ];
 
   const additionalServices = [
     {
-      name: "Traduction urgente",
-      description: "Livraison en moins de 12h",
-      price: "+50%",
-      icon: Clock
+      name: "Audit Marché Indonésien",
+      description: "Analyse complète de votre secteur + Opportunités",
+      price: "€2,500",
+      icon: Star,
+      duration: "14 jours",
+      includes: "250 pages rapport + présentation exécutive"
     },
     {
-      name: "Interprétation",
-      description: "Service d'interprétation en ligne ou sur site",
-      price: "150€/h",
-      icon: Headphones
+      name: "Setup Filiale Locale",
+      description: "Création entreprise + Comptes bancaires + Licences",
+      price: "€15,000",
+      icon: Shield,
+      duration: "3-6 mois",
+      includes: "Accompagnement réglementaire complet"
     },
     {
-      name: "Localisation",
-      description: "Adaptation culturelle complète",
-      price: "Sur devis",
-      icon: Globe
+      name: "Accompagnement Réglementaire",
+      description: "Conformité, Licences, Taxes, Droit du travail",
+      price: "€5,000",
+      icon: Clock,
+      duration: "Mensuel",
+      includes: "Avocat partenaire + veille réglementaire"
+    },
+    {
+      name: "Réseau Partenaires Business",
+      description: "Introduction Distributeurs, Fournisseurs, Clients",
+      price: "€8,500",
+      icon: Headphones,
+      duration: "3 mois",
+      includes: "15 contacts qualifiés + due diligence"
+    },
+    {
+      name: "Formation Équipe Locale",
+      description: "Culture Business, Négociation, Management indonésien",
+      price: "€3,500",
+      icon: Globe,
+      duration: "5 jours",
+      includes: "Formation sur site + kit outils"
     },
     {
       name: "Révision tierce",
@@ -246,6 +306,22 @@ export default function PricingPage() {
                       </div>
                     )}
 
+                    {plan.highlight && (
+                      <div className="absolute -top-4 right-4">
+                        <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-xs font-bold">
+                          {plan.highlight}
+                        </div>
+                      </div>
+                    )}
+
+                    {plan.discount && (
+                      <div className="absolute -top-4 left-4">
+                        <div className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-4 py-2 rounded-full text-xs font-bold">
+                          {plan.discount}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="text-center mb-8">
                       <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Icon className="w-8 h-8 text-white" />
@@ -258,15 +334,25 @@ export default function PricingPage() {
                       </p>
                       
                       <div className="mb-4">
+                        {plan.originalPrice && (
+                          <div className="text-lg text-gray-400 line-through mb-1">
+                            {plan.originalPrice[billingPeriod]}€
+                          </div>
+                        )}
                         <span className="text-4xl font-bold text-gray-800">
                           {price}€
                         </span>
                         <span className="text-gray-600">
                           /{billingPeriod === 'monthly' ? 'mois' : 'an'}
                         </span>
-                        {billingPeriod === 'yearly' && (
+                        {billingPeriod === 'yearly' && price > 0 && (
                           <div className="text-green-600 text-sm font-medium">
                             Économisez {calculateSavings(monthlyPrice)}%
+                          </div>
+                        )}
+                        {price === 0 && (
+                          <div className="text-green-600 text-sm font-medium">
+                            🎯 Testez l'Indonésie gratuitement
                           </div>
                         )}
                       </div>
@@ -306,8 +392,8 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Additional Services */}
-        <section className="py-12 bg-gray-50">
+        {/* Services d'Expansion Business */}
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className="text-center mb-12"
@@ -316,43 +402,86 @@ export default function PricingPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                Services Complémentaires
+              <h2 className="text-4xl font-bold text-white mb-4">
+                Services d'Expansion Indonésienne
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Enrichissez votre abonnement avec nos services spécialisés.
+              <p className="text-blue-100 max-w-3xl mx-auto text-lg">
+                Au-delà de la traduction : accompagnement complet pour votre implantation en Indonésie.
+                Plus de 147 entreprises nous font confiance.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {additionalServices.map((service, index) => {
                 const Icon = service.icon;
                 return (
                   <motion.div
                     key={index}
-                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
+                    className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
                   >
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-6 h-6 text-white" />
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
                       {service.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-gray-600 text-sm mb-4 text-center">
                       {service.description}
                     </p>
-                    <div className="text-blue-600 font-semibold">
-                      {service.price}
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-500 text-sm">Prix:</span>
+                        <span className="text-2xl font-bold text-blue-600">{service.price}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-500 text-sm">Délai:</span>
+                        <span className="text-gray-700 font-medium">{service.duration}</span>
+                      </div>
+                      <div className="bg-blue-50 p-3 rounded-lg">
+                        <span className="text-blue-800 text-xs font-medium">Inclus: </span>
+                        <span className="text-blue-700 text-xs">{service.includes}</span>
+                      </div>
                     </div>
+
+                    <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
+                      Découvrir ce service
+                    </button>
                   </motion.div>
                 );
               })}
             </div>
+
+            {/* CTA Section */}
+            <motion.div
+              className="text-center mt-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Besoin d'un accompagnement sur-mesure ?
+                </h3>
+                <p className="text-blue-100 mb-6">
+                  Nos experts vous conseillent gratuitement sur votre stratégie d'expansion indonésienne
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Consultation gratuite (30min)
+                  </button>
+                  <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                    Télécharger le guide expansion
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 

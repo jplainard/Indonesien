@@ -13,7 +13,9 @@ import {
   Menu, 
   X,
   Home,
-  Users
+  Users,
+  Calculator,
+  Trophy
 } from 'lucide-react';
 
 interface User {
@@ -62,6 +64,8 @@ export default function Navigation() {
   // Navigation publique (visible pour tous)
   const publicNavigationItems = [
     { href: '/about', label: 'À propos', icon: Home },
+    { href: '/market-calculator', label: 'Calculateur', icon: Calculator },
+    { href: '/success-stories', label: 'Succès', icon: Trophy },
     { href: '/pricing', label: 'Tarifs', icon: BarChart3 },
     { href: '/contact', label: 'Contact', icon: Users }
   ];

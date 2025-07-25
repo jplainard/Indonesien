@@ -24,6 +24,8 @@ export default function Footer() {
     ],
     services: [
       { label: 'Traduction', href: '/translate' },
+      { label: 'Calculateur marché', href: '/market-calculator' },
+      { label: 'Succès clients', href: '/success-stories' },
       { label: 'Tarifs', href: '/pricing' },
       { label: 'API', href: '/docs/api' },
       { label: 'Entreprises', href: '/enterprise' }

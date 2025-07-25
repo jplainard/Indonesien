@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { 
   FileText, 
@@ -116,11 +115,11 @@ export default function Home() {
     <MainLayout>
       <div className="bg-white min-h-screen">
 
-      {/* HERO - TRADUCTION DE DOCUMENTS */}
+      {/* HERO - EXPANSION BUSINESS INDONÉSIE */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 overflow-hidden">
         {/* Fond décoratif avec formes géométriques */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Image SVG de fond */}
+          {/* Badge marché indonésien */}
           <motion.div
             className="absolute top-10 right-10 opacity-20"
             animate={{ 
@@ -133,17 +132,12 @@ export default function Home() {
               ease: "easeInOut" 
             }}
           >
-            <Image 
-              src="/translation-bg.svg" 
-              alt="Translation background" 
-              width={384}
-              height={288}
-              className="w-96 h-72"
-              priority
-            />
+            <div className="bg-red-500/10 rounded-full p-8 border-2 border-red-200">
+              <Globe className="w-32 h-32 text-red-600" />
+            </div>
           </motion.div>
 
-          {/* Illustration de gauche - représentation abstraite de documents */}
+          {/* Illustration de gauche - représentation business */}
           <motion.div
             className="absolute bottom-10 left-10 opacity-15"
             animate={{ 
@@ -363,6 +357,18 @@ export default function Home() {
         />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Badge marché indonésien */}
+          <motion.div 
+            className="text-center mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-100 to-red-50 text-red-800 rounded-full text-sm font-medium border border-red-200">
+              🇮🇩 277 millions de clients vous attendent en Indonésie (4ème économie mondiale)
+            </div>
+          </motion.div>
+
           <motion.div 
             className="text-center relative z-10"
             initial={{ opacity: 0, y: 20 }}
@@ -370,7 +376,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative"
+              className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -378,10 +384,11 @@ export default function Home() {
               {/* Effet de lueur derrière le texte */}
               <span className="absolute inset-0 bg-gradient-to-r from-blue-200/20 via-purple-200/20 to-blue-200/20 blur-xl -z-10"></span>
               <span className="relative">
-                Traduction professionnelle de documents<br />
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent font-extrabold">
-                  Indonésien ↔ Français
+                Votre expansion en<br />
+                <span className="bg-gradient-to-r from-red-500 via-white to-red-500 bg-clip-text text-transparent font-extrabold block mt-2">
+                  Indonésie
                 </span>
+                <span className="text-4xl md:text-5xl">commence ici</span>
               </span>
             </motion.h1>
             <motion.p 
@@ -390,11 +397,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Nous traduisons vos documents officiels, commerciaux et techniques avec précision et confidentialité. 
-              Service dédié aux entreprises et particuliers.
+              La première plateforme d'expansion franco-indonésienne. Au-delà de la traduction : 
+              accompagnement business, réseau local, et IA culturelle pour réussir votre implantation.
             </motion.p>
             
-            {/* Types de documents */}
+            {/* Services business expansion */}
             <motion.div 
               className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
@@ -402,40 +409,71 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               {[
-                { icon: FileText, title: "Contrats" },
-                { icon: Building2, title: "Documents RH" },
-                { icon: BarChart3, title: "Rapports" },
-                { icon: GraduationCap, title: "Diplômes" }
+                { icon: TrendingUp, title: "Analyse Marché", desc: "Gratuite" },
+                { icon: Building2, title: "Setup Filiale", desc: "Accompagné" },
+                { icon: Users, title: "Réseau Local", desc: "147 partenaires" },
+                { icon: Shield, title: "Conformité", desc: "Garantie" }
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
+                  className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 group"
+                  whileHover={{ scale: 1.05, y: -5 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                 >
-                  <item.icon className="w-8 h-8 mx-auto mb-2 text-blue-600" />
-                  <div className="text-sm font-medium">{item.title}</div>
+                  <item.icon className="w-10 h-10 mx-auto mb-3 text-blue-600 group-hover:text-blue-700 transition-colors" />
+                  <div className="text-sm font-semibold mb-1">{item.title}</div>
+                  <div className="text-xs text-gray-500">{item.desc}</div>
                 </motion.div>
               ))}
             </motion.div>
 
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <motion.a
-                href="/contact"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
+                href="/market-calculator"
+                className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Calculator className="w-5 h-5" />
-                Demander un devis
+                Analysez votre marché indonésien (gratuit)
               </motion.a>
+              <motion.a
+                href="/success-stories"
+                className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <TrendingUp className="w-5 h-5" />
+                Voir les succès clients (+127% revenus moy.)
+              </motion.a>
+            </motion.div>
+
+            {/* Social Proof */}
+            <motion.div 
+              className="flex items-center justify-center space-x-8 text-sm text-gray-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4 }}
+            >
+              <div className="flex items-center">
+                <Star className="w-4 h-4 text-yellow-400 mr-1" />
+                <span>4.9/5 satisfaction client</span>
+              </div>
+              <div className="flex items-center">
+                <Shield className="w-4 h-4 text-green-500 mr-1" />
+                <span>ISO 17100 certifié</span>
+              </div>
+              <div className="flex items-center">
+                <Users className="w-4 h-4 text-blue-500 mr-1" />
+                <span>147 entreprises accompagnées</span>
+              </div>
             </motion.div>
           </motion.div>
         </div>

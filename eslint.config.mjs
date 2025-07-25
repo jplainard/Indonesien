@@ -31,7 +31,9 @@ const eslintConfig = [
           "varsIgnorePattern": "^_",
           "caughtErrorsIgnorePattern": "^_"
         }
-      ]
+      ],
+      // Permettre les apostrophes et guillemets dans le texte React
+      "react/no-unescaped-entities": "off"
     }
   }
 ];

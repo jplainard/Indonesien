@@ -296,7 +296,7 @@ Ce fichier a été traduit par IndoFrench - Service de traduction automatique.`;
               Glissez-déposez vos fichiers ici
             </h3>
             <p className="text-gray-600 mb-4">
-              ou cliquez pour sélectionner des fichiers
+              Ou cliquez pour sélectionner des fichiers
             </p>
             <p className="text-sm text-gray-500">
               Formats supportés: PDF, Word, Txt, RTF (max 10MB par fichier)

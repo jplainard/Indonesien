@@ -28,7 +28,7 @@ const nextConfig = {
   },
   
   // Configuration pour WSL et développement local
-    webpack: (config, { dev, isServer }) => {
+    webpack: (config, { dev, isServer: _isServer }) => {
       if (dev) {
         // Configuration pour éviter les problèmes de permissions en développement
         config.watchOptions = {
