@@ -50,10 +50,10 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Attendre un peu pour que le cookie soit défini
+        // Attendre un peu pour que le cookie soit défini puis forcer le rechargement
         setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 100);
+          window.location.replace('/dashboard');
+        }, 150);
       } else {
         setError(data.error || 'Une erreur est survenue');
         setLoading(false);

@@ -50,7 +50,11 @@ export async function middleware(request: NextRequest) {
       const url = request.nextUrl.clone();
       url.pathname = '/auth';
       url.searchParams.set('from', pathname);
-      return NextResponse.redirect(url);
+      const response = NextResponse.redirect(url);
+      response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      response.headers.set('Pragma', 'no-cache');
+      response.headers.set('Expires', '0');
+      return response;
     }
 
     try {
@@ -66,6 +70,9 @@ export async function middleware(request: NextRequest) {
       // Supprimer le token invalide
       const response = NextResponse.redirect(url);
       response.cookies.delete('auth-token');
+      response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      response.headers.set('Pragma', 'no-cache');
+      response.headers.set('Expires', '0');
       return response;
     }
   }
@@ -78,7 +85,11 @@ export async function middleware(request: NextRequest) {
         await jwtVerify(token, JWT_SECRET);
         const url = request.nextUrl.clone();
         url.pathname = '/dashboard';
-        return NextResponse.redirect(url);
+        const response = NextResponse.redirect(url);
+        response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        response.headers.set('Pragma', 'no-cache');
+        response.headers.set('Expires', '0');
+        return response;
       } catch (_error) {
         // Token invalide, laisser accéder à /auth
         const response = NextResponse.next();
